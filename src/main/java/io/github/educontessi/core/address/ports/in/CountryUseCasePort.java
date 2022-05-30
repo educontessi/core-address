@@ -1,0 +1,22 @@
+package io.github.educontessi.core.address.ports.in;
+
+import io.github.educontessi.core.address.core.filter.CountryFilter;
+import io.github.educontessi.core.address.core.model.Country;
+import io.github.educontessi.core.address.core.usecase.validation.Validator;
+
+import java.util.List;
+
+public interface CountryUseCasePort {
+
+    List<Country> findAll();
+
+    Object search(CountryFilter filter, Object pageable);
+
+    Country findById(Long id);
+
+    Country save(Country model, List<Validator> validators);
+
+    Country update(Long id, Country model, List<Validator> validators);
+
+    void delete(Long id, List<Validator> validators);
+}
