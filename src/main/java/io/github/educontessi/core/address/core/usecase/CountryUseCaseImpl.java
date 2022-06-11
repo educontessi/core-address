@@ -45,7 +45,7 @@ public class CountryUseCaseImpl implements CountryUseCasePort {
 
     @Override
     public Country update(Long id, Country model, List<Validator> validatorsOutOfCore) {
-        validations.validationsOnUpdate(model, validatorsOutOfCore).forEach(Validator::validate);
+        validations.validationsOnSave(model, validatorsOutOfCore).forEach(Validator::validate);
         Country saved = findById(id);
         return repository.update(model, saved);
     }

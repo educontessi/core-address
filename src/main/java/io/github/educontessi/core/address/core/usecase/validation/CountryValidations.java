@@ -14,12 +14,6 @@ public class CountryValidations {
         return validators;
     }
 
-    public List<Validator> validationsOnUpdate(Country country, List<Validator> validatorsOutOfCore) {
-        List<Validator> validators = new ArrayList<>(validatorsOutOfCore);
-        validators.add(new ObjectNotNull(country));
-        return validators;
-    }
-
     public List<Validator> validationsOnDelete(List<Validator> validatorsOutOfCore) {
         return new ArrayList<>(validatorsOutOfCore);
     }

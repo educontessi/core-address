@@ -31,7 +31,7 @@ public class StringUtils {
                         builder.append(org.apache.commons.lang3.StringUtils.capitalize(wordsDmute[0])).append("'");
                         builder.append(org.apache.commons.lang3.StringUtils.capitalize(wordsDmute[1]));
                     } else {
-                        throw new BusinessException("Nome Inválido");
+                        throw new BusinessException("Invalid name");
                     }
                 }
                 return builder.toString().trim();
