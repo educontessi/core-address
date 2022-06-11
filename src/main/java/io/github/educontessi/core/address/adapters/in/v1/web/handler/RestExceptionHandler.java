@@ -1,8 +1,9 @@
 package io.github.educontessi.core.address.adapters.in.v1.web.handler;
 
+import io.github.educontessi.core.address.adapters.in.v1.web.exception.InvalidDtoException;
 import io.github.educontessi.core.address.adapters.in.v1.web.response.ErrorDetail;
 import io.github.educontessi.core.address.adapters.in.v1.web.response.ErrorType;
-import io.github.educontessi.core.address.adapters.in.v1.web.response.RequestError;
+import io.github.educontessi.core.address.adapters.in.v1.web.response.ResponseError;
 import io.github.educontessi.core.address.core.exception.BusinessException;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.OffsetDateTime;
@@ -43,8 +46,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.INVALID_REQUEST;
         String userMessage = "Content-Type was not informed";
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, userMessage);
-        return handleExceptionInternal(ex, requestError, headers, statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, headers, statusResponse, request);
     }
 
     @Override
@@ -54,8 +57,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.INCOMPREHENSIVE_MESSAGE;
         String userMessage = "The request body is invalid. Check syntax error.";
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, userMessage);
-        return handleExceptionInternal(ex, requestError, headers, statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, headers, statusResponse, request);
     }
 
     @Override
@@ -65,9 +68,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.INVALID_DATA;
         String userMessage = "One or more fields are invalid. Please fill in correctly and try again.";
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, userMessage);
-        requestError.setDatails(getErrorDatails(ex.getBindingResult()));
-        return handleExceptionInternal(ex, requestError, headers, statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        responseError.setDatails(getErrorDatails(ex.getBindingResult()));
+        return handleExceptionInternal(ex, responseError, headers, statusResponse, request);
     }
 
     @ExceptionHandler({BusinessException.class})
@@ -76,8 +79,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.BUSINESS_ERROR;
         String userMessage = ex.getMessage();
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, userMessage);
-        return handleExceptionInternal(ex, requestError, new HttpHeaders(), statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
     }
 
     @ExceptionHandler({EntityInUseException.class})
@@ -86,8 +89,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.ENTITY_IN_USE;
         String userMessage = ex.getMessage();
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, userMessage);
-        return handleExceptionInternal(ex, requestError, new HttpHeaders(), statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
     }
 
     @ExceptionHandler({EntityNotFoundException.class})
@@ -96,8 +99,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.RESOURCE_NOT_FOUND;
         String userMessage = ex.getMessage();
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, userMessage);
-        return handleExceptionInternal(ex, requestError, new HttpHeaders(), statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
     }
 
     @ExceptionHandler({InvalidUuidException.class})
@@ -106,8 +109,38 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.INVALID_DATA;
         String userMessage = ex.getMessage();
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, userMessage);
-        return handleExceptionInternal(ex, requestError, new HttpHeaders(), statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
+    }
+
+    @ExceptionHandler({InvalidDtoException.class})
+    public ResponseEntity<Object> handleDtoInvalidoException(InvalidDtoException ex, WebRequest request) {
+        HttpStatus statusResponse = HttpStatus.UNPROCESSABLE_ENTITY;
+        ErrorType errorType = ErrorType.BUSINESS_ERROR;
+        String userMessage = ex.getMessage();
+
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
+    }
+
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
+    public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, WebRequest request) {
+        HttpStatus statusResponse = HttpStatus.UNPROCESSABLE_ENTITY;
+        ErrorType errorType = ErrorType.INVALID_DATA;
+        String userMessage = ex.getMessage();
+
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        HttpStatus statusResponse = HttpStatus.UNPROCESSABLE_ENTITY;
+        ErrorType errorType = ErrorType.INVALID_DATA;
+        String userMessage = ex.getMessage();
+
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
     }
 
     @ExceptionHandler(Exception.class)
@@ -115,22 +148,22 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         HttpStatus statusResponse = HttpStatus.INTERNAL_SERVER_ERROR;
         ErrorType errorType = ErrorType.INTERNAL_SERVER_ERROR;
 
-        RequestError requestError = getRequestError(ex, statusResponse, errorType, GENERIC_ERROR_MESSAGE_TO_END_USER);
-        return handleExceptionInternal(ex, requestError, new HttpHeaders(), statusResponse, request);
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, GENERIC_ERROR_MESSAGE_TO_END_USER);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
     }
 
-    protected RequestError getRequestError(Exception ex, HttpStatus status, ErrorType errorType, String userMessage) {
-        RequestError requestError = new RequestError();
-        requestError.setStatus(status.value());
-        requestError.setTimestamp(OffsetDateTime.now());
-        requestError.setType(errorType.name());
-        requestError.setTitle(errorType.getTitle());
-        requestError.setUrlError(errorType.getPath());
-        requestError.setUserMessage(userMessage);
-        requestError.setException(ex.getClass().getName());
-        requestError.setExceptionMessage(ex.getMessage());
+    protected ResponseError getRequestError(Exception ex, HttpStatus status, ErrorType errorType, String userMessage) {
+        ResponseError responseError = new ResponseError();
+        responseError.setStatus(status.value());
+        responseError.setTimestamp(OffsetDateTime.now());
+        responseError.setType(errorType.name());
+        responseError.setTitle(errorType.getTitle());
+        responseError.setUrlError(errorType.getPath());
+        responseError.setUserMessage(userMessage);
+        responseError.setException(ex.getClass().getName());
+        responseError.setExceptionMessage(ex.getMessage());
 
-        return requestError;
+        return responseError;
     }
 
     protected List<ErrorDetail> getErrorDatails(BindingResult bindingResult) {

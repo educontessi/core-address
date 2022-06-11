@@ -1,11 +1,6 @@
 package io.github.educontessi.core.address.core.util;
 
-import io.github.educontessi.core.address.core.enums.MaskType;
-import io.github.educontessi.core.address.core.enums.PersonType;
 import io.github.educontessi.core.address.core.exception.BusinessException;
-
-import javax.swing.text.MaskFormatter;
-import java.text.ParseException;
 
 /**
  * String manipulation class
@@ -16,33 +11,6 @@ public class StringUtils {
 
     private StringUtils() {
         throw new IllegalStateException("Utility class");
-    }
-
-    public static String addMask(MaskType maskType, Object value) {
-        return addMask(maskType.getMask(), value);
-    }
-
-    public static String addMask(PersonType personType, Object value) {
-        return addMask(MaskType.getPersonMaskType(personType), value);
-    }
-
-    private static String addMask(String maskType, Object value) {
-        MaskFormatter mask;
-        try {
-            mask = new MaskFormatter(maskType);
-            mask.setValueContainsLiteralCharacters(false);
-            value = value == null ? "" : value;
-            return mask.valueToString(value);
-        } catch (ParseException e) {
-            throw new BusinessException(e.getMessage());
-        }
-    }
-
-    public static String removeNumberMask(String value) {
-        if (value == null) {
-            return value;
-        }
-        return value.replaceAll("[^0123456789]", "");
     }
 
     public static String formatName(String name) {

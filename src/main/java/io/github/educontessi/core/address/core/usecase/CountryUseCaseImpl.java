@@ -3,6 +3,7 @@ package io.github.educontessi.core.address.core.usecase;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
+import io.github.educontessi.core.address.core.usecase.validation.CountryValidations;
 import io.github.educontessi.core.address.core.usecase.validation.Validator;
 import io.github.educontessi.core.address.ports.in.CountryUseCasePort;
 import io.github.educontessi.core.address.ports.out.CountryRepositoryPort;
@@ -13,9 +14,11 @@ import java.util.Optional;
 public class CountryUseCaseImpl implements CountryUseCasePort {
 
     private final CountryRepositoryPort repository;
+    private final CountryValidations validations;
 
-    public CountryUseCaseImpl(CountryRepositoryPort repository) {
+    public CountryUseCaseImpl(CountryRepositoryPort repository, CountryValidations validations) {
         this.repository = repository;
+        this.validations = validations;
     }
 
     @Override
@@ -35,21 +38,21 @@ public class CountryUseCaseImpl implements CountryUseCasePort {
     }
 
     @Override
-    public Country save(Country model, List<Validator> validators) {
-        validators.forEach(Validator::validate);
+    public Country save(Country model, List<Validator> validatorsOutOfCore) {
+        validations.validationsOnSave(model, validatorsOutOfCore).forEach(Validator::validate);
         return repository.save(model);
     }
 
     @Override
-    public Country update(Long id, Country model, List<Validator> validators) {
-        validators.forEach(Validator::validate);
+    public Country update(Long id, Country model, List<Validator> validatorsOutOfCore) {
+        validations.validationsOnUpdate(model, validatorsOutOfCore).forEach(Validator::validate);
         Country saved = findById(id);
         return repository.update(model, saved);
     }
 
     @Override
-    public void delete(Long id, List<Validator> validators) {
-        validators.forEach(Validator::validate);
+    public void delete(Long id, List<Validator> validatorsOutOfCore) {
+        validations.validationsOnDelete(validatorsOutOfCore).forEach(Validator::validate);
         Country saved = findById(id);
         repository.delete(saved);
     }

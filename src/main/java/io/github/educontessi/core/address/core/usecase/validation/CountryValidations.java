@@ -8,17 +8,19 @@ import java.util.List;
 
 public class CountryValidations {
 
-    private CountryValidations() {
-        throw new IllegalStateException("Utility class");
-    }
-
-    public static List<Validator> validationsOnSave(Country country) {
-        List<Validator> validators = new ArrayList<>();
+    public List<Validator> validationsOnSave(Country country, List<Validator> validatorsOutOfCore) {
+        List<Validator> validators = new ArrayList<>(validatorsOutOfCore);
         validators.add(new ObjectNotNull(country));
         return validators;
     }
 
-    public static List<Validator> validationsOnDelete() {
-        return new ArrayList<>();
+    public List<Validator> validationsOnUpdate(Country country, List<Validator> validatorsOutOfCore) {
+        List<Validator> validators = new ArrayList<>(validatorsOutOfCore);
+        validators.add(new ObjectNotNull(country));
+        return validators;
+    }
+
+    public List<Validator> validationsOnDelete(List<Validator> validatorsOutOfCore) {
+        return new ArrayList<>(validatorsOutOfCore);
     }
 }

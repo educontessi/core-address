@@ -1,6 +1,6 @@
 package io.github.educontessi.core.address.adapters.in.documentation;
 
-import io.github.educontessi.core.address.adapters.in.v1.web.response.RequestError;
+import io.github.educontessi.core.address.adapters.in.v1.web.response.ResponseError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,7 +16,7 @@ import java.lang.annotation.*;
 @SwaggerDocumentationGlobal
 @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Resource successfully deleted"),
-        @ApiResponse(responseCode = "404", description = "The resource you were trying to access was not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RequestError.class)))})
+        @ApiResponse(responseCode = "404", description = "The resource you were trying to access was not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ResponseError.class)))})
 public @interface SwaggerDocumentationDELETE {
 
 }

@@ -14,9 +14,9 @@ public interface CountryUseCasePort {
 
     Country findById(Long id);
 
-    Country save(Country model, List<Validator> validators);
+    Country save(Country model, List<Validator> validatorsOutOfCore);
 
-    Country update(Long id, Country model, List<Validator> validators);
+    Country update(Long id, Country model, List<Validator> validatorsOutOfCore);
 
-    void delete(Long id, List<Validator> validators);
+    void delete(Long id, List<Validator> validatorsOutOfCore);
 }

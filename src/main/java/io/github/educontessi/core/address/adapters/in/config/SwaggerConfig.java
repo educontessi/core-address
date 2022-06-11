@@ -27,7 +27,7 @@ public class SwaggerConfig {
         contact.setEmail("contessi@outlook.com");
 
         return new OpenAPI()
-                .info(new Info().title("Hexagonal Architecture")
+                .info(new Info().title("Core Address")
                         .version(appVersion)
                         .description(appDesciption)
                         .contact(contact))
@@ -38,7 +38,7 @@ public class SwaggerConfig {
 
     @Bean
     public GroupedOpenApi groupedOpenApiV1() {
-        var packagesToscan = "io.github.educontessi.hexagonalarchitecture.adapters.in.web.v1.controller";
+        var packagesToscan = "io.github.educontessi.core.address.adapters.in.v1.web.controller";
         return GroupedOpenApi.builder()
                 .group("hexagonal-architecture-v1")
                 .packagesToScan(packagesToscan)

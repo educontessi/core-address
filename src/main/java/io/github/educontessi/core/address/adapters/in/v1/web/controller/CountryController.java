@@ -7,6 +7,7 @@ import io.github.educontessi.core.address.core.model.Country;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,9 +65,9 @@ public class CountryController extends BaseController<Country> {
 
     @DeleteMapping("/{id}")
     @SwaggerDocumentationDELETE
-    public Object delete(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
         dataManager.delete(id);
-        return ResponseEntity.noContent();
     }
 
 }

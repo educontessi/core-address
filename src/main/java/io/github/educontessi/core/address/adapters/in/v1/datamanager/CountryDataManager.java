@@ -2,12 +2,12 @@ package io.github.educontessi.core.address.adapters.in.v1.datamanager;
 
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.core.usecase.validation.CountryValidations;
 import io.github.educontessi.core.address.ports.in.CountryUseCasePort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,14 +37,14 @@ public class CountryDataManager {
     }
 
     public Country save(Country model) {
-        return countryUseCasePort.save(model, CountryValidations.validationsOnSave(model)); // posso adicionar novas validações fora do core
+        return countryUseCasePort.save(model, Collections.emptyList()); // posso adicionar novas validações fora do core
     }
 
     public Country update(Long id, Country model) {
-        return countryUseCasePort.update(id, model, CountryValidations.validationsOnSave(model)); // posso adicionar novas validações fora do core
+        return countryUseCasePort.update(id, model, Collections.emptyList()); // posso adicionar novas validações fora do core
     }
 
     public void delete(Long id) {
-        countryUseCasePort.delete(id, CountryValidations.validationsOnDelete()); // posso adicionar novas validações fora do core
+        countryUseCasePort.delete(id, Collections.emptyList()); // posso adicionar novas validações fora do core
     }
 }

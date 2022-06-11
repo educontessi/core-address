@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RequestError implements Serializable {
+public class ResponseError implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -7936551501603456464L;

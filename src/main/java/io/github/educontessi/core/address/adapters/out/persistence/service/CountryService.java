@@ -48,7 +48,7 @@ public class CountryService implements CountryRepositoryPort {
     @Override
     public Optional<Country> findById(Long id) {
         Optional<CountryEntity> optionalSaved = repository.findById(id);
-        return Optional.of(mapper.entityToModel(optionalSaved.orElse(null)));
+        return optionalSaved.map(mapper::entityToModel);
     }
 
 
