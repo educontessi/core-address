@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.core.usecase.validation;
+package io.github.educontessi.core.address.core.validation;
 
 import java.util.ArrayList;
 import java.util.List;

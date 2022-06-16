@@ -1,8 +1,5 @@
 package io.github.educontessi.core.address.adapters.in.v1.web.exception;
 
-/**
- * @author Eduardo Possamai Contessi
- */
 public class InvalidDtoException extends RuntimeException {
 
     public InvalidDtoException(String mensagem) {

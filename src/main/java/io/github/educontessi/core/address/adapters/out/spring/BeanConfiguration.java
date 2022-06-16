@@ -2,7 +2,7 @@ package io.github.educontessi.core.address.adapters.out.spring;
 
 import io.github.educontessi.core.address.adapters.out.persistence.service.CountryService;
 import io.github.educontessi.core.address.core.usecase.CountryUseCaseImpl;
-import io.github.educontessi.core.address.core.usecase.validation.CountryValidations;
+import io.github.educontessi.core.address.core.validation.CountryValidations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

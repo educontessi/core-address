@@ -10,11 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Classe utilizada para abstrair as validações referente a gerenciamento dos dados
- * Exemplo: hoje utiliza a porta de entrada um endpoint, mas futuramente uma troca para consumidor de fila
- * é só chamar essa abstração
- */
 @Component
 public class CountryDataManager {
 
@@ -41,10 +36,10 @@ public class CountryDataManager {
     }
 
     public Country update(Long id, Country model) {
-        return countryUseCasePort.update(id, model, Collections.emptyList()); // posso adicionar novas validações fora do core
+        return countryUseCasePort.update(id, model, Collections.emptyList());
     }
 
     public void delete(Long id) {
-        countryUseCasePort.delete(id, Collections.emptyList()); // posso adicionar novas validações fora do core
+        countryUseCasePort.delete(id, Collections.emptyList());
     }
 }

@@ -28,11 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Classe de tratamento de erros
- *
- * @author Eduardo Possamai Contessi
- */
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -54,7 +49,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         HttpStatus statusResponse = HttpStatus.BAD_REQUEST;
-        ErrorType errorType = ErrorType.INCOMPREHENSIVE_MESSAGE;
+        ErrorType errorType = ErrorType.INCOMPREHENSIBLE_MESSAGE;
         String userMessage = "The request body is invalid. Check syntax error.";
 
         ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);

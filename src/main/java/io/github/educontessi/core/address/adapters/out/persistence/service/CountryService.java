@@ -51,7 +51,6 @@ public class CountryService implements CountryRepositoryPort {
         return optionalSaved.map(mapper::entityToModel);
     }
 
-
     @Override
     public Country save(Country model) {
         CountryEntity entity = new CountryEntity();
@@ -88,7 +87,6 @@ public class CountryService implements CountryRepositoryPort {
             throw new EntityInUseException(saved.getId());
         }
     }
-
 
     protected void paranoidDelete(CountryEntity saved) {
         saved.setDeleted(true);

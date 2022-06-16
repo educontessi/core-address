@@ -40,7 +40,7 @@ public class SwaggerConfig {
     public GroupedOpenApi groupedOpenApiV1() {
         var packagesToscan = "io.github.educontessi.core.address.adapters.in.v1.web.controller";
         return GroupedOpenApi.builder()
-                .group("hexagonal-architecture-v1")
+                .group("core-address-v1")
                 .packagesToScan(packagesToscan)
                 .build();
     }

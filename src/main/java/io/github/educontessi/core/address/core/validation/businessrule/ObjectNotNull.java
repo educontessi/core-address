@@ -1,6 +1,6 @@
-package io.github.educontessi.core.address.core.usecase.validation.businessrule;
+package io.github.educontessi.core.address.core.validation.businessrule;
 
-import io.github.educontessi.core.address.core.usecase.validation.Validator;
+import io.github.educontessi.core.address.core.validation.Validator;
 
 import java.util.Objects;
 

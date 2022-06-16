@@ -2,7 +2,7 @@ package io.github.educontessi.core.address.ports.in;
 
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.core.usecase.validation.Validator;
+import io.github.educontessi.core.address.core.validation.Validator;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package io.github.educontessi.core.address.core.usecase.validation;
+package io.github.educontessi.core.address.core.validation;
 
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.core.usecase.validation.businessrule.ObjectNotNull;
+import io.github.educontessi.core.address.core.validation.businessrule.ObjectNotNull;
 
 import java.util.ArrayList;
 import java.util.List;

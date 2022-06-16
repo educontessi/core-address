@@ -3,8 +3,8 @@ package io.github.educontessi.core.address.core.usecase;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.core.usecase.validation.CountryValidations;
-import io.github.educontessi.core.address.core.usecase.validation.Validator;
+import io.github.educontessi.core.address.core.validation.CountryValidations;
+import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.ports.in.CountryUseCasePort;
 import io.github.educontessi.core.address.ports.out.CountryRepositoryPort;
 
