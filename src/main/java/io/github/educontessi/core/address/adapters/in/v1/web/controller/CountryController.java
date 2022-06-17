@@ -2,8 +2,8 @@ package io.github.educontessi.core.address.adapters.in.v1.web.controller;
 
 import io.github.educontessi.core.address.adapters.in.documentation.*;
 import io.github.educontessi.core.address.adapters.in.v1.datamanager.CountryDataManager;
+import io.github.educontessi.core.address.adapters.in.v1.dto.CountryDto;
 import io.github.educontessi.core.address.core.filter.CountryFilter;
-import io.github.educontessi.core.address.core.model.Country;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,7 @@ import java.util.List;
         produces = {"application/json"},
         consumes = {"application/json"})
 @Tag(name = "CountryController", description = "Country Manipulation")
-public class CountryController extends BaseController<Country> {
+public class CountryController extends BaseController<CountryDto> {
 
     private final CountryDataManager dataManager;
 
@@ -30,37 +30,37 @@ public class CountryController extends BaseController<Country> {
 
     @PostMapping
     @SwaggerDocumentationPOST
-    public ResponseEntity<Country> save(@Valid @RequestBody Country model) {
-        Country entity = dataManager.save(model);
-        return created(entity.getId(), entity);
+    public ResponseEntity<CountryDto> save(@Valid @RequestBody CountryDto dto) {
+        CountryDto saved = dataManager.save(dto);
+        return created(saved.getId(), saved);
     }
 
     @GetMapping
     @SwaggerDocumentationGETList
-    public ResponseEntity<List<Country>> findAll() {
-        List<Country> list = dataManager.findAll();
+    public ResponseEntity<List<CountryDto>> findAll() {
+        List<CountryDto> list = dataManager.findAll();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("/search")
     @SwaggerDocumentationGETList
-    public ResponseEntity<Page<Country>> search(CountryFilter filter, Pageable pageable) {
-        Page<Country> page = dataManager.search(filter, pageable);
+    public ResponseEntity<Page<CountryDto>> search(CountryFilter filter, Pageable pageable) {
+        Page<CountryDto> page = dataManager.search(filter, pageable);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
     @SwaggerDocumentationGET
-    public ResponseEntity<Country> findById(@PathVariable Long id) {
-        Country model = dataManager.findById(id);
-        return ResponseEntity.ok(model);
+    public ResponseEntity<CountryDto> findById(@PathVariable Long id) {
+        CountryDto dto = dataManager.findById(id);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/{id}")
     @SwaggerDocumentationPUT
-    public ResponseEntity<Country> update(@PathVariable Long id, @Valid @RequestBody Country model) {
-        model = dataManager.update(id, model);
-        return ResponseEntity.ok(model);
+    public ResponseEntity<CountryDto> update(@PathVariable Long id, @Valid @RequestBody CountryDto dto) {
+        dto = dataManager.update(id, dto);
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping("/{id}")

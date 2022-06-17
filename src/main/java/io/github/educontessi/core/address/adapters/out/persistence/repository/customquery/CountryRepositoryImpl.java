@@ -40,7 +40,7 @@ public class CountryRepositoryImpl implements CountryRepositoryQuery {
     private Predicate[] createRestrictions(CountryFilter filter, CriteriaBuilder builder, Root<CountryEntity> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (filter != null && !StringUtils.isEmpty(filter.getName())){
+        if (filter != null && !StringUtils.isEmpty(filter.getName())) {
             predicates.add(builder.like(root.get(CountryFilter.COLUMN_NAME), "%" + filter.getName().toLowerCase() + "%"));
         }
 

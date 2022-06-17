@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.persistence.mapper;
+package io.github.educontessi.core.address.adapters.out.persistence.dataconverter;
 
 import io.github.educontessi.core.address.adapters.out.persistence.entity.CountryEntity;
 import io.github.educontessi.core.address.core.model.Country;
@@ -6,7 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CountryMapper implements DataConverter<CountryEntity, Country> {
+public class CountryOutDataconverter implements DataConverter<CountryEntity, Country> {
 
     @Override
     public void modelToEntity(CountryEntity entity, Country model) {

@@ -19,36 +19,35 @@ public abstract class BaseModel {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    protected LocalDateTime created;
+    protected LocalDateTime dateTimeCreation;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    protected LocalDateTime changed;
+    protected LocalDateTime dateTimeChange;
 
-    public LocalDateTime getCreated() {
-        return created;
+    public LocalDateTime getDateTimeCreation() {
+        return dateTimeCreation;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public void setDateTimeCreation(LocalDateTime dateTimeCreation) {
+        this.dateTimeCreation = dateTimeCreation;
     }
 
-    public LocalDateTime getChanged() {
-        return changed;
+    public LocalDateTime getDateTimeChange() {
+        return dateTimeChange;
     }
 
-    public void setChanged(LocalDateTime changed) {
-        this.changed = changed;
+    public void setDateTimeChange(LocalDateTime dateTimeChange) {
+        this.dateTimeChange = dateTimeChange;
     }
 
     @JsonIgnore
     public String[] getIgnoreProperties() {
         Set<String> list = new HashSet<>();
         list.add("id");
-        list.add("created");
-        list.add("changed");
-        list.add("deletedDate");
+        list.add("dateTimeCreation");
+        list.add("dateTimeChange");
 
         return list.toArray(new String[0]);
     }

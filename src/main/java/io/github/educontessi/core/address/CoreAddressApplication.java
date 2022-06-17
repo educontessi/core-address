@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CoreAddressApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CoreAddressApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(CoreAddressApplication.class, args);
+    }
 
 }

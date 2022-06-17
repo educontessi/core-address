@@ -1,7 +1,7 @@
 package io.github.educontessi.core.address.adapters.out.persistence.service;
 
+import io.github.educontessi.core.address.adapters.out.persistence.dataconverter.CountryOutDataconverter;
 import io.github.educontessi.core.address.adapters.out.persistence.entity.CountryEntity;
-import io.github.educontessi.core.address.adapters.out.persistence.mapper.CountryMapper;
 import io.github.educontessi.core.address.adapters.out.persistence.repository.CountryRepository;
 import io.github.educontessi.core.address.core.config.GlobalParameters;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
@@ -24,9 +24,9 @@ import java.util.Optional;
 public class CountryService implements CountryRepositoryPort {
 
     private final CountryRepository repository;
-    private final CountryMapper mapper;
+    private final CountryOutDataconverter mapper;
 
-    public CountryService(CountryRepository repository, CountryMapper mapper) {
+    public CountryService(CountryRepository repository, CountryOutDataconverter mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

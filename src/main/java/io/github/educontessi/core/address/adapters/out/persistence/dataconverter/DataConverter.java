@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.persistence.mapper;
+package io.github.educontessi.core.address.adapters.out.persistence.dataconverter;
 
 import io.github.educontessi.core.address.adapters.out.persistence.entity.BaseEntity;
 

@@ -11,49 +11,48 @@ import java.time.LocalDateTime;
 @JsonInclude(Include.NON_NULL)
 public abstract class BaseEntity {
 
-    @Column(name = "create_date", insertable = false, updatable = false)
-    protected LocalDateTime created;
+    @Column(name = "date_time_creation", insertable = false, updatable = false)
+    protected LocalDateTime dateTimeCreation;
 
-    @Column(name = "changed", insertable = false, updatable = false)
-    protected LocalDateTime changed;
+    @Column(name = "date_time_change", insertable = false, updatable = false)
+    protected LocalDateTime dateTimeChange;
 
     @Column(name = "deleted", columnDefinition = "tinyint(1) default 0", insertable = false)
     protected boolean deleted;
 
-    @Column(name = "delete_date", insertable = false)
-    protected LocalDateTime deletedDate;
+    @Column(name = "date_time_deletion", insertable = false)
+    protected LocalDateTime dateTimeDeletion;
 
-    public LocalDateTime getCreated() {
-        return created;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+        this.setDateTimeDeletion(this.deleted ? LocalDateTime.now() : null);
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public LocalDateTime getDateTimeCreation() {
+        return dateTimeCreation;
     }
 
-    public LocalDateTime getChanged() {
-        return changed;
+    public void setDateTimeCreation(LocalDateTime dateTimeCreation) {
+        this.dateTimeCreation = dateTimeCreation;
     }
 
-    public void setChanged(LocalDateTime changed) {
-        this.changed = changed;
+    public LocalDateTime getDateTimeChange() {
+        return dateTimeChange;
+    }
+
+    public void setDateTimeChange(LocalDateTime dateTimeChange) {
+        this.dateTimeChange = dateTimeChange;
     }
 
     public boolean isDeleted() {
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-        this.setDeletedDate(this.deleted ? LocalDateTime.now() : null);
+    public LocalDateTime getDateTimeDeletion() {
+        return dateTimeDeletion;
     }
 
-    public LocalDateTime getDeletedDate() {
-        return deletedDate;
+    public void setDateTimeDeletion(LocalDateTime dateTimeDeletion) {
+        this.dateTimeDeletion = dateTimeDeletion;
     }
-
-    public void setDeletedDate(LocalDateTime deletedDate) {
-        this.deletedDate = deletedDate;
-    }
-
 }

@@ -16,26 +16,26 @@ public abstract class BaseDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    protected LocalDateTime dataHoraInclusao;
+    protected LocalDateTime dateTimeCreation;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    protected LocalDateTime dataHoraInativacao;
+    protected LocalDateTime dateTimeChange;
 
-    public LocalDateTime getDataHoraInclusao() {
-        return dataHoraInclusao;
+    public LocalDateTime getDateTimeCreation() {
+        return dateTimeCreation;
     }
 
-    public void setDataHoraInclusao(LocalDateTime dataHoraInclusao) {
-        this.dataHoraInclusao = dataHoraInclusao;
+    public void setDateTimeCreation(LocalDateTime dateTimeCreation) {
+        this.dateTimeCreation = dateTimeCreation;
     }
 
-    public LocalDateTime getDataHoraInativacao() {
-        return dataHoraInativacao;
+    public LocalDateTime getDateTimeChange() {
+        return dateTimeChange;
     }
 
-    public void setDataHoraInativacao(LocalDateTime dataHoraInativacao) {
-        this.dataHoraInativacao = dataHoraInativacao;
+    public void setDateTimeChange(LocalDateTime dateTimeChange) {
+        this.dateTimeChange = dateTimeChange;
     }
 }
