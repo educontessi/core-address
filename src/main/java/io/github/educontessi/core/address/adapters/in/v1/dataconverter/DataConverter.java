@@ -29,4 +29,14 @@ public abstract class DataConverter<M extends BaseModel, D extends BaseDto> {
             throw new InvalidDtoException(builder);
         }
     }
+
+    protected Long getIdOrNull(BaseDto dto, Long idPriority) {
+        Long retorno = null;
+        if (idPriority != null) {
+            retorno = idPriority;
+        } else if (dto != null) {
+            retorno = dto.getId();
+        }
+        return retorno;
+    }
 }

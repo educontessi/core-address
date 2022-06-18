@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 @JsonInclude(Include.NON_NULL)
 public abstract class BaseDto {
 
+    protected Long id;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -22,6 +24,14 @@ public abstract class BaseDto {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     protected LocalDateTime dateTimeChange;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public LocalDateTime getDateTimeCreation() {
         return dateTimeCreation;
