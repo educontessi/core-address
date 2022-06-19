@@ -17,6 +17,10 @@ public interface StateRepositoryPort {
 
     Optional<State> findById(Long id, String expand);
 
+    List<State> findAllByCountryId(Long countryId, String expand);
+
+    Optional<State> findByUf(String uf, String expand);
+
     State save(State model);
 
     State update(State model, State saved);

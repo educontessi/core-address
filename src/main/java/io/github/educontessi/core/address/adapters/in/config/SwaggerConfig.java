@@ -38,7 +38,7 @@ public class SwaggerConfig {
 
     @Bean
     public GroupedOpenApi groupedOpenApiV1() {
-        var packagesToscan = "io.github.educontessi.core.address.adapters.in.v1.web.controller";
+        var packagesToscan = "io.github.educontessi.core.address.adapters.in.web.v1.web.controller";
         return GroupedOpenApi.builder()
                 .group("core-address-v1")
                 .packagesToScan(packagesToscan)

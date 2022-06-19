@@ -52,6 +52,18 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
+    public List<State> findAllByCountryId(Long countryId, String expand) {
+        List<StateEntity> list = repository.findAllByCountryId(countryId);
+        return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
+    }
+
+    @Override
+    public Optional<State> findByUf(String uf, String expand) {
+        Optional<StateEntity> optionalSaved = repository.findByUf(uf);
+        return optionalSaved.map(e -> mapper.entityToModel(e, expand));
+    }
+
+    @Override
     public State save(State model) {
         StateEntity entity = new StateEntity();
         mapper.modelToEntity(entity, model);

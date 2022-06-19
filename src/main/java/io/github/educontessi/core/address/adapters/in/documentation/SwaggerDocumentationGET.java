@@ -1,6 +1,6 @@
 package io.github.educontessi.core.address.adapters.in.documentation;
 
-import io.github.educontessi.core.address.adapters.in.v1.web.response.ResponseError;
+import io.github.educontessi.core.address.adapters.in.web.response.ResponseError;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

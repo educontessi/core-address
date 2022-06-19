@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.in.v1.web.response;
+package io.github.educontessi.core.address.adapters.in.web.response;
 
 import java.io.Serial;
 import java.io.Serializable;

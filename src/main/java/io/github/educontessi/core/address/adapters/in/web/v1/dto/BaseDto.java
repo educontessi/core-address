@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.in.v1.dto;
+package io.github.educontessi.core.address.adapters.in.web.v1.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;

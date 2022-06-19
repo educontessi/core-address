@@ -14,9 +14,15 @@ public interface StateUseCasePort {
 
     State findById(Long id, String expand);
 
+    List<State> findAllByCountryId(Long countryId, String expand);
+
+    State findByUf(String uf, String expand);
+
     State save(State model, List<Validator> validatorsOutOfCore);
 
     State update(Long id, State model, List<Validator> validatorsOutOfCore);
 
     void delete(Long id, List<Validator> validatorsOutOfCore);
+
+
 }

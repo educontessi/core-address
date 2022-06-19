@@ -1,16 +1,16 @@
-package io.github.educontessi.core.address.adapters.in.v1.dto;
+package io.github.educontessi.core.address.adapters.in.web.v1.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.github.educontessi.core.address.core.util.StringUtils;
 
 @JsonIgnoreProperties(value = {"dateTimeCreation", "datTimeChange"})
-public class StateDto extends BaseDto {
+public class StateV1Dto extends BaseDto {
 
     private Long id;
     private String name;
     private String uf;
     private Long countryId;
-    private CountryDto country;
+    private CountryV1Dto country;
 
     @Override
     public Long getId() {
@@ -45,11 +45,11 @@ public class StateDto extends BaseDto {
         this.countryId = countryId;
     }
 
-    public CountryDto getCountry() {
+    public CountryV1Dto getCountry() {
         return country;
     }
 
-    public void setCountry(CountryDto country) {
+    public void setCountry(CountryV1Dto country) {
         this.country = country;
     }
 }

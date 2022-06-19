@@ -1,7 +1,7 @@
-package io.github.educontessi.core.address.adapters.in.v1.dataconverter;
+package io.github.educontessi.core.address.adapters.in.web.v1.dataconverter;
 
-import io.github.educontessi.core.address.adapters.in.v1.dto.BaseDto;
-import io.github.educontessi.core.address.adapters.in.v1.web.exception.InvalidDtoException;
+import io.github.educontessi.core.address.adapters.in.web.v1.dto.BaseDto;
+import io.github.educontessi.core.address.adapters.in.web.exception.InvalidDtoException;
 import io.github.educontessi.core.address.core.model.BaseModel;
 
 import javax.validation.ConstraintViolation;

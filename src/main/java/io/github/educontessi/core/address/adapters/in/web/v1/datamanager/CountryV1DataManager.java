@@ -1,7 +1,7 @@
-package io.github.educontessi.core.address.adapters.in.v1.datamanager;
+package io.github.educontessi.core.address.adapters.in.web.v1.datamanager;
 
-import io.github.educontessi.core.address.adapters.in.v1.dataconverter.CountryInDataConverter;
-import io.github.educontessi.core.address.adapters.in.v1.dto.CountryDto;
+import io.github.educontessi.core.address.adapters.in.web.v1.dataconverter.CountryInV1DataConverter;
+import io.github.educontessi.core.address.adapters.in.web.v1.dto.CountryV1Dto;
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
 import io.github.educontessi.core.address.ports.in.CountryUseCasePort;
@@ -14,34 +14,34 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
-public class CountryDataManager {
+public class CountryV1DataManager {
 
     private final CountryUseCasePort countryUseCasePort;
-    private final CountryInDataConverter dataConverter;
+    private final CountryInV1DataConverter dataConverter;
 
-    public CountryDataManager(CountryUseCasePort countryUseCasePort, CountryInDataConverter dataConverter) {
+    public CountryV1DataManager(CountryUseCasePort countryUseCasePort, CountryInV1DataConverter dataConverter) {
         this.countryUseCasePort = countryUseCasePort;
         this.dataConverter = dataConverter;
     }
 
-    public List<CountryDto> findAll() {
+    public List<CountryV1Dto> findAll() {
         List<Country> list = countryUseCasePort.findAll();
         return list.stream().map(dataConverter::convertToDto).toList();
     }
 
-    public Page<CountryDto> search(CountryFilter filter, Pageable pageable) {
+    public Page<CountryV1Dto> search(CountryFilter filter, Pageable pageable) {
         Page<Country> paginatedTist = (Page<Country>) countryUseCasePort.search(filter, pageable);
         return new PageImpl<>(
                 paginatedTist.getContent().stream().map(dataConverter::convertToDto).toList(),
                 paginatedTist.getPageable(), paginatedTist.getTotalElements());
     }
 
-    public CountryDto findById(Long id) {
+    public CountryV1Dto findById(Long id) {
         var model = countryUseCasePort.findById(id);
         return dataConverter.convertToDto(model);
     }
 
-    public CountryDto save(CountryDto dto) {
+    public CountryV1Dto save(CountryV1Dto dto) {
         var model = new Country();
         dataConverter.copyToModel(model, dto);
 
@@ -49,7 +49,7 @@ public class CountryDataManager {
         return dataConverter.convertToDto(dto, model);
     }
 
-    public CountryDto update(Long id, CountryDto dto) {
+    public CountryV1Dto update(Long id, CountryV1Dto dto) {
         var model = new Country();
         dataConverter.copyToModel(model, dto);
 

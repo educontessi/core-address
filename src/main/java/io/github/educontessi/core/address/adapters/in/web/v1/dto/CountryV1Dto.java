@@ -1,10 +1,10 @@
-package io.github.educontessi.core.address.adapters.in.v1.dto;
+package io.github.educontessi.core.address.adapters.in.web.v1.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.github.educontessi.core.address.core.util.StringUtils;
 
 @JsonIgnoreProperties(value = {"dateTimeCreation", "datTimeChange"})
-public class CountryDto extends BaseDto {
+public class CountryV1Dto extends BaseDto {
 
     private Long id;
     private String name;

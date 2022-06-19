@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.in.v1.web.exception;
+package io.github.educontessi.core.address.adapters.in.web.exception;
 
 public class InvalidDtoException extends RuntimeException {
 

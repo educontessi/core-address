@@ -1,9 +1,9 @@
-package io.github.educontessi.core.address.adapters.in.v1.web.handler;
+package io.github.educontessi.core.address.adapters.in.web.handler;
 
-import io.github.educontessi.core.address.adapters.in.v1.web.exception.InvalidDtoException;
-import io.github.educontessi.core.address.adapters.in.v1.web.response.ErrorDetail;
-import io.github.educontessi.core.address.adapters.in.v1.web.response.ErrorType;
-import io.github.educontessi.core.address.adapters.in.v1.web.response.ResponseError;
+import io.github.educontessi.core.address.adapters.in.web.exception.InvalidDtoException;
+import io.github.educontessi.core.address.adapters.in.web.response.ErrorDetail;
+import io.github.educontessi.core.address.adapters.in.web.response.ErrorType;
+import io.github.educontessi.core.address.adapters.in.web.response.ResponseError;
 import io.github.educontessi.core.address.core.exception.BusinessException;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;

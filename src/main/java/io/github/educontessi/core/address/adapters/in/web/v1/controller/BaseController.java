@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.in.v1.web.controller;
+package io.github.educontessi.core.address.adapters.in.web.v1.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

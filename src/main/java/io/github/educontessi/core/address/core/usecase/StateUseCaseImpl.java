@@ -42,6 +42,17 @@ public class StateUseCaseImpl implements StateUseCasePort {
     }
 
     @Override
+    public List<State> findAllByCountryId(Long countryId, String expand) {
+        return repository.findAllByCountryId(countryId, expand);
+    }
+
+    @Override
+    public State findByUf(String uf, String expand) {
+        Optional<State> optionalSaved = repository.findByUf(uf, expand);
+        return optionalSaved.orElseThrow(() -> new EntityNotFoundException(String.format("There is no record with UF %s", uf)));
+    }
+
+    @Override
     public State save(State model, List<Validator> validatorsOutOfCore) {
         validations.validationsOnSave(model, validatorsOutOfCore).forEach(Validator::validate);
         return repository.save(model);
