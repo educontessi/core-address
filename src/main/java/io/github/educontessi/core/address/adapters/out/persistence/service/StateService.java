@@ -38,17 +38,17 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
-    public Page<State> search(StateFilter filter, Object pageable) {
+    public Page<State> search(StateFilter filter, Object pageable, String expand) {
         Page<StateEntity> list = repository.search(filter, (Pageable) pageable);
         return new PageImpl<>(
-                list.getContent().stream().map(mapper::entityToModel).toList(),
+                list.getContent().stream().map(e -> mapper.entityToModel(e, expand)).toList(),
                 list.getPageable(), list.getTotalElements());
     }
 
     @Override
-    public Optional<State> findById(Long id) {
+    public Optional<State> findById(Long id, String expand) {
         Optional<StateEntity> optionalSaved = repository.findById(id);
-        return optionalSaved.map(mapper::entityToModel);
+        return optionalSaved.map(e -> mapper.entityToModel(e, expand));
     }
 
     @Override

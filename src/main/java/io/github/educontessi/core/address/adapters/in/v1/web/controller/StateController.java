@@ -44,15 +44,15 @@ public class StateController extends BaseController<StateDto> {
 
     @GetMapping("/search")
     @SwaggerDocumentationGETList
-    public ResponseEntity<Page<StateDto>> search(StateFilter filter, Pageable pageable) {
-        Page<StateDto> page = dataManager.search(filter, pageable);
+    public ResponseEntity<Page<StateDto>> search(StateFilter filter, Pageable pageable, String expand) {
+        Page<StateDto> page = dataManager.search(filter, pageable, expand);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
     @SwaggerDocumentationGET
-    public ResponseEntity<StateDto> findById(@PathVariable Long id) {
-        StateDto dto = dataManager.findById(id);
+    public ResponseEntity<StateDto> findById(@PathVariable Long id, String expand) {
+        StateDto dto = dataManager.findById(id, expand);
         return ResponseEntity.ok(dto);
     }
 

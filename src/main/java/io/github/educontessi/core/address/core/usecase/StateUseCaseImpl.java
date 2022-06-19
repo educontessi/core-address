@@ -27,14 +27,18 @@ public class StateUseCaseImpl implements StateUseCasePort {
     }
 
     @Override
-    public Object search(StateFilter filter, Object pageable) {
-        return repository.search(filter, pageable);
+    public Object search(StateFilter filter, Object pageable, String expand) {
+        return repository.search(filter, pageable, expand);
     }
 
     @Override
-    public State findById(Long id) {
-        Optional<State> optionalSaved = repository.findById(id);
+    public State findById(Long id, String expand) {
+        Optional<State> optionalSaved = repository.findById(id, expand);
         return optionalSaved.orElseThrow(() -> new EntityNotFoundException(id));
+    }
+
+    public State findById(Long id) {
+        return findById(id, null);
     }
 
     @Override

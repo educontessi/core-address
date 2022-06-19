@@ -13,9 +13,9 @@ public interface StateRepositoryPort {
 
     List<State> findAll(String expand);
 
-    Page<State> search(StateFilter filter, Object pageable);
+    Page<State> search(StateFilter filter, Object pageable, String expand);
 
-    Optional<State> findById(Long id);
+    Optional<State> findById(Long id, String expand);
 
     State save(State model);
 

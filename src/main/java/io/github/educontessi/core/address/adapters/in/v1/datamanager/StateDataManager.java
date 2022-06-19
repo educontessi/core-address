@@ -29,15 +29,15 @@ public class StateDataManager {
         return list.stream().map(dataConverter::convertToDto).toList();
     }
 
-    public Page<StateDto> search(StateFilter filter, Pageable pageable) {
-        Page<State> paginatedTist = (Page<State>) stateUseCasePort.search(filter, pageable);
+    public Page<StateDto> search(StateFilter filter, Pageable pageable, String expand) {
+        Page<State> paginatedTist = (Page<State>) stateUseCasePort.search(filter, pageable, expand);
         return new PageImpl<>(
                 paginatedTist.getContent().stream().map(dataConverter::convertToDto).toList(),
                 paginatedTist.getPageable(), paginatedTist.getTotalElements());
     }
 
-    public StateDto findById(Long id) {
-        var model = stateUseCasePort.findById(id);
+    public StateDto findById(Long id, String expand) {
+        var model = stateUseCasePort.findById(id, expand);
         return dataConverter.convertToDto(model);
     }
 

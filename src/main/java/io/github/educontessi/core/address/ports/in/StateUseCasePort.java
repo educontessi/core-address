@@ -10,9 +10,9 @@ public interface StateUseCasePort {
 
     List<State> findAll(String expand);
 
-    Object search(StateFilter filter, Object pageable);
+    Object search(StateFilter filter, Object pageable, String expand);
 
-    State findById(Long id);
+    State findById(Long id, String expand);
 
     State save(State model, List<Validator> validatorsOutOfCore);
 
