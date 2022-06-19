@@ -22,8 +22,8 @@ public class StateUseCaseImpl implements StateUseCasePort {
     }
 
     @Override
-    public List<State> findAll() {
-        return repository.findAll();
+    public List<State> findAll(String expand) {
+        return repository.findAll(expand);
     }
 
     @Override

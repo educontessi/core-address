@@ -38,7 +38,7 @@ public class StateController extends BaseController<StateDto> {
     @GetMapping
     @SwaggerDocumentationGETList
     public ResponseEntity<List<StateDto>> findAll(String expand) {
-        List<StateDto> list = dataManager.findAll();
+        List<StateDto> list = dataManager.findAll(expand);
         return ResponseEntity.ok(list);
     }
 

@@ -24,8 +24,8 @@ public class StateDataManager {
         this.dataConverter = dataConverter;
     }
 
-    public List<StateDto> findAll() {
-        List<State> list = stateUseCasePort.findAll();
+    public List<StateDto> findAll(String expand) {
+        List<State> list = stateUseCasePort.findAll(expand);
         return list.stream().map(dataConverter::convertToDto).toList();
     }
 
@@ -46,7 +46,7 @@ public class StateDataManager {
         dataConverter.copyToModel(model, dto);
 
         model = stateUseCasePort.save(model, Collections.emptyList());
-        return dataConverter.convertToDto(dto, model);
+        return dataConverter.convertToDto(model);
     }
 
     public StateDto update(Long id, StateDto dto) {

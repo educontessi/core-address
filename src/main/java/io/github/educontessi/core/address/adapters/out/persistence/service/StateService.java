@@ -32,9 +32,9 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
-    public List<State> findAll() {
+    public List<State> findAll(String expand) {
         List<StateEntity> list = repository.findAll();
-        return list.stream().map(mapper::entityToModel).toList();
+        return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
     }
 
     @Override

@@ -6,9 +6,19 @@ import io.github.educontessi.core.address.core.util.StringUtils;
 @JsonIgnoreProperties(value = {"dateTimeCreation", "datTimeChange"})
 public class CountryDto extends BaseDto {
 
+    private Long id;
     private String name;
     private String acronym;
     private String bacen;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

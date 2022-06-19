@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface StateRepositoryPort {
 
-    List<State> findAll();
+    List<State> findAll(String expand);
 
     Page<State> search(StateFilter filter, Object pageable);
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface StateUseCasePort {
 
-    List<State> findAll();
+    List<State> findAll(String expand);
 
     Object search(StateFilter filter, Object pageable);
 

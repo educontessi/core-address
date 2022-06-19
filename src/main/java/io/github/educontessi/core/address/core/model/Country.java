@@ -1,6 +1,5 @@
 package io.github.educontessi.core.address.core.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.github.educontessi.core.address.core.util.StringUtils;
 
 import javax.validation.constraints.NotNull;
