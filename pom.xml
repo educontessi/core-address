@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.github.educontessi</groupId>
-	<artifactId>core.address</artifactId>
+	<artifactId>core-address</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>core-address</name>
 	<description>Project to manage addresses</description>

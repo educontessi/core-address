@@ -1,0 +1,28 @@
+version: "3"
+services:
+  core-address:
+    image: core-address
+    ports:
+      - "8081:8081"
+    environment:
+      - spring.datasource.url=jdbc:mysql://docker-mysql:3306/core-address?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+      - spring.datasource.username=usuario
+      - spring.datasource.password=usuario
+    networks:
+      - core-mysql
+    depends_on:
+      - docker-mysql
+
+  docker-mysql:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    networks:
+      - core-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=usuario
+      - MYSQL_DATABASE=core-address
+      - MYSQL_USER=usuario
+      - MYSQL_PASSWORD=usuario
+networks:
+  core-mysql:
