@@ -1,7 +1,6 @@
 package io.github.educontessi.core.address.adapters.in.web.v1.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.github.educontessi.core.address.core.util.StringUtils;
 
 @JsonIgnoreProperties(value = {"dateTimeCreation", "datTimeChange"})
 public class StateV1Dto extends BaseDto {
@@ -26,7 +25,7 @@ public class StateV1Dto extends BaseDto {
     }
 
     public void setName(String name) {
-        this.name = StringUtils.formatName(name);
+        this.name = name;
     }
 
     public String getUf() {

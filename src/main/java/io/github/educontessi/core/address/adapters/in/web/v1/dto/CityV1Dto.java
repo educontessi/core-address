@@ -3,12 +3,13 @@ package io.github.educontessi.core.address.adapters.in.web.v1.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(value = {"dateTimeCreation", "datTimeChange"})
-public class CountryV1Dto extends BaseDto {
+public class CityV1Dto extends BaseDto {
 
     private Long id;
     private String name;
-    private String acronym;
-    private String bacen;
+    private Long stateId;
+    private StateV1Dto state;
+    private Integer ibge;
 
     @Override
     public Long getId() {
@@ -27,19 +28,27 @@ public class CountryV1Dto extends BaseDto {
         this.name = name;
     }
 
-    public String getAcronym() {
-        return acronym;
+    public Long getStateId() {
+        return stateId;
     }
 
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
+    public void setStateId(Long stateId) {
+        this.stateId = stateId;
     }
 
-    public String getBacen() {
-        return bacen;
+    public StateV1Dto getState() {
+        return state;
     }
 
-    public void setBacen(String bacen) {
-        this.bacen = bacen;
+    public void setState(StateV1Dto state) {
+        this.state = state;
+    }
+
+    public Integer getIbge() {
+        return ibge;
+    }
+
+    public void setIbge(Integer ibge) {
+        this.ibge = ibge;
     }
 }

@@ -24,5 +24,4 @@ public interface StateUseCasePort {
 
     void delete(Long id, List<Validator> validatorsOutOfCore);
 
-
 }

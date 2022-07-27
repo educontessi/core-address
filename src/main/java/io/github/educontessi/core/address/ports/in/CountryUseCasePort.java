@@ -19,4 +19,5 @@ public interface CountryUseCasePort {
     Country update(Long id, Country model, List<Validator> validatorsOutOfCore);
 
     void delete(Long id, List<Validator> validatorsOutOfCore);
+
 }
