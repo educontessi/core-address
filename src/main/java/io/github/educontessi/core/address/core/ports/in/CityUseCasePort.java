@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.ports.in;
+package io.github.educontessi.core.address.core.ports.in;
 
 import io.github.educontessi.core.address.core.filter.CityFilter;
 import io.github.educontessi.core.address.core.model.City;

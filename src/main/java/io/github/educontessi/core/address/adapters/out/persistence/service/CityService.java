@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.CityFilter;
 import io.github.educontessi.core.address.core.model.City;
-import io.github.educontessi.core.address.ports.out.CityRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.CityRepositoryPort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;

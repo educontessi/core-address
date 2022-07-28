@@ -1,14 +1,14 @@
 package io.github.educontessi.core.address.adapters.out.persistence.service;
 
-import io.github.educontessi.core.address.adapters.out.persistence.dataconverter.StateOutDataconverter;
-import io.github.educontessi.core.address.adapters.out.persistence.entity.StateEntity;
-import io.github.educontessi.core.address.adapters.out.persistence.repository.StateRepository;
+import io.github.educontessi.core.address.adapters.out.persistence.dataconverter.NeighborhoodOutDataconverter;
+import io.github.educontessi.core.address.adapters.out.persistence.entity.NeighborhoodEntity;
+import io.github.educontessi.core.address.adapters.out.persistence.repository.NeighborhoodRepository;
 import io.github.educontessi.core.address.core.config.GlobalParameters;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
-import io.github.educontessi.core.address.core.filter.StateFilter;
-import io.github.educontessi.core.address.core.model.State;
-import io.github.educontessi.core.address.core.ports.out.StateRepositoryPort;
+import io.github.educontessi.core.address.core.filter.NeighborhoodFilter;
+import io.github.educontessi.core.address.core.model.Neighborhood;
+import io.github.educontessi.core.address.core.ports.out.NeighborhoodRepositoryPort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,65 +21,59 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StateService implements StateRepositoryPort {
+public class NeighborhoodService implements NeighborhoodRepositoryPort {
 
-    private final StateRepository repository;
-    private final StateOutDataconverter mapper;
+    private final NeighborhoodRepository repository;
+    private final NeighborhoodOutDataconverter mapper;
 
-    public StateService(StateRepository repository, StateOutDataconverter mapper) {
+    public NeighborhoodService(NeighborhoodRepository repository, NeighborhoodOutDataconverter mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
     @Override
-    public List<State> findAll(String expand) {
-        List<StateEntity> list = repository.findAll();
+    public List<Neighborhood> findAll(String expand) {
+        List<NeighborhoodEntity> list = repository.findAll();
         return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
     }
 
     @Override
-    public Page<State> search(StateFilter filter, Object pageable, String expand) {
-        Page<StateEntity> list = repository.search(filter, (Pageable) pageable);
+    public Page<Neighborhood> search(NeighborhoodFilter filter, Object pageable, String expand) {
+        Page<NeighborhoodEntity> list = repository.search(filter, (Pageable) pageable);
         return new PageImpl<>(
                 list.getContent().stream().map(e -> mapper.entityToModel(e, expand)).toList(),
                 list.getPageable(), list.getTotalElements());
     }
 
     @Override
-    public Optional<State> findById(Long id, String expand) {
-        Optional<StateEntity> optionalSaved = repository.findById(id);
+    public Optional<Neighborhood> findById(Long id, String expand) {
+        Optional<NeighborhoodEntity> optionalSaved = repository.findById(id);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
     }
 
     @Override
-    public List<State> findAllByCountryId(Long countryId, String expand) {
-        List<StateEntity> list = repository.findAllByCountryId(countryId);
+    public List<Neighborhood> findAllByCityId(Long cityId, String expand) {
+        List<NeighborhoodEntity> list = repository.findAllByCityId(cityId);
         return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
     }
 
     @Override
-    public Optional<State> findByUf(String uf, String expand) {
-        Optional<StateEntity> optionalSaved = repository.findByUf(uf);
-        return optionalSaved.map(e -> mapper.entityToModel(e, expand));
-    }
-
-    @Override
-    public State save(State model) {
-        StateEntity entity = new StateEntity();
+    public Neighborhood save(Neighborhood model) {
+        NeighborhoodEntity entity = new NeighborhoodEntity();
         mapper.modelToEntity(entity, model);
         repository.save(entity);
         return mapper.entityToModel(entity);
     }
 
     @Override
-    public State update(State model, State saved) {
+    public Neighborhood update(Neighborhood model, Neighborhood saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
-    public void delete(State saved) {
-        StateEntity entity = new StateEntity();
+    public void delete(Neighborhood saved) {
+        NeighborhoodEntity entity = new NeighborhoodEntity();
         mapper.modelToEntity(entity, saved);
         if (GlobalParameters.EXCLUDE_DEFINITIVE) {
             definitiveDelete(entity);
@@ -88,7 +82,7 @@ public class StateService implements StateRepositoryPort {
         }
     }
 
-    protected void definitiveDelete(StateEntity saved) {
+    protected void definitiveDelete(NeighborhoodEntity saved) {
         try {
             repository.delete(saved);
             repository.flush();
@@ -100,7 +94,7 @@ public class StateService implements StateRepositoryPort {
         }
     }
 
-    protected void paranoidDelete(StateEntity saved) {
+    protected void paranoidDelete(NeighborhoodEntity saved) {
         saved.setDeleted(true);
         repository.saveAndFlush(saved);
     }

@@ -5,8 +5,8 @@ import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
 import io.github.educontessi.core.address.core.validation.CountryValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
-import io.github.educontessi.core.address.ports.in.CountryUseCasePort;
-import io.github.educontessi.core.address.ports.out.CountryRepositoryPort;
+import io.github.educontessi.core.address.core.ports.in.CountryUseCasePort;
+import io.github.educontessi.core.address.core.ports.out.CountryRepositoryPort;
 
 import java.util.List;
 import java.util.Optional;

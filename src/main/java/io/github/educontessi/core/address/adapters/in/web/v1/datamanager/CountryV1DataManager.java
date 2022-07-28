@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.adapters.in.web.v1.dataconverter.Count
 import io.github.educontessi.core.address.adapters.in.web.v1.dto.CountryV1Dto;
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.ports.in.CountryUseCasePort;
+import io.github.educontessi.core.address.core.ports.in.CountryUseCasePort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.ports.out;
+package io.github.educontessi.core.address.core.ports.out;
 
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;

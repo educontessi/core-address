@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.adapters.in.web.v1.dataconverter.State
 import io.github.educontessi.core.address.adapters.in.web.v1.dto.StateV1Dto;
 import io.github.educontessi.core.address.core.filter.StateFilter;
 import io.github.educontessi.core.address.core.model.State;
-import io.github.educontessi.core.address.ports.in.StateUseCasePort;
+import io.github.educontessi.core.address.core.ports.in.StateUseCasePort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

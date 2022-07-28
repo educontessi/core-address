@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.adapters.in.web.v1.dataconverter.CityI
 import io.github.educontessi.core.address.adapters.in.web.v1.dto.CityV1Dto;
 import io.github.educontessi.core.address.core.filter.CityFilter;
 import io.github.educontessi.core.address.core.model.City;
-import io.github.educontessi.core.address.ports.in.CityUseCasePort;
+import io.github.educontessi.core.address.core.ports.in.CityUseCasePort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -41,8 +41,8 @@ public class CityV1DataManager {
         return dataConverter.convertToDto(model);
     }
 
-    public List<CityV1Dto> findAllByStateId(Long countryId, String expand) {
-        List<City> list = cityUseCasePort.findAllByStateId(countryId, expand);
+    public List<CityV1Dto> findAllByStateId(Long stateId, String expand) {
+        List<City> list = cityUseCasePort.findAllByStateId(stateId, expand);
         return list.stream().map(dataConverter::convertToDto).toList();
     }
 

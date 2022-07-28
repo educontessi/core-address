@@ -1,0 +1,32 @@
+package io.github.educontessi.core.address.adapters.in.web.v1.dataconverter;
+
+import io.github.educontessi.core.address.adapters.in.web.v1.dto.NeighborhoodV1Dto;
+import io.github.educontessi.core.address.core.model.Neighborhood;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
+
+@Component
+public class NeighborhoodInV1DataConverter extends DataConverter<Neighborhood, NeighborhoodV1Dto> {
+
+    @Override
+    public void copyToModel(Neighborhood model, NeighborhoodV1Dto dto) {
+        BeanUtils.copyProperties(dto, model);
+        model.setCityId(getIdOrNull(dto.getCity(), dto.getCityId()));
+        isValid(model);
+    }
+
+    @Override
+    public NeighborhoodV1Dto convertToDto(NeighborhoodV1Dto dto, Neighborhood model) {
+        BeanUtils.copyProperties(model, dto);
+        if (model.getCity() != null) {
+            dto.setCity(new CityInV1DataConverter().convertToDto(model.getCity()));
+            dto.setCityId(null); // otimização do json de retorno
+        }
+        return dto;
+    }
+
+    public NeighborhoodV1Dto convertToDto(Neighborhood model) {
+        return convertToDto(new NeighborhoodV1Dto(), model);
+    }
+
+}
