@@ -30,10 +30,10 @@ public class CountryV1DataManager {
     }
 
     public Page<CountryV1Dto> search(CountryFilter filter, Pageable pageable) {
-        Page<Country> paginatedTist = (Page<Country>) countryUseCasePort.search(filter, pageable);
+        Page<Country> paginated = (Page<Country>) countryUseCasePort.search(filter, pageable);
         return new PageImpl<>(
-                paginatedTist.getContent().stream().map(dataConverter::convertToDto).toList(),
-                paginatedTist.getPageable(), paginatedTist.getTotalElements());
+                paginated.getContent().stream().map(dataConverter::convertToDto).toList(),
+                paginated.getPageable(), paginated.getTotalElements());
     }
 
     public CountryV1Dto findById(Long id) {
@@ -60,4 +60,5 @@ public class CountryV1DataManager {
     public void delete(Long id) {
         countryUseCasePort.delete(id, Collections.emptyList());
     }
+
 }

@@ -64,7 +64,7 @@ public class StateV1Controller extends BaseController<StateV1Dto> {
     }
 
     @GetMapping("/uf/{uf}")
-    @SwaggerDocumentationGETList
+    @SwaggerDocumentationGET
     public ResponseEntity<StateV1Dto> findByUf(@PathVariable String uf, String expand) {
         StateV1Dto dto = dataManager.findByUf(uf, expand);
         return ResponseEntity.ok(dto);

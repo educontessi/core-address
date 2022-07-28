@@ -30,10 +30,10 @@ public class CityV1DataManager {
     }
 
     public Page<CityV1Dto> search(CityFilter filter, Pageable pageable, String expand) {
-        Page<City> paginatedTist = (Page<City>) cityUseCasePort.search(filter, pageable, expand);
+        Page<City> paginated = (Page<City>) cityUseCasePort.search(filter, pageable, expand);
         return new PageImpl<>(
-                paginatedTist.getContent().stream().map(dataConverter::convertToDto).toList(),
-                paginatedTist.getPageable(), paginatedTist.getTotalElements());
+                paginated.getContent().stream().map(dataConverter::convertToDto).toList(),
+                paginated.getPageable(), paginated.getTotalElements());
     }
 
     public CityV1Dto findById(Long id, String expand) {
@@ -70,6 +70,5 @@ public class CityV1DataManager {
     public void delete(Long id) {
         cityUseCasePort.delete(id, Collections.emptyList());
     }
-
 
 }

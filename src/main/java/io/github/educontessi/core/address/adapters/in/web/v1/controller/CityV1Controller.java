@@ -64,7 +64,7 @@ public class CityV1Controller extends BaseController<CityV1Dto> {
     }
 
     @GetMapping("/ibge/{ibge}")
-    @SwaggerDocumentationGETList
+    @SwaggerDocumentationGET
     public ResponseEntity<CityV1Dto> findByIbge(@PathVariable Integer ibge, String expand) {
         CityV1Dto dto = dataManager.findByIbge(ibge, expand);
         return ResponseEntity.ok(dto);
