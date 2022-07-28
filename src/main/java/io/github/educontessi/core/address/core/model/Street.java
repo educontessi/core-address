@@ -6,11 +6,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Model {@link Neighborhood} to manipulate state table
+ * Model {@link Street} to manipulate street table
  *
  * @author Eduardo Possamai Contessi
  */
-public class State extends BaseModel {
+public class Street extends BaseModel {
 
     private Long id;
 
@@ -19,13 +19,9 @@ public class State extends BaseModel {
     private String name;
 
     @NotNull
-    @Size(min = 2, max = 10)
-    private String uf;
+    private Long cityId;
 
-    @NotNull
-    private Long countryId;
-
-    private Country country;
+    private City city;
 
     public Long getId() {
         return id;
@@ -43,27 +39,19 @@ public class State extends BaseModel {
         this.name = StringUtils.formatName(name);
     }
 
-    public String getUf() {
-        return uf;
+    public Long getCityId() {
+        return cityId;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
-    public Long getCountryId() {
-        return countryId;
+    public City getCity() {
+        return city;
     }
 
-    public void setCountryId(Long countryId) {
-        this.countryId = countryId;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCity(City city) {
+        this.city = city;
     }
 }

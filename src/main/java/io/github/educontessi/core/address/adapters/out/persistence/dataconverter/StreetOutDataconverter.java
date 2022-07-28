@@ -1,32 +1,32 @@
 package io.github.educontessi.core.address.adapters.out.persistence.dataconverter;
 
-import io.github.educontessi.core.address.adapters.out.persistence.entity.NeighborhoodEntity;
-import io.github.educontessi.core.address.core.model.Neighborhood;
+import io.github.educontessi.core.address.adapters.out.persistence.entity.StreetEntity;
+import io.github.educontessi.core.address.core.model.Street;
 import io.github.educontessi.core.address.core.util.ExpandUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NeighborhoodOutDataconverter implements DataConverter<NeighborhoodEntity, Neighborhood> {
+public class StreetOutDataconverter implements DataConverter<StreetEntity, Street> {
 
     @Override
-    public void modelToEntity(NeighborhoodEntity entity, Neighborhood model) {
+    public void modelToEntity(StreetEntity entity, Street model) {
         BeanUtils.copyProperties(model, entity);
     }
 
     @Override
-    public Neighborhood entityToModel(NeighborhoodEntity entity, String expand) {
-        Neighborhood model = new Neighborhood();
+    public Street entityToModel(StreetEntity entity, String expand) {
+        Street model = new Street();
         BeanUtils.copyProperties(entity, model);
         setCity(model, entity, expand);
         return model;
     }
 
-    public Neighborhood entityToModel(NeighborhoodEntity entity) {
+    public Street entityToModel(StreetEntity entity) {
         return entityToModel(entity, null);
     }
 
-    protected void setCity(Neighborhood model, NeighborhoodEntity entity, String expand) {
+    protected void setCity(Street model, StreetEntity entity, String expand) {
         if (ExpandUtil.contains("city", expand)) {
             model.setCity(new CityOutDataconverter().entityToModel(entity.getCity(), ExpandUtil.extractSubExpand("state", expand)));
             model.setCityId(null); // otimizar retorno json
