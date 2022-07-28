@@ -24,4 +24,5 @@ public interface NeighborhoodRepositoryPort {
 
     void delete(Neighborhood saved) throws EntityNotFoundException, EntityInUseException;
 
+    Optional<Neighborhood> findByNameAndCityId(String name, Long cityId);
 }

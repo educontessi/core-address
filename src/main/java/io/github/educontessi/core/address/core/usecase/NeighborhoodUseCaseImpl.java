@@ -66,4 +66,9 @@ public class NeighborhoodUseCaseImpl implements NeighborhoodUseCasePort {
         repository.delete(saved);
     }
 
+    @Override
+    public Neighborhood findByNameAndCityId(String name, Long cityId) {
+        return repository.findByNameAndCityId(name, cityId).orElse(null);
+    }
+
 }

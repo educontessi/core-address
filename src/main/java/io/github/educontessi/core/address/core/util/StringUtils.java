@@ -65,5 +65,11 @@ public class StringUtils {
         return caracteres.contains(word);
     }
 
+    public static String removeNumberMask(String value) {
+        if (value == null) {
+            return value;
+        }
+        return value.replaceAll("[^0123456789]", "");
+    }
 
 }

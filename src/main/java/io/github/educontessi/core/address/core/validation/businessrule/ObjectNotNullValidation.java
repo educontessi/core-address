@@ -4,11 +4,11 @@ import io.github.educontessi.core.address.core.validation.Validator;
 
 import java.util.Objects;
 
-public class ObjectNotNull implements Validator {
+public class ObjectNotNullValidation implements Validator {
 
     private final Object object;
 
-    public ObjectNotNull(Object object) {
+    public ObjectNotNullValidation(Object object) {
         this.object = object;
     }
 

@@ -82,6 +82,12 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
         }
     }
 
+    @Override
+    public Optional<Neighborhood> findByNameAndCityId(String name, Long cityId) {
+        Optional<NeighborhoodEntity> optionalSaved = repository.findByNameAndCityId(name, cityId);
+        return optionalSaved.map(e -> mapper.entityToModel(e, null));
+    }
+
     protected void definitiveDelete(NeighborhoodEntity saved) {
         try {
             repository.delete(saved);

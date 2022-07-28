@@ -82,6 +82,12 @@ public class StreetService implements StreetRepositoryPort {
         }
     }
 
+    @Override
+    public Optional<Street> findByNameAndCityId(String name, Long cityId) {
+        Optional<StreetEntity> optionalSaved = repository.findByNameAndCityId(name, cityId);
+        return optionalSaved.map(e -> mapper.entityToModel(e, null));
+    }
+
     protected void definitiveDelete(StreetEntity saved) {
         try {
             repository.delete(saved);

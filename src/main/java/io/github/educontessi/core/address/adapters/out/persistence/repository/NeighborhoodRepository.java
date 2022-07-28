@@ -11,6 +11,8 @@ import java.util.Optional;
 @Repository
 public interface NeighborhoodRepository extends JpaRepository<NeighborhoodEntity, Long>, NeighborhoodRepositoryQuery {
 
+    Optional<NeighborhoodEntity> findByNameAndCityId(String name, Long cityId);
+
     List<NeighborhoodEntity> findAllByCityId(Long cityId);
 
 }

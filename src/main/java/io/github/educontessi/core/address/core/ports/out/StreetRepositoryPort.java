@@ -24,4 +24,5 @@ public interface StreetRepositoryPort {
 
     void delete(Street saved) throws EntityNotFoundException, EntityInUseException;
 
+    Optional<Street> findByNameAndCityId(String name, Long cityId);
 }

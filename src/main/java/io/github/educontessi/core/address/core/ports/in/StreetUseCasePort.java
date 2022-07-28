@@ -22,4 +22,5 @@ public interface StreetUseCasePort {
 
     void delete(Long id, List<Validator> validatorsOutOfCore);
 
+    Street findByNameAndCityId(String logradouro, Long id);
 }

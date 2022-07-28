@@ -66,4 +66,9 @@ public class StreetUseCaseImpl implements StreetUseCasePort {
         repository.delete(saved);
     }
 
+    @Override
+    public Street findByNameAndCityId(String name, Long cityId) {
+        return repository.findByNameAndCityId(name, cityId).orElse(null);
+    }
+
 }
