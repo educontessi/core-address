@@ -1,9 +1,11 @@
 package io.github.educontessi.core.address.core.model;
 
+import java.io.Serializable;
+
 /**
  * @author Eduardo Possamai Contessi
  */
-public class ZipCodeSearch {
+public class ZipCodeSearch implements Serializable {
 
     private String zipCode;
     private Street street;

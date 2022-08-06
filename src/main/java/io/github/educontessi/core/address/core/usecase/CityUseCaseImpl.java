@@ -3,10 +3,10 @@ package io.github.educontessi.core.address.core.usecase;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.CityFilter;
 import io.github.educontessi.core.address.core.model.City;
-import io.github.educontessi.core.address.core.validation.CityValidations;
-import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.core.ports.in.CityUseCasePort;
 import io.github.educontessi.core.address.core.ports.out.CityRepositoryPort;
+import io.github.educontessi.core.address.core.validation.CityValidations;
+import io.github.educontessi.core.address.core.validation.Validator;
 
 import java.util.List;
 import java.util.Optional;

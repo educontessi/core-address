@@ -1,5 +1,6 @@
 package io.github.educontessi.core.address.adapters.out.feing.service;
 
+import io.github.educontessi.core.address.adapters.in.web.v1.controller.CityV1Controller;
 import io.github.educontessi.core.address.adapters.out.feing.ViaCEPFeign;
 import io.github.educontessi.core.address.adapters.out.feing.dto.ViaCepDto;
 import io.github.educontessi.core.address.core.model.*;
@@ -9,15 +10,22 @@ import io.github.educontessi.core.address.core.ports.in.StateUseCasePort;
 import io.github.educontessi.core.address.core.ports.in.StreetUseCasePort;
 import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchRepositoryPort;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+
+import static io.github.educontessi.core.address.core.config.TagLogs.*;
 
 /**
  * @author Eduardo Possamai Contessi
  */
 @Service
 public class ViaCEPService implements ZipCodeSearchRepositoryPort {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityV1Controller.class);
 
     private final StreetUseCasePort streetUseCasePort;
     private final NeighborhoodUseCasePort neighborhoodUseCasePort;
@@ -38,7 +46,9 @@ public class ViaCEPService implements ZipCodeSearchRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-zipcode")
     public ZipCodeSearch search(String zipCode) {
+        long start = System.currentTimeMillis();
         zipCode = io.github.educontessi.core.address.core.util.StringUtils.removeNumberMask(zipCode);
         ViaCepDto dto = dtoFeign.searchZipCode(zipCode);
         ZipCodeSearch zipCodeSearch = null;
@@ -50,6 +60,7 @@ public class ViaCEPService implements ZipCodeSearchRepositoryPort {
             zipCodeSearch.setNeighborhood(getNeighborhood(dto, zipCodeSearch.getCity()));
             zipCodeSearch.setStreet(getStreet(dto, zipCodeSearch.getCity()));
         }
+        LOGGER.info("{}{}{} Total time to consult zip code {}ms", TIMER, FEIGN, VIACEP, System.currentTimeMillis() - start);
         return zipCodeSearch;
     }
 

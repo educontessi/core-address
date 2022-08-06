@@ -31,9 +31,17 @@ public class RedisConfig {
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
         return (builder) -> builder
                 .withCacheConfiguration("core-address-country",
-                        cacheConfiguration().entryTtl(Duration.ofMinutes(10)))
-                .withCacheConfiguration("customerCache",
-                        cacheConfiguration().entryTtl(Duration.ofMinutes(5)));
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)))
+                .withCacheConfiguration("core-address-state",
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)))
+                .withCacheConfiguration("core-address-city",
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)))
+                .withCacheConfiguration("core-address-neighborhood",
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)))
+                .withCacheConfiguration("core-address-street",
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)))
+                .withCacheConfiguration("core-address-zipcode",
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)));
     }
 
 }

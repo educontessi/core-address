@@ -10,6 +10,8 @@ import io.github.educontessi.core.address.core.filter.StreetFilter;
 import io.github.educontessi.core.address.core.model.Street;
 import io.github.educontessi.core.address.core.ports.out.StreetRepositoryPort;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -58,6 +60,7 @@ public class StreetService implements StreetRepositoryPort {
     }
 
     @Override
+    @CacheEvict(value = "core-address-street", allEntries = true)
     public Street save(Street model) {
         StreetEntity entity = new StreetEntity();
         mapper.modelToEntity(entity, model);
@@ -66,12 +69,14 @@ public class StreetService implements StreetRepositoryPort {
     }
 
     @Override
+    @CacheEvict(value = "core-address-street", allEntries = true)
     public Street update(Street model, Street saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
+    @CacheEvict(value = "core-address-street", allEntries = true)
     public void delete(Street saved) {
         StreetEntity entity = new StreetEntity();
         mapper.modelToEntity(entity, saved);
@@ -83,6 +88,7 @@ public class StreetService implements StreetRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-street")
     public Optional<Street> findByNameAndCityId(String name, Long cityId) {
         Optional<StreetEntity> optionalSaved = repository.findByNameAndCityId(name, cityId);
         return optionalSaved.map(e -> mapper.entityToModel(e, null));

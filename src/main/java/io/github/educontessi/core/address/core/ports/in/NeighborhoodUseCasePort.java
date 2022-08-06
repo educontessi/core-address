@@ -5,7 +5,6 @@ import io.github.educontessi.core.address.core.model.Neighborhood;
 import io.github.educontessi.core.address.core.validation.Validator;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface NeighborhoodUseCasePort {
 

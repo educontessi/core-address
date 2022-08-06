@@ -1,6 +1,5 @@
 package io.github.educontessi.core.address.adapters.out.persistence.repository;
 
-import io.github.educontessi.core.address.adapters.out.persistence.entity.NeighborhoodEntity;
 import io.github.educontessi.core.address.adapters.out.persistence.entity.StreetEntity;
 import io.github.educontessi.core.address.adapters.out.persistence.repository.customquery.StreetRepositoryQuery;
 import org.springframework.data.jpa.repository.JpaRepository;

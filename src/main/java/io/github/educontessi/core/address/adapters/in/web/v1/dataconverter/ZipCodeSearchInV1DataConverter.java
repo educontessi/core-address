@@ -1,7 +1,6 @@
 package io.github.educontessi.core.address.adapters.in.web.v1.dataconverter;
 
 import io.github.educontessi.core.address.adapters.in.web.v1.dto.ZipCodeSearchV1Dto;
-import io.github.educontessi.core.address.adapters.in.web.v1.dto.ZipCodeSearchV1Dto;
 import io.github.educontessi.core.address.core.model.ZipCodeSearch;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;

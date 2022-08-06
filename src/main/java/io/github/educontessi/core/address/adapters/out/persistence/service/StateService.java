@@ -10,6 +10,8 @@ import io.github.educontessi.core.address.core.filter.StateFilter;
 import io.github.educontessi.core.address.core.model.State;
 import io.github.educontessi.core.address.core.ports.out.StateRepositoryPort;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -58,12 +60,14 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-state")
     public Optional<State> findByUf(String uf, String expand) {
         Optional<StateEntity> optionalSaved = repository.findByUf(uf);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
     }
 
     @Override
+    @CacheEvict(value = "core-address-state", allEntries = true)
     public State save(State model) {
         StateEntity entity = new StateEntity();
         mapper.modelToEntity(entity, model);
@@ -72,12 +76,14 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
+    @CacheEvict(value = "core-address-state", allEntries = true)
     public State update(State model, State saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
+    @CacheEvict(value = "core-address-state", allEntries = true)
     public void delete(State saved) {
         StateEntity entity = new StateEntity();
         mapper.modelToEntity(entity, saved);

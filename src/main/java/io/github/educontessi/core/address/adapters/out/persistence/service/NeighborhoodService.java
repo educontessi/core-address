@@ -10,6 +10,8 @@ import io.github.educontessi.core.address.core.filter.NeighborhoodFilter;
 import io.github.educontessi.core.address.core.model.Neighborhood;
 import io.github.educontessi.core.address.core.ports.out.NeighborhoodRepositoryPort;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -58,6 +60,7 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
     }
 
     @Override
+    @CacheEvict(value = "core-address-neighborhood", allEntries = true)
     public Neighborhood save(Neighborhood model) {
         NeighborhoodEntity entity = new NeighborhoodEntity();
         mapper.modelToEntity(entity, model);
@@ -66,12 +69,14 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
     }
 
     @Override
+    @CacheEvict(value = "core-address-neighborhood", allEntries = true)
     public Neighborhood update(Neighborhood model, Neighborhood saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
+    @CacheEvict(value = "core-address-neighborhood", allEntries = true)
     public void delete(Neighborhood saved) {
         NeighborhoodEntity entity = new NeighborhoodEntity();
         mapper.modelToEntity(entity, saved);
@@ -83,6 +88,7 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-neighborhood")
     public Optional<Neighborhood> findByNameAndCityId(String name, Long cityId) {
         Optional<NeighborhoodEntity> optionalSaved = repository.findByNameAndCityId(name, cityId);
         return optionalSaved.map(e -> mapper.entityToModel(e, null));

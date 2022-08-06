@@ -10,6 +10,8 @@ import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
 import io.github.educontessi.core.address.core.ports.out.CountryRepositoryPort;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -32,7 +34,6 @@ public class CountryService implements CountryRepositoryPort {
     }
 
     @Override
-    //@Cacheable(value = "core-address-country")
     public List<Country> findAll() {
         List<CountryEntity> list = repository.findAll();
         return list.stream().map(mapper::entityToModel).toList();
@@ -47,14 +48,14 @@ public class CountryService implements CountryRepositoryPort {
     }
 
     @Override
-    //@Cacheable(value = "core-address-country")
+    @Cacheable(value = "core-address-country")
     public Optional<Country> findById(Long id) {
         Optional<CountryEntity> optionalSaved = repository.findById(id);
         return optionalSaved.map(mapper::entityToModel);
     }
 
     @Override
-    //@CacheEvict(value = "core-address-country", allEntries = true)
+    @CacheEvict(value = "core-address-country", allEntries = true)
     public Country save(Country model) {
         CountryEntity entity = new CountryEntity();
         mapper.modelToEntity(entity, model);
@@ -69,7 +70,7 @@ public class CountryService implements CountryRepositoryPort {
     }
 
     @Override
-    //@CacheEvict(value = "core-address-country", allEntries = true)
+    @CacheEvict(value = "core-address-country", allEntries = true)
     public void delete(Country saved) {
         CountryEntity entity = new CountryEntity();
         mapper.modelToEntity(entity, saved);

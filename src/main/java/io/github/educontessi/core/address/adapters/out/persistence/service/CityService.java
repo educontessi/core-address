@@ -10,6 +10,8 @@ import io.github.educontessi.core.address.core.filter.CityFilter;
 import io.github.educontessi.core.address.core.model.City;
 import io.github.educontessi.core.address.core.ports.out.CityRepositoryPort;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -58,12 +60,14 @@ public class CityService implements CityRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-city")
     public Optional<City> findByIbge(Integer ibge, String expand) {
         Optional<CityEntity> optionalSaved = repository.findByIbge(ibge);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
     }
 
     @Override
+    @CacheEvict(value = "core-address-city", allEntries = true)
     public City save(City model) {
         CityEntity entity = new CityEntity();
         mapper.modelToEntity(entity, model);
@@ -72,12 +76,14 @@ public class CityService implements CityRepositoryPort {
     }
 
     @Override
+    @CacheEvict(value = "core-address-city", allEntries = true)
     public City update(City model, City saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
+    @CacheEvict(value = "core-address-city", allEntries = true)
     public void delete(City saved) {
         CityEntity entity = new CityEntity();
         mapper.modelToEntity(entity, saved);
