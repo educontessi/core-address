@@ -70,7 +70,7 @@ public class CountryService implements CountryRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-country", key = "#p0.id", condition = "#p0.id != null")
+    @CacheEvict(value = "core-address-country", key = "#p0.id")
     public void delete(Country saved) {
         CountryEntity entity = new CountryEntity();
         mapper.modelToEntity(entity, saved);

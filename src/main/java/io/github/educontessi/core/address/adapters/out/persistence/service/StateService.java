@@ -48,6 +48,7 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-state")
     public Optional<State> findById(Long id, String expand) {
         Optional<StateEntity> optionalSaved = repository.findById(id);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
@@ -67,7 +68,7 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-state", allEntries = true)
+    @CacheEvict(value = "core-address-state", key = "#p0.id", condition = "#p0.id != null")
     public State save(State model) {
         StateEntity entity = new StateEntity();
         mapper.modelToEntity(entity, model);
@@ -76,14 +77,13 @@ public class StateService implements StateRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-state", allEntries = true)
     public State update(State model, State saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
-    @CacheEvict(value = "core-address-state", allEntries = true)
+    @CacheEvict(value = "core-address-state", key = "#p0.id")
     public void delete(State saved) {
         StateEntity entity = new StateEntity();
         mapper.modelToEntity(entity, saved);

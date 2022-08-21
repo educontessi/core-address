@@ -33,7 +33,7 @@ public class AddressService implements AddressRepositoryPort {
     @Cacheable(value = "core-address")
     public List<Address> findAllByIntegrationId(String integrationId) {
         List<AddressEntity> list = repository.findAllByIntegrationId(integrationId);
-        return list.stream().map(e -> mapper.entityToModel(e, "country,state,city,neighborhood,street")).toList();
+        return list.stream().map(mapper::entityToModel).toList();
     }
 
     @Override
@@ -60,7 +60,6 @@ public class AddressService implements AddressRepositoryPort {
     }
 
     @Override
-    @CacheEvict(cacheNames = {"core-address", "core-address-default"}, allEntries = true)
     public Address update(Address model, Address saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);

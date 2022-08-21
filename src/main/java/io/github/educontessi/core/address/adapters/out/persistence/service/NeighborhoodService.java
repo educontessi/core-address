@@ -48,6 +48,7 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-neighborhood")
     public Optional<Neighborhood> findById(Long id, String expand) {
         Optional<NeighborhoodEntity> optionalSaved = repository.findById(id);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
@@ -60,7 +61,7 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-neighborhood", allEntries = true)
+    @CacheEvict(value = "core-address-neighborhood", key = "#p0.id", condition = "#p0.id != null")
     public Neighborhood save(Neighborhood model) {
         NeighborhoodEntity entity = new NeighborhoodEntity();
         mapper.modelToEntity(entity, model);
@@ -69,14 +70,13 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-neighborhood", allEntries = true)
     public Neighborhood update(Neighborhood model, Neighborhood saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
-    @CacheEvict(value = "core-address-neighborhood", allEntries = true)
+    @CacheEvict(value = "core-address-neighborhood", key = "#p0.id")
     public void delete(Neighborhood saved) {
         NeighborhoodEntity entity = new NeighborhoodEntity();
         mapper.modelToEntity(entity, saved);

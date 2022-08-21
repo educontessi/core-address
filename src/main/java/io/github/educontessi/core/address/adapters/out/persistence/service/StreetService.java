@@ -48,6 +48,7 @@ public class StreetService implements StreetRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-street")
     public Optional<Street> findById(Long id, String expand) {
         Optional<StreetEntity> optionalSaved = repository.findById(id);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
@@ -60,7 +61,7 @@ public class StreetService implements StreetRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-street", allEntries = true)
+    @CacheEvict(value = "core-address-street", key = "#p0.id", condition = "#p0.id != null")
     public Street save(Street model) {
         StreetEntity entity = new StreetEntity();
         mapper.modelToEntity(entity, model);
@@ -69,14 +70,13 @@ public class StreetService implements StreetRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-street", allEntries = true)
     public Street update(Street model, Street saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
-    @CacheEvict(value = "core-address-street", allEntries = true)
+    @CacheEvict(value = "core-address-street", key = "#p0.id")
     public void delete(Street saved) {
         StreetEntity entity = new StreetEntity();
         mapper.modelToEntity(entity, saved);

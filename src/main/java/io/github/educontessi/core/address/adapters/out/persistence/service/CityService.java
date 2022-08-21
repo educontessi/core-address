@@ -48,6 +48,7 @@ public class CityService implements CityRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-city")
     public Optional<City> findById(Long id, String expand) {
         Optional<CityEntity> optionalSaved = repository.findById(id);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
@@ -67,7 +68,7 @@ public class CityService implements CityRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-city", allEntries = true)
+    @CacheEvict(value = "core-address-city", key = "#p0.id", condition = "#p0.id != null")
     public City save(City model) {
         CityEntity entity = new CityEntity();
         mapper.modelToEntity(entity, model);
@@ -76,14 +77,13 @@ public class CityService implements CityRepositoryPort {
     }
 
     @Override
-    @CacheEvict(value = "core-address-city", allEntries = true)
     public City update(City model, City saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
-    @CacheEvict(value = "core-address-city", allEntries = true)
+    @CacheEvict(value = "core-address-city", key = "#p0.id")
     public void delete(City saved) {
         CityEntity entity = new CityEntity();
         mapper.modelToEntity(entity, saved);
