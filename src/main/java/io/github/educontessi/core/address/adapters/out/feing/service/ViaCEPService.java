@@ -1,6 +1,5 @@
 package io.github.educontessi.core.address.adapters.out.feing.service;
 
-import io.github.educontessi.core.address.adapters.in.web.v1.controller.CityV1Controller;
 import io.github.educontessi.core.address.adapters.out.feing.ViaCEPFeign;
 import io.github.educontessi.core.address.adapters.out.feing.dto.ViaCepDto;
 import io.github.educontessi.core.address.core.model.*;
@@ -25,7 +24,7 @@ import static io.github.educontessi.core.address.core.config.TagLogs.*;
 @Service
 public class ViaCEPService implements ZipCodeSearchRepositoryPort {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CityV1Controller.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ViaCEPService.class);
 
     private final StreetUseCasePort streetUseCasePort;
     private final NeighborhoodUseCasePort neighborhoodUseCasePort;
