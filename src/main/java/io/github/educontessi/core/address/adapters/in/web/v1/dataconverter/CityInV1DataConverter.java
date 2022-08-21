@@ -18,11 +18,15 @@ public class CityInV1DataConverter extends DataConverter<City, CityV1Dto> {
     @Override
     public CityV1Dto convertToDto(CityV1Dto dto, City model) {
         BeanUtils.copyProperties(model, dto);
+        setState(dto, model);
+        return dto;
+    }
+
+    private void setState(CityV1Dto dto, City model) {
         if (model.getState() != null) {
             dto.setState(new StateInV1DataConverter().convertToDto(model.getState()));
             dto.setStateId(null); // otimização do json de retorno
         }
-        return dto;
     }
 
     public CityV1Dto convertToDto(City model) {

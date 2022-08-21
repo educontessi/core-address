@@ -28,7 +28,7 @@ public class StreetOutDataconverter implements DataConverter<StreetEntity, Stree
 
     protected void setCity(Street model, StreetEntity entity, String expand) {
         if (ExpandUtil.contains("city", expand)) {
-            model.setCity(new CityOutDataconverter().entityToModel(entity.getCity(), ExpandUtil.extractSubExpand("state", expand)));
+            model.setCity(new CityOutDataconverter().entityToModel(entity.getCity(), ExpandUtil.extractSubExpand("city", expand)));
             model.setCityId(null); // otimizar retorno json
         } else {
             model.setCityId(entity.getCityId());

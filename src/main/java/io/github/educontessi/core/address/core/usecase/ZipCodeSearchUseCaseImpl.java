@@ -6,12 +6,12 @@ import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchRepository
 import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.core.validation.ZipCodeSearchValidations;
 
-public class ZipCodeSearchUseCaseUseCaseImpl implements ZipCodeSearchUseCasePort {
+public class ZipCodeSearchUseCaseImpl implements ZipCodeSearchUseCasePort {
 
     private final ZipCodeSearchRepositoryPort repository;
     private final ZipCodeSearchValidations validations;
 
-    public ZipCodeSearchUseCaseUseCaseImpl(ZipCodeSearchRepositoryPort repository, ZipCodeSearchValidations validations) {
+    public ZipCodeSearchUseCaseImpl(ZipCodeSearchRepositoryPort repository, ZipCodeSearchValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

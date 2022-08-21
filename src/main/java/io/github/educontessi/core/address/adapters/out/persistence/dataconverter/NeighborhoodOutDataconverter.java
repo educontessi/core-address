@@ -28,7 +28,7 @@ public class NeighborhoodOutDataconverter implements DataConverter<NeighborhoodE
 
     protected void setCity(Neighborhood model, NeighborhoodEntity entity, String expand) {
         if (ExpandUtil.contains("city", expand)) {
-            model.setCity(new CityOutDataconverter().entityToModel(entity.getCity(), ExpandUtil.extractSubExpand("state", expand)));
+            model.setCity(new CityOutDataconverter().entityToModel(entity.getCity(), ExpandUtil.extractSubExpand("city", expand)));
             model.setCityId(null); // otimizar retorno json
         } else {
             model.setCityId(entity.getCityId());

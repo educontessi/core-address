@@ -36,7 +36,12 @@ public class BeanConfiguration {
     }
 
     @Bean
-    ZipCodeSearchUseCaseUseCaseImpl zipCodeSearchUseCase(ViaCEPService service) {
-        return new ZipCodeSearchUseCaseUseCaseImpl(service, new ZipCodeSearchValidations());
+    ZipCodeSearchUseCaseImpl zipCodeSearchUseCase(ViaCEPService service) {
+        return new ZipCodeSearchUseCaseImpl(service, new ZipCodeSearchValidations());
+    }
+
+    @Bean
+    AddressUseCaseImpl addressUseCase(AddressService service) {
+        return new AddressUseCaseImpl(service, new AddressValidations());
     }
 }

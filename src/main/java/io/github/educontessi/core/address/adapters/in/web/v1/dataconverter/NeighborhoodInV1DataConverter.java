@@ -18,11 +18,15 @@ public class NeighborhoodInV1DataConverter extends DataConverter<Neighborhood, N
     @Override
     public NeighborhoodV1Dto convertToDto(NeighborhoodV1Dto dto, Neighborhood model) {
         BeanUtils.copyProperties(model, dto);
+        setCity(dto, model);
+        return dto;
+    }
+
+    private void setCity(NeighborhoodV1Dto dto, Neighborhood model) {
         if (model.getCity() != null) {
             dto.setCity(new CityInV1DataConverter().convertToDto(model.getCity()));
             dto.setCityId(null); // otimização do json de retorno
         }
-        return dto;
     }
 
     public NeighborhoodV1Dto convertToDto(Neighborhood model) {

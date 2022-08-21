@@ -27,6 +27,13 @@ public abstract class BaseModel implements Serializable {
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     protected LocalDateTime dateTimeChange;
 
+    protected boolean deleted;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    protected LocalDateTime dateTimeDeletion;
+
     public LocalDateTime getDateTimeCreation() {
         return dateTimeCreation;
     }
@@ -41,6 +48,22 @@ public abstract class BaseModel implements Serializable {
 
     public void setDateTimeChange(LocalDateTime dateTimeChange) {
         this.dateTimeChange = dateTimeChange;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public LocalDateTime getDateTimeDeletion() {
+        return dateTimeDeletion;
+    }
+
+    public void setDateTimeDeletion(LocalDateTime dateTimeDeletion) {
+        this.dateTimeDeletion = dateTimeDeletion;
     }
 
     @JsonIgnore

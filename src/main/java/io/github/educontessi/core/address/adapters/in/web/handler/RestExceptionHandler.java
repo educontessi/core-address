@@ -8,6 +8,7 @@ import io.github.educontessi.core.address.core.exception.BusinessException;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.exception.InvalidUuidException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -144,6 +145,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorType errorType = ErrorType.INTERNAL_SERVER_ERROR;
 
         ResponseError responseError = getRequestError(ex, statusResponse, errorType, GENERIC_ERROR_MESSAGE_TO_END_USER);
+        return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
+        HttpStatus statusResponse = HttpStatus.BAD_REQUEST;
+        ErrorType errorType = ErrorType.INVALID_DATA;
+        String userMessage = ex.getMessage();
+
+        ResponseError responseError = getRequestError(ex, statusResponse, errorType, userMessage);
         return handleExceptionInternal(ex, responseError, new HttpHeaders(), statusResponse, request);
     }
 

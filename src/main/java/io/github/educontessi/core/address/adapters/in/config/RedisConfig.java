@@ -41,6 +41,10 @@ public class RedisConfig {
                 .withCacheConfiguration("core-address-street",
                         cacheConfiguration().entryTtl(Duration.ofDays(1)))
                 .withCacheConfiguration("core-address-zipcode",
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)))
+                .withCacheConfiguration("core-address",
+                        cacheConfiguration().entryTtl(Duration.ofDays(1)))
+                .withCacheConfiguration("core-address-default",
                         cacheConfiguration().entryTtl(Duration.ofDays(1)));
     }
 

@@ -18,11 +18,15 @@ public class StateInV1DataConverter extends DataConverter<State, StateV1Dto> {
     @Override
     public StateV1Dto convertToDto(StateV1Dto dto, State model) {
         BeanUtils.copyProperties(model, dto);
+        setCountry(dto, model);
+        return dto;
+    }
+
+    private void setCountry(StateV1Dto dto, State model) {
         if (model.getCountry() != null) {
             dto.setCountry(new CountryInV1DataConverter().convertToDto(model.getCountry()));
             dto.setCountryId(null); // otimização do json de retorno
         }
-        return dto;
     }
 
     public StateV1Dto convertToDto(State model) {

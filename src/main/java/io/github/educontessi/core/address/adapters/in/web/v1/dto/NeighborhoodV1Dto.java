@@ -1,8 +1,5 @@
 package io.github.educontessi.core.address.adapters.in.web.v1.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(value = {"dateTimeCreation", "datTimeChange"})
 public class NeighborhoodV1Dto extends BaseDto {
 
     private Long id;

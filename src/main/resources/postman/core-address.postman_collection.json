@@ -1,0 +1,3396 @@
+{
+	"info": {
+		"_postman_id": "8b1ad266-0a8a-4455-8c62-abf476754d2d",
+		"name": "core-address",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4329219"
+	},
+	"item": [
+		{
+			"name": "AddressV1Controller",
+			"item": [
+				{
+					"name": "save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"var data = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"addressId\", data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"integrationId\": \"5aacc33b-4400-41b5-8463-fadbb82fe756\",\r\n    \"countryId\": 1,\r\n    \"stateId\": 24,\r\n    \"cityId\": 4330,\r\n    \"neighborhoodId\": 1,\r\n    \"streetId\": 1,\r\n    \"number\": \"1234\",\r\n    \"recipientName\": \"Teste destinatário\",\r\n    \"recipientPhone\": \"+5548999999999\",\r\n    \"propertyType\": \"HOUSE\",\r\n    \"complement\": \"complemento teste\",\r\n    \"proximity\": \"proximidade teste\",\r\n    \"deliveryInstructions\": \"instrução de entrega teste\",\r\n    \"zipCode\": \"88900-000\",\r\n    \"defaultAddress\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/integration/{{integrationId}}/adresses",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"integration",
+								"{{integrationId}}",
+								"adresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/integration/{{integrationId}}/adresses",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"integration",
+								"{{integrationId}}",
+								"adresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/integration/{{integrationId}}/adresses/{{addressId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"integration",
+								"{{integrationId}}",
+								"adresses",
+								"{{addressId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findDefaultAddress",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/integration/{{integrationId}}/adresses/default-address",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"integration",
+								"{{integrationId}}",
+								"adresses",
+								"default-address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste Update\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste Update\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"integrationId\": \"5aacc33b-4400-41b5-8463-fadbb82fe756\",\r\n    \"countryId\": 1,\r\n    \"stateId\": 24,\r\n    \"cityId\": 4330,\r\n    \"neighborhoodId\": 1,\r\n    \"streetId\": 1,\r\n    \"number\": \"1234\",\r\n    \"recipientName\": \"Teste destinatário update\",\r\n    \"recipientPhone\": \"+5548999999999\",\r\n    \"propertyType\": \"HOUSE\",\r\n    \"complement\": \"complemento teste update\",\r\n    \"proximity\": \"proximidade teste update\",\r\n    \"deliveryInstructions\": \"instrução de entrega teste update\",\r\n    \"zipCode\": \"88900-000\",\r\n    \"defaultAddress\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/integration/{{integrationId}}/adresses/{{addressId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"integration",
+								"{{integrationId}}",
+								"adresses",
+								"{{addressId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/integration/{{integrationId}}/adresses/{{addressId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"integration",
+								"{{integrationId}}",
+								"adresses",
+								"{{addressId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "CountryV1Controller",
+			"item": [
+				{
+					"name": "save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"var data = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"countryId\", data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste\",\r\n    \"acronym\": \"TS\",\r\n    \"bacen\": \"0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/countries",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/countries",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/countries/search?name=brasil&size=2&page=0",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"countries",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "brasil"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/countries/{{countryId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"countries",
+								"{{countryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste Update\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste Update\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste update\",\r\n    \"acronym\": \"TS\",\r\n    \"bacen\": \"0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/countries/{{countryId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"countries",
+								"{{countryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/countries/{{countryId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"countries",
+								"{{countryId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "StateV1Controller",
+			"item": [
+				{
+					"name": "save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"var data = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"stateId\", data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste\",\r\n    \"uf\": \"TS\",\r\n    \"country\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states/search?expand=all&name=santa&size=2&page=0",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states",
+								"search"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								},
+								{
+									"key": "name",
+									"value": "santa"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states/{{stateId}}?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states",
+								"{{stateId}}"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllByCountryId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states/country/1?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states",
+								"country",
+								"1"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByUf",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states/uf/SC?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states",
+								"uf",
+								"SC"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste Update\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste Update\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste update\",\r\n    \"uf\": \"TS\",\r\n    \"countryId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states/{{stateId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states",
+								"{{stateId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/states/{{stateId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"states",
+								"{{stateId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "CityV1Controller",
+			"item": [
+				{
+					"name": "save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"var data = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"cityId\", data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste\",\r\n    \"ibge\": 123456,\r\n    \"state\": {\r\n        \"id\": 24\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities/search?expand=all&name=araran&size=2&page=0",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities",
+								"search"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								},
+								{
+									"key": "name",
+									"value": "araran"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities/{{cityId}}?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities",
+								"{{cityId}}"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllByStateId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities/state/24?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities",
+								"state",
+								"24"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByIbge",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities/ibge/4201406?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities",
+								"ibge",
+								"4201406"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste Update\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste Update\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste update\",\r\n    \"ibge\": 123456,\r\n    \"stateId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities/{{cityId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities",
+								"{{cityId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/cities/{{cityId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"cities",
+								"{{cityId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "NeighborhoodV1Controller",
+			"item": [
+				{
+					"name": "save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"var data = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"neighborhoodId\", data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste\",\r\n    \"city\": {\r\n        \"id\": 4330\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/neighborhoods",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"neighborhoods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Mato Alto\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Mato Alto\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/neighborhoods?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"neighborhoods"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Mato Alto\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Mato Alto\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/neighborhoods/search?expand=all&name=mato al&size=2&page=0",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"neighborhoods",
+								"search"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								},
+								{
+									"key": "name",
+									"value": "mato al"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/neighborhoods/{{neighborhoodId}}?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"neighborhoods",
+								"{{neighborhoodId}}"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllByCityId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Mato Alto\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Mato Alto\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/neighborhoods/city/4330?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"neighborhoods",
+								"city",
+								"4330"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste Update\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste Update\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste update\",\r\n    \"cityId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/neighborhoods/{{neighborhoodId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"neighborhoods",
+								"{{neighborhoodId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/neighborhoods/{{neighborhoodId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"neighborhoods",
+								"{{neighborhoodId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "StreetV1Controller",
+			"item": [
+				{
+					"name": "save",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"var data = JSON.parse(responseBody);\r",
+									"pm.globals.set(\"streetId\", data.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste\",\r\n    \"city\": {\r\n        \"id\": 4330\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/streets",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"streets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Rua a\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Rua a\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/streets?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"streets"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Rua a\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Rua a\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/streets/search?expand=all&name=rua a&size=2&page=0",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"streets",
+								"search"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								},
+								{
+									"key": "name",
+									"value": "rua a"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/streets/{{streetId}}?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"streets",
+								"{{streetId}}"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllByCityId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Mato Alto\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Mato Alto\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Brasil\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Brasil\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/streets/city/4330?expand=all",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"streets",
+								"city",
+								"4330"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "all"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Teste Update\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Teste Update\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Teste update\",\r\n    \"cityId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/streets/{{streetId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"streets",
+								"{{streetId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/streets/{{streetId}}",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"streets",
+								"{{streetId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ZipCodeSearchV1Controller",
+			"item": [
+				{
+					"name": "search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Avenida Getúlio Vargas\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Avenida Getúlio Vargas\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Araranguá\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Araranguá\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Santa Catarina\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Santa Catarina\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/v1/zip-code-search/88900035",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"v1",
+								"zip-code-search",
+								"88900035"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Actuator",
+			"item": [
+				{
+					"name": "actuator",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/actuator",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "health",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches UP\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"UP\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host_core_address}}/{{base_path_resource}}/actuator/health",
+							"host": [
+								"{{host_core_address}}"
+							],
+							"path": [
+								"{{base_path_resource}}",
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "caches",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches core-address-country\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"core-address-country\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches core-address-state\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"core-address-state\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches core-address-city\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"core-address-city\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches core-address-neighborhood\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"core-address-neighborhood\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches core-address-street\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"core-address-street\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches core-address-zipcode\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"core-address-zipcode\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/core-address/actuator/caches",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"core-address",
+								"actuator",
+								"caches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shutdown",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches Not Found\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Not Found\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/core-address/actuator/shutdown",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"core-address",
+								"actuator",
+								"shutdown"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "env",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/core-address/actuator/env",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"core-address",
+								"actuator",
+								"env"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_path_resource",
+			"value": "api/core-address",
+			"type": "string"
+		},
+		{
+			"key": "integrationId",
+			"value": "5aacc33b-4400-41b5-8463-fadbb82fe756"
+		}
+	]
+}
