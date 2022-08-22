@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.config;
+package io.github.educontessi.core.address.adapters.out.redis.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

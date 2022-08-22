@@ -6,9 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableFeignClients
+@EnableAsync
 public class CoreAddressApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CoreAddressApplication.class);
