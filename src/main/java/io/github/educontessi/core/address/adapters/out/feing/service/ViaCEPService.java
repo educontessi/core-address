@@ -48,17 +48,24 @@ public class ViaCEPService implements ZipCodeSearchRepositoryPort {
     @Cacheable(value = "core-address-zipcode")
     public ZipCodeSearch search(String zipCode) {
         long start = System.currentTimeMillis();
-        zipCode = io.github.educontessi.core.address.core.util.StringUtils.removeNumberMask(zipCode);
-        ViaCepDto dto = dtoFeign.searchZipCode(zipCode);
         ZipCodeSearch zipCodeSearch = null;
-        if (dto != null) {
-            zipCodeSearch = new ZipCodeSearch();
-            zipCodeSearch.setZipCode(dto.getCep());
-            zipCodeSearch.setState(getState(dto));
-            zipCodeSearch.setCity(getCity(dto, zipCodeSearch.getState()));
-            zipCodeSearch.setNeighborhood(getNeighborhood(dto, zipCodeSearch.getCity()));
-            zipCodeSearch.setStreet(getStreet(dto, zipCodeSearch.getCity()));
+
+        try {
+            zipCode = io.github.educontessi.core.address.core.util.StringUtils.removeNumberMask(zipCode);
+            ViaCepDto dto = dtoFeign.searchZipCode(zipCode);
+            if (dto != null) {
+                zipCodeSearch = new ZipCodeSearch();
+                zipCodeSearch.setZipCode(dto.getCep());
+                zipCodeSearch.setState(getState(dto));
+                zipCodeSearch.setCity(getCity(dto, zipCodeSearch.getState()));
+                zipCodeSearch.setNeighborhood(getNeighborhood(dto, zipCodeSearch.getCity()));
+                zipCodeSearch.setStreet(getStreet(dto, zipCodeSearch.getCity()));
+            }
+        } catch (Exception e) {
+            LOGGER.error("{}", ZIP_CODE_SEARCH + COUNT + FAIL);
+            throw e;
         }
+
         LOGGER.info("{}{}{} Total time to consult zip code {}ms", TIMER, FEIGN, VIACEP, System.currentTimeMillis() - start);
         return zipCodeSearch;
     }

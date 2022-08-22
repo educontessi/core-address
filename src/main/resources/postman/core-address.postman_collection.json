@@ -37,6 +37,17 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var uuid = require('uuid'); \r",
+									"var myUUID = uuid.v4();\r",
+									"pm.collectionVariables.set(\"integrationId\",myUUID);"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"protocolProfileBehavior": {
@@ -47,7 +58,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"integrationId\": \"5aacc33b-4400-41b5-8463-fadbb82fe756\",\r\n    \"countryId\": 1,\r\n    \"stateId\": 24,\r\n    \"cityId\": 4330,\r\n    \"neighborhoodId\": 1,\r\n    \"streetId\": 1,\r\n    \"number\": \"1234\",\r\n    \"recipientName\": \"Teste destinatário\",\r\n    \"recipientPhone\": \"+5548999999999\",\r\n    \"propertyType\": \"HOUSE\",\r\n    \"complement\": \"complemento teste\",\r\n    \"proximity\": \"proximidade teste\",\r\n    \"deliveryInstructions\": \"instrução de entrega teste\",\r\n    \"zipCode\": \"88900-000\",\r\n    \"defaultAddress\": true\r\n}",
+							"raw": "{\r\n    \"integrationId\": \"{{integrationId}}\",\r\n    \"countryId\": 1,\r\n    \"stateId\": 24,\r\n    \"cityId\": 4330,\r\n    \"neighborhoodId\": 1,\r\n    \"streetId\": 1,\r\n    \"number\": \"1234\",\r\n    \"recipientName\": \"Teste destinatário\",\r\n    \"recipientPhone\": \"+5548999999999\",\r\n    \"propertyType\": \"HOUSE\",\r\n    \"complement\": \"complemento teste\",\r\n    \"proximity\": \"proximidade teste\",\r\n    \"deliveryInstructions\": \"instrução de entrega teste\",\r\n    \"zipCode\": \"88900-000\",\r\n    \"defaultAddress\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1417,8 +1428,8 @@
 									"    pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"pm.test(\"Response time is less than 2000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2007,8 +2018,8 @@
 									"    pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2530,8 +2541,8 @@
 									"    pm.response.to.have.header(\"Content-Type\");\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Response time is less than 1500ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2765,8 +2776,8 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Body matches Mato Alto\", function () {\r",
-									"    pm.expect(pm.response.text()).to.include(\"Mato Alto\");\r",
+									"pm.test(\"Body matches Rua a\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Rua a\");\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Body matches Araranguá\", function () {\r",
@@ -3390,7 +3401,12 @@
 		},
 		{
 			"key": "integrationId",
-			"value": "5aacc33b-4400-41b5-8463-fadbb82fe756"
+			"value": "9b231cd5-30b8-4ffa-924f-ce7f1b4d6680"
+		},
+		{
+			"key": "expand",
+			"value": "all",
+			"type": "string"
 		}
 	]
 }
