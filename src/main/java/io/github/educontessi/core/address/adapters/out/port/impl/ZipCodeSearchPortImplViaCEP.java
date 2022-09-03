@@ -62,7 +62,7 @@ public class ZipCodeSearchPortImplViaCEP implements ZipCodeSearchPort {
                 zipCodeSearch.setStreet(getStreet(dto, zipCodeSearch.getCity()));
             }
         } catch (Exception e) {
-            LOGGER.error("{}", ZIP_CODE_SEARCH + COUNT + FAIL);
+            LOGGER.error("{}", ZIP_CODE_SEARCH + COUNT + REQUEST + FAIL);
             throw e;
         }
 

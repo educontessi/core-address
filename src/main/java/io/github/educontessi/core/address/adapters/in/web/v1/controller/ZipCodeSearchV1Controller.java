@@ -35,7 +35,7 @@ public class ZipCodeSearchV1Controller extends BaseController<ZipCodeSearchV1Dto
     public ResponseEntity<ZipCodeSearchV1Dto> search(@PathVariable String zipCode) {
         LOGGER.info("{}", ZIP_CODE_SEARCH + COUNT + REQUEST);
         ZipCodeSearchV1Dto dto = dataManager.search(zipCode);
-        LOGGER.info("{}", ZIP_CODE_SEARCH + COUNT + SUCCESS);
+        LOGGER.info("{}", ZIP_CODE_SEARCH + COUNT + REQUEST + SUCCESS);
         return ResponseEntity.ok(dto);
     }
 
