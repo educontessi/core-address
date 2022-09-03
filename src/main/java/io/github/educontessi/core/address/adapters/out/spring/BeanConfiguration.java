@@ -1,6 +1,6 @@
 package io.github.educontessi.core.address.adapters.out.spring;
 
-import io.github.educontessi.core.address.adapters.out.feing.service.ViaCEPService;
+import io.github.educontessi.core.address.adapters.out.port.impl.ZipCodeSearchPortImplViaCEP;
 import io.github.educontessi.core.address.adapters.out.persistence.service.*;
 import io.github.educontessi.core.address.core.usecase.*;
 import io.github.educontessi.core.address.core.validation.*;
@@ -36,7 +36,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    ZipCodeSearchUseCaseImpl zipCodeSearchUseCase(ViaCEPService service) {
+    ZipCodeSearchUseCaseImpl zipCodeSearchUseCase(ZipCodeSearchPortImplViaCEP service) {
         return new ZipCodeSearchUseCaseImpl(service, new ZipCodeSearchValidations());
     }
 

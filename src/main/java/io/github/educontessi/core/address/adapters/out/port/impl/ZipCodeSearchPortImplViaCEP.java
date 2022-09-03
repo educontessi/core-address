@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.feing.service;
+package io.github.educontessi.core.address.adapters.out.port.impl;
 
 import io.github.educontessi.core.address.adapters.out.feing.ViaCEPFeign;
 import io.github.educontessi.core.address.adapters.out.feing.dto.ViaCepDto;
@@ -7,7 +7,7 @@ import io.github.educontessi.core.address.core.ports.in.CityUseCasePort;
 import io.github.educontessi.core.address.core.ports.in.NeighborhoodUseCasePort;
 import io.github.educontessi.core.address.core.ports.in.StateUseCasePort;
 import io.github.educontessi.core.address.core.ports.in.StreetUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchPort;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,26 +22,26 @@ import static io.github.educontessi.core.address.core.config.TagLogs.*;
  * @author Eduardo Possamai Contessi
  */
 @Service
-public class ViaCEPService implements ZipCodeSearchRepositoryPort {
+public class ZipCodeSearchPortImplViaCEP implements ZipCodeSearchPort {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ViaCEPService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ZipCodeSearchPortImplViaCEP.class);
 
     private final StreetUseCasePort streetUseCasePort;
     private final NeighborhoodUseCasePort neighborhoodUseCasePort;
     private final CityUseCasePort cityUseCasePort;
     private final StateUseCasePort stateUseCasePort;
-    private final ViaCEPFeign dtoFeign;
+    private final ViaCEPFeign viaCEPFeign;
 
-    public ViaCEPService(StreetUseCasePort streetUseCasePort,
-                         NeighborhoodUseCasePort neighborhoodUseCasePort,
-                         CityUseCasePort cityUseCasePort,
-                         StateUseCasePort stateUseCasePort,
-                         ViaCEPFeign dtoFeign) {
+    public ZipCodeSearchPortImplViaCEP(StreetUseCasePort streetUseCasePort,
+                                       NeighborhoodUseCasePort neighborhoodUseCasePort,
+                                       CityUseCasePort cityUseCasePort,
+                                       StateUseCasePort stateUseCasePort,
+                                       ViaCEPFeign viaCEPFeign) {
         this.streetUseCasePort = streetUseCasePort;
         this.neighborhoodUseCasePort = neighborhoodUseCasePort;
         this.cityUseCasePort = cityUseCasePort;
         this.stateUseCasePort = stateUseCasePort;
-        this.dtoFeign = dtoFeign;
+        this.viaCEPFeign = viaCEPFeign;
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ViaCEPService implements ZipCodeSearchRepositoryPort {
 
         try {
             zipCode = io.github.educontessi.core.address.core.util.StringUtils.removeNumberMask(zipCode);
-            ViaCepDto dto = dtoFeign.searchZipCode(zipCode);
+            ViaCepDto dto = viaCEPFeign.searchZipCode(zipCode);
             if (dto != null) {
                 zipCodeSearch = new ZipCodeSearch();
                 zipCodeSearch.setZipCode(dto.getCep());
@@ -66,7 +66,7 @@ public class ViaCEPService implements ZipCodeSearchRepositoryPort {
             throw e;
         }
 
-        LOGGER.info("{}{}{} Total time to consult zip code {}ms", TIMER, FEIGN, VIACEP, System.currentTimeMillis() - start);
+        LOGGER.info("{} Total time to consult zip code {}ms", TIMER + FEIGN + VIACEP, System.currentTimeMillis() - start);
         return zipCodeSearch;
     }
 
