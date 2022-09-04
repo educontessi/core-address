@@ -52,8 +52,8 @@ public class BeanConfiguration {
         loggingFilter.setIncludeClientInfo(true);
         loggingFilter.setIncludeQueryString(true);
         loggingFilter.setIncludePayload(true);
-        loggingFilter.setIncludeHeaders(false);
         loggingFilter.setMaxPayloadLength(2048);
+        loggingFilter.setIncludeHeaders(false);
         return loggingFilter;
     }
 
