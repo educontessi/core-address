@@ -5,6 +5,10 @@ package io.github.educontessi.core.address.core.config;
  */
 public class TagLogs {
 
+    private TagLogs() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static final String STARTED = "#Started";
     public static final String CORE = "#Core";
     public static final String ADAPTER = "#Adapter";

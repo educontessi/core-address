@@ -17,7 +17,7 @@ public class ZipCodeSearchV1DataManager {
     }
 
     public ZipCodeSearchV1Dto search(String zipCode) {
-        var model = zipCodeSearchUseCasePort.search(zipCode);
+        var model = zipCodeSearchUseCasePort.execute(zipCode);
         return dataConverter.convertToDto(model);
     }
 

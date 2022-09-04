@@ -17,7 +17,7 @@ public class ZipCodeSearchUseCaseImpl implements ZipCodeSearchUseCasePort {
     }
 
     @Override
-    public ZipCodeSearch search(String zipCode) {
+    public ZipCodeSearch execute(String zipCode) {
         validations.validationsOnSearch(zipCode).forEach(Validator::validate);
         return repository.search(zipCode);
     }

@@ -35,7 +35,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer() {
-        return (builder) -> builder
+        return builder -> builder
                 .withCacheConfiguration("core-address-country",
                         cacheConfiguration().entryTtl(Duration.ofDays(1)))
                 .withCacheConfiguration("core-address-state",

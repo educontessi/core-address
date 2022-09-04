@@ -40,12 +40,14 @@ public class StateRepositoryImpl implements StateRepositoryQuery {
     private Predicate[] createRestrictions(StateFilter filter, CriteriaBuilder builder, Root<StateEntity> root) {
         List<Predicate> predicates = new ArrayList<>();
 
-        if (filter != null && !StringUtils.isEmpty(filter.getName())) {
-            predicates.add(builder.like(root.get(StateFilter.COLUMN_NAME), "%" + filter.getName().toLowerCase() + "%"));
-        }
+        if(filter != null){
+            if (!StringUtils.isEmpty(filter.getName())) {
+                predicates.add(builder.like(root.get(StateFilter.COLUMN_NAME), "%" + filter.getName().toLowerCase() + "%"));
+            }
 
-        if (!StringUtils.isEmpty(filter.getUf())) {
-            predicates.add(builder.equal(root.get(StateFilter.COLUMN_UF), filter.getUf().toUpperCase()));
+            if (!StringUtils.isEmpty(filter.getUf())) {
+                predicates.add(builder.equal(root.get(StateFilter.COLUMN_UF), filter.getUf().toUpperCase()));
+            }
         }
 
         return predicates.toArray(new Predicate[0]);

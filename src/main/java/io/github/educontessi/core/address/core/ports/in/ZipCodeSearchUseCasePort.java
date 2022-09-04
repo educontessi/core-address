@@ -4,6 +4,6 @@ import io.github.educontessi.core.address.core.model.ZipCodeSearch;
 
 public interface ZipCodeSearchUseCasePort {
 
-    ZipCodeSearch search(String zipCode);
+    ZipCodeSearch execute(String zipCode);
 
 }
