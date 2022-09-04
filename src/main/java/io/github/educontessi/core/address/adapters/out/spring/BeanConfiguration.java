@@ -1,11 +1,12 @@
 package io.github.educontessi.core.address.adapters.out.spring;
 
-import io.github.educontessi.core.address.adapters.out.port.impl.ZipCodeSearchPortImplViaCEP;
 import io.github.educontessi.core.address.adapters.out.persistence.service.*;
+import io.github.educontessi.core.address.adapters.out.port.impl.ZipCodeSearchPortImplViaCEP;
 import io.github.educontessi.core.address.core.usecase.*;
 import io.github.educontessi.core.address.core.validation.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
 public class BeanConfiguration {
@@ -44,4 +45,17 @@ public class BeanConfiguration {
     AddressUseCaseImpl addressUseCase(AddressService service) {
         return new AddressUseCaseImpl(service, new AddressValidations());
     }
+
+    @Bean
+    public CommonsRequestLoggingFilter requestLoggingFilter() {
+        CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+        loggingFilter.setIncludeClientInfo(true);
+        loggingFilter.setIncludeQueryString(true);
+        loggingFilter.setIncludePayload(true);
+        loggingFilter.setIncludeHeaders(false);
+        loggingFilter.setMaxPayloadLength(2048);
+        return loggingFilter;
+    }
+
+
 }

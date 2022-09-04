@@ -13,5 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
         registry.addInterceptor(new CorrelationIdInterceptor());
+        registry.addInterceptor(new TimeRequestInterceptor());
     }
 }
