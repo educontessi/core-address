@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -48,11 +47,10 @@ public class AddressV1Controller extends BaseController<AddressV1Dto> {
     }
 
     @GetMapping("/default-address")
-    @SwaggerDocumentationGETList
-    public ResponseEntity<List<AddressV1Dto>> findDefaultAddress(@PathVariable String integrationId) {
-        //todo: retorno de lista para padronização de endpoint, verificar uma maneira melhor de fazer
-        List<AddressV1Dto> list = Collections.singletonList(dataManager.findDefaultAddress(integrationId));
-        return ResponseEntity.ok(list);
+    @SwaggerDocumentationGET
+    public ResponseEntity<AddressV1Dto> findDefaultAddress(@PathVariable String integrationId) {
+        AddressV1Dto dto = dataManager.findDefaultAddress(integrationId);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/{id}")
