@@ -34,12 +34,6 @@ public class NeighborhoodService implements NeighborhoodRepositoryPort {
     }
 
     @Override
-    public List<Neighborhood> findAll(String expand) {
-        List<NeighborhoodEntity> list = repository.findAll();
-        return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
-    }
-
-    @Override
     public Page<Neighborhood> search(NeighborhoodFilter filter, Object pageable, String expand) {
         Page<NeighborhoodEntity> list = repository.search(filter, (Pageable) pageable);
         return new PageImpl<>(

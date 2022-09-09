@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface CityUseCasePort {
 
-    List<City> findAll(String expand);
-
     Object search(CityFilter filter, Object pageable, String expand);
 
     City findById(Long id, String expand);

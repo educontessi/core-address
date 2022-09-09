@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public interface NeighborhoodRepositoryPort {
 
-    List<Neighborhood> findAll(String expand);
-
     Object search(NeighborhoodFilter filter, Object pageable, String expand);
 
     Optional<Neighborhood> findById(Long id, String expand);

@@ -34,12 +34,6 @@ public class CityService implements CityRepositoryPort {
     }
 
     @Override
-    public List<City> findAll(String expand) {
-        List<CityEntity> list = repository.findAll();
-        return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
-    }
-
-    @Override
     public Page<City> search(CityFilter filter, Object pageable, String expand) {
         Page<CityEntity> list = repository.search(filter, (Pageable) pageable);
         return new PageImpl<>(

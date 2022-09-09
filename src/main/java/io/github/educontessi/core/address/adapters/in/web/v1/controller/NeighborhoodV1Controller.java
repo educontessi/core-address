@@ -35,13 +35,6 @@ public class NeighborhoodV1Controller extends BaseController<NeighborhoodV1Dto> 
         return created(saved.getId(), saved);
     }
 
-    @GetMapping
-    @SwaggerDocumentationGETList
-    public ResponseEntity<List<NeighborhoodV1Dto>> findAll(String expand) {
-        List<NeighborhoodV1Dto> list = dataManager.findAll(expand);
-        return ResponseEntity.ok(list);
-    }
-
     @GetMapping("/search")
     @SwaggerDocumentationGETList
     public ResponseEntity<Page<NeighborhoodV1Dto>> search(NeighborhoodFilter filter, Pageable pageable, String expand) {

@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface NeighborhoodUseCasePort {
 
-    List<Neighborhood> findAll(String expand);
-
     Object search(NeighborhoodFilter filter, Object pageable, String expand);
 
     Neighborhood findById(Long id, String expand);

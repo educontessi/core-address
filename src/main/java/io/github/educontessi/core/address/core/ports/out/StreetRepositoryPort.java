@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public interface StreetRepositoryPort {
 
-    List<Street> findAll(String expand);
-
     Object search(StreetFilter filter, Object pageable, String expand);
 
     Optional<Street> findById(Long id, String expand);

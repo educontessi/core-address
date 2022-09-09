@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public interface CityRepositoryPort {
 
-    List<City> findAll(String expand);
-
     Object search(CityFilter filter, Object pageable, String expand);
 
     Optional<City> findById(Long id, String expand);

@@ -22,11 +22,6 @@ public class NeighborhoodUseCaseImpl implements NeighborhoodUseCasePort {
     }
 
     @Override
-    public List<Neighborhood> findAll(String expand) {
-        return repository.findAll(expand);
-    }
-
-    @Override
     public Object search(NeighborhoodFilter filter, Object pageable, String expand) {
         return repository.search(filter, pageable, expand);
     }

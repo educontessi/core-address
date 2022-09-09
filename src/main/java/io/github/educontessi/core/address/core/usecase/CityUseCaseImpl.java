@@ -22,11 +22,6 @@ public class CityUseCaseImpl implements CityUseCasePort {
     }
 
     @Override
-    public List<City> findAll(String expand) {
-        return repository.findAll(expand);
-    }
-
-    @Override
     public Object search(CityFilter filter, Object pageable, String expand) {
         return repository.search(filter, pageable, expand);
     }

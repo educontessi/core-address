@@ -35,13 +35,6 @@ public class StreetV1Controller extends BaseController<StreetV1Dto> {
         return created(saved.getId(), saved);
     }
 
-    @GetMapping
-    @SwaggerDocumentationGETList
-    public ResponseEntity<List<StreetV1Dto>> findAll(String expand) {
-        List<StreetV1Dto> list = dataManager.findAll(expand);
-        return ResponseEntity.ok(list);
-    }
-
     @GetMapping("/search")
     @SwaggerDocumentationGETList
     public ResponseEntity<Page<StreetV1Dto>> search(StreetFilter filter, Pageable pageable, String expand) {

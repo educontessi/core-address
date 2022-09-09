@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface StreetUseCasePort {
 
-    List<Street> findAll(String expand);
-
     Object search(StreetFilter filter, Object pageable, String expand);
 
     Street findById(Long id, String expand);

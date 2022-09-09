@@ -24,11 +24,6 @@ public class StreetV1DataManager {
         this.dataConverter = dataConverter;
     }
 
-    public List<StreetV1Dto> findAll(String expand) {
-        List<Street> list = cityUseCasePort.findAll(expand);
-        return list.stream().map(dataConverter::convertToDto).toList();
-    }
-
     public Page<StreetV1Dto> search(StreetFilter filter, Pageable pageable, String expand) {
         Page<Street> paginated = (Page<Street>) cityUseCasePort.search(filter, pageable, expand);
         return new PageImpl<>(

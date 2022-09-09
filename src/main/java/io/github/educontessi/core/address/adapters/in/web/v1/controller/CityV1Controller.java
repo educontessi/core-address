@@ -35,13 +35,6 @@ public class CityV1Controller extends BaseController<CityV1Dto> {
         return created(saved.getId(), saved);
     }
 
-    @GetMapping
-    @SwaggerDocumentationGETList
-    public ResponseEntity<List<CityV1Dto>> findAll(String expand) {
-        List<CityV1Dto> list = dataManager.findAll(expand);
-        return ResponseEntity.ok(list);
-    }
-
     @GetMapping("/search")
     @SwaggerDocumentationGETList
     public ResponseEntity<Page<CityV1Dto>> search(CityFilter filter, Pageable pageable, String expand) {

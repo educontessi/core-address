@@ -34,12 +34,6 @@ public class StreetService implements StreetRepositoryPort {
     }
 
     @Override
-    public List<Street> findAll(String expand) {
-        List<StreetEntity> list = repository.findAll();
-        return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
-    }
-
-    @Override
     public Page<Street> search(StreetFilter filter, Object pageable, String expand) {
         Page<StreetEntity> list = repository.search(filter, (Pageable) pageable);
         return new PageImpl<>(

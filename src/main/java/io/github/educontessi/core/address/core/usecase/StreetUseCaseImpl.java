@@ -22,11 +22,6 @@ public class StreetUseCaseImpl implements StreetUseCasePort {
     }
 
     @Override
-    public List<Street> findAll(String expand) {
-        return repository.findAll(expand);
-    }
-
-    @Override
     public Object search(StreetFilter filter, Object pageable, String expand) {
         return repository.search(filter, pageable, expand);
     }
