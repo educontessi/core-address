@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.spring;
+package io.github.educontessi.core.address.adapters.out.spring.config;
 
 import io.github.educontessi.core.address.adapters.out.persistence.service.*;
 import io.github.educontessi.core.address.adapters.out.port.impl.ZipCodeSearchPortImplViaCEP;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
-public class BeanConfiguration {
+public class BeanConfig {
 
     @Bean
     CountryUseCaseImpl countryUseCaseImpl(CountryService service) {

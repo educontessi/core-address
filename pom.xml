@@ -124,6 +124,13 @@
 					<excludes>
 						<exclude>**/CoreAddressApplication.*</exclude>
 						<exclude>**/config/*</exclude>
+						<exclude>**/model/*</exclude>
+						<exclude>**/filter/*</exclude>
+						<exclude>**/enums/*</exclude>
+						<exclude>**/entity/*</exclude>
+						<exclude>**/dto/*</exclude>
+						<exclude>**/response/*</exclude>
+						<exclude>**/response/*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
