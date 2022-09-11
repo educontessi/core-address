@@ -1,5 +1,7 @@
 package io.github.educontessi.core.address.core.exception;
 
+import io.github.educontessi.core.address.core.util.UUIdUtils;
+
 import java.io.Serial;
 import java.util.UUID;
 
@@ -17,7 +19,7 @@ public class EntityNotFoundException extends RuntimeException {
     }
 
     public EntityNotFoundException(UUID id) {
-        this(String.format("There is no record with code %s", id.toString()));
+        this(String.format("There is no record with code %s", UUIdUtils.uuidToString(id)));
     }
 
 }

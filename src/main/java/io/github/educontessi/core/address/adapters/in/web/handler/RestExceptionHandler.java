@@ -110,7 +110,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler({InvalidDtoException.class})
-    public ResponseEntity<Object> handleDtoInvalidoException(InvalidDtoException ex, WebRequest request) {
+    public ResponseEntity<Object> handleInvalidDtoException(InvalidDtoException ex, WebRequest request) {
         HttpStatus statusResponse = HttpStatus.UNPROCESSABLE_ENTITY;
         ErrorType errorType = ErrorType.BUSINESS_ERROR;
         String userMessage = ex.getMessage();
