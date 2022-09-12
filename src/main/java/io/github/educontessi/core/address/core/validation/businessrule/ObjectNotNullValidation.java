@@ -3,13 +3,7 @@ package io.github.educontessi.core.address.core.validation.businessrule;
 import io.github.educontessi.core.address.core.exception.BusinessException;
 import io.github.educontessi.core.address.core.validation.Validator;
 
-public class ObjectNotNullValidation implements Validator {
-
-    private final Object object;
-
-    public ObjectNotNullValidation(Object object) {
-        this.object = object;
-    }
+public record ObjectNotNullValidation(Object object) implements Validator {
 
     @Override
     public void validate() {
