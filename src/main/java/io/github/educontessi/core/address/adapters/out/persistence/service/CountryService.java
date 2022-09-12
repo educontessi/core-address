@@ -34,6 +34,7 @@ public class CountryService implements CountryRepositoryPort {
     }
 
     @Override
+    @Cacheable(value = "core-address-country")
     public List<Country> findAll() {
         List<CountryEntity> list = repository.findAll();
         return list.stream().map(mapper::entityToModel).toList();

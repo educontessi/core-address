@@ -130,7 +130,7 @@
 						<exclude>**/entity/*</exclude>
 						<exclude>**/dto/*</exclude>
 						<exclude>**/response/*</exclude>
-						<exclude>**/response/*</exclude>
+						<exclude>**/interceptor/*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
