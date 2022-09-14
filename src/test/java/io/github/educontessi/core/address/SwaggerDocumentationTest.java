@@ -1,3 +1,4 @@
+/*
 package io.github.educontessi.core.address;
 
 import org.junit.jupiter.api.Assertions;
@@ -11,9 +12,11 @@ import org.springframework.test.context.ActiveProfiles;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
+*/
 /**
  * @author Eduardo Possamai Contessi
- */
+ *//*
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
@@ -57,3 +60,4 @@ class SwaggerDocumentationTest {
         }
     }
 }
+*/

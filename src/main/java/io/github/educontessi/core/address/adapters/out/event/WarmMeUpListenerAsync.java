@@ -32,14 +32,14 @@ public class WarmMeUpListenerAsync {
         sendWarmUpRestRequest();
     }
 
-    private void sendWarmUpRestRequest() {
+    protected void sendWarmUpRestRequest() {
         logger.info("Sending REST request to force initialization of Jackson...");
         final String response = feign.warmup(createSampleMessage());
         logger.info("...done, response received: {}", response);
     }
 
-    private WarmUpRequestDto createSampleMessage() {
-        final WarmUpRequestDto warmUpRequestDto = new WarmUpRequestDto();
+    protected WarmUpRequestDto createSampleMessage() {
+        WarmUpRequestDto warmUpRequestDto = new WarmUpRequestDto();
         warmUpRequestDto.setWarmUpString("warm me up");
         warmUpRequestDto.setWarmUpNumber(15);
         warmUpRequestDto.setWarmUpBigDecimal(BigDecimal.TEN);

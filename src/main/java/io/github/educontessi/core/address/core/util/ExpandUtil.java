@@ -7,7 +7,7 @@ package io.github.educontessi.core.address.core.util;
  */
 public class ExpandUtil {
 
-    private ExpandUtil() {
+    ExpandUtil() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -15,9 +15,9 @@ public class ExpandUtil {
     private static final String DOT = ".";
     private static final String ALL = "all";
 
-    public static boolean contains(String campo, String expandir) {
-        if (!StringUtils.nullOrEmpty(expandir)) {
-            return expandir.contains(ALL) || expandir.contains(campo);
+    public static boolean contains(String field, String expand) {
+        if (!StringUtils.nullOrEmpty(expand)) {
+            return expand.contains(ALL) || expand.contains(field);
         }
         return false;
     }
@@ -44,7 +44,7 @@ public class ExpandUtil {
         return subExpand.toString().replaceFirst(DELIMITER_REGEX, "").trim();
     }
 
-    private static String getSubExpand(String aux) {
+    protected static String getSubExpand(String aux) {
         if (aux.startsWith(DOT)) {
             return aux.replaceFirst("\\.", "");
         }
