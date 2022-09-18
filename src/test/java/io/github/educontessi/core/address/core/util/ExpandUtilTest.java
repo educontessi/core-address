@@ -56,6 +56,20 @@ class ExpandUtilTest {
     }
 
     @Test
+    void contains_shouldReturnFalse() {
+        // Configuration
+        String field = "test";
+        String expand = "capivara";
+        boolean response;
+
+        // Execution
+        response = ExpandUtil.contains(field, expand);
+
+        // Check the results
+        assertFalse(response);
+    }
+
+    @Test
     void contains_shouldReturnFalseWhenExpandNull() {
         // Configuration
         String field = "city";
@@ -72,7 +86,8 @@ class ExpandUtilTest {
     @CsvSource({
             "city, city.state.country, state.country",
             "city, \"\", \"\"",
-            "city, all, all"
+            "city, all, all",
+            "city, \'city.state.country, \', state.country",
     })
     void extractSubExpand_shouldExtractSubExpand(ArgumentsAccessor arguments) {
         // Configuration

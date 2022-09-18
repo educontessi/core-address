@@ -9,7 +9,7 @@ import io.github.educontessi.core.address.core.exception.BusinessException;
  */
 public class StringUtils {
 
-    private StringUtils() {
+    StringUtils() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -44,13 +44,9 @@ public class StringUtils {
 
     public static String formatDescription(String description) {
         if (description != null) {
-            try {
-                description = description.trim();
-                description = description.replaceAll("\\s+", " ");
-                return description;
-            } catch (Exception e) {
-                throw new BusinessException(e.getMessage());
-            }
+            description = description.trim();
+            description = description.replaceAll("\\s+", " ");
+            return description;
         }
         return description;
     }
@@ -60,7 +56,7 @@ public class StringUtils {
     }
 
 
-    private static boolean checkPrepositionName(String word) {
+    protected static boolean checkPrepositionName(String word) {
         String caracteres = "da|das|de|do|dos|e";
         return caracteres.contains(word);
     }

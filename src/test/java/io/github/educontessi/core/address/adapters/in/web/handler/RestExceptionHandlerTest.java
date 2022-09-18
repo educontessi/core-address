@@ -1,24 +1,30 @@
 package io.github.educontessi.core.address.adapters.in.web.handler;
 
 import io.github.educontessi.core.address.adapters.in.web.exception.InvalidDtoException;
+import io.github.educontessi.core.address.adapters.in.web.response.ErrorDetail;
 import io.github.educontessi.core.address.adapters.in.web.response.ResponseError;
 import io.github.educontessi.core.address.core.exception.BusinessException;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.exception.InvalidUuidException;
+import io.github.educontessi.core.address.core.model.Country;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.springframework.core.MethodParameter;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.validation.BindException;
+import org.springframework.validation.*;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -69,6 +75,31 @@ class RestExceptionHandlerTest {
 
         // Execution
         ResponseEntity<Object> response = restExceptionHandler.handleHttpMessageNotReadable(mockException, headers, status, webRequest);
+
+        // Check the results
+        assertNotNull(response);
+        assertTrue(response.getBody() instanceof ResponseError);
+        assertEquals(400, response.getStatusCodeValue());
+        assertEquals(userMessage, ((ResponseError) response.getBody()).getUserMessage());
+    }
+
+    @Test
+    void handleMethodArgumentNotValid() throws NoSuchMethodException {
+        // Configuration
+        RestExceptionHandler restExceptionHandler = new RestExceptionHandler();
+        HttpHeaders headers = new HttpHeaders();
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        String userMessage = "One or more fields are invalid. Please fill in correctly and try again.";
+
+        Country country = new Country();
+        country.setId(1L);
+        Errors errors = new BeanPropertyBindingResult(country, "country");
+
+        MethodParameter parameter = new MethodParameter(country.getClass().getMethod("setName", String.class), 0);
+        MethodArgumentNotValidException mockException = new MethodArgumentNotValidException(parameter, (BindingResult) errors);
+
+        // Execution
+        ResponseEntity<Object> response = restExceptionHandler.handleMethodArgumentNotValid(mockException, headers, status, webRequest);
 
         // Check the results
         assertNotNull(response);
@@ -243,5 +274,25 @@ class RestExceptionHandlerTest {
         assertTrue(response.getBody() instanceof ResponseError);
         assertEquals(400, response.getStatusCodeValue());
         assertEquals(userMessage, ((ResponseError) response.getBody()).getUserMessage());
+    }
+
+    @Test
+    void getErrorDatails() {
+        // Configuration
+        RestExceptionHandler restExceptionHandler = new RestExceptionHandler();
+
+        Country country = new Country();
+        country.setId(1L);
+        BeanPropertyBindingResult errors = new BeanPropertyBindingResult(country, "country");
+        errors.addError(new FieldError("test", "test", "teste"));
+
+
+        // Execution
+        List<ErrorDetail> response = restExceptionHandler.getErrorDatails(errors);
+
+        // Check the results
+        assertNotNull(response);
+        assertTrue(response instanceof List<ErrorDetail>);
+        assertEquals(1, response.size());
     }
 }

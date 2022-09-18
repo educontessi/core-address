@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class UUIdUtils {
 
-    private UUIdUtils() {
+    UUIdUtils() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -37,19 +37,14 @@ public class UUIdUtils {
 
     protected static void validateUUID(String uuidString) {
         if (Objects.isNull(uuidString)) {
-            throwException("UUID cannot be null");
+            throw new InvalidUuidException("UUID cannot be null");
         }
         if (StringUtils.isBlank(uuidString)) {
-            throwException("UUID cannot be empty");
+            throw new InvalidUuidException("UUID cannot be empty");
         }
-        if (uuidString.length() < 32 || uuidString.length() > 36) {
-            throwException("Invalid UUID");
+        if (uuidString.length() < 32 || uuidString.length() > 36) { // todo: rever logica
+            throw new InvalidUuidException("Invalid UUID");
         }
     }
-
-    protected static void throwException(String message) {
-        throw new InvalidUuidException(message);
-    }
-
 
 }
