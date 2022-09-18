@@ -6,7 +6,7 @@ import io.github.educontessi.core.address.core.model.Country;
 import io.github.educontessi.core.address.core.ports.out.CountryRepositoryPort;
 import io.github.educontessi.core.address.core.validation.CountryValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ class CountryUseCaseImplTest {
     @InjectMocks
     private CountryUseCaseImpl useCase;
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @BeforeEach
     void setup() {
@@ -46,7 +46,7 @@ class CountryUseCaseImplTest {
     @Test
     void findAll_shouldReturnList() {
         // Configuration
-        when(repository.findAll()).thenReturn(mockFactory.getCountryList());
+        when(repository.findAll()).thenReturn(mockSingleton.getCountryList());
         List<Country> response;
 
         // Execution
@@ -61,10 +61,10 @@ class CountryUseCaseImplTest {
     @Test
     void search_shouldReturnSearch() {
         // Configuration
-        CountryFilter filter = mockFactory.getCountryFilter();
-        Object pageable = mockFactory.getPageable();
+        CountryFilter filter = mockSingleton.getCountryFilter();
+        Object pageable = mockSingleton.getPageable();
 
-        when(repository.search(filter, pageable)).thenReturn(mockFactory.getPaginatedCountry());
+        when(repository.search(filter, pageable)).thenReturn(mockSingleton.getPaginatedCountry());
         Object response;
 
         // Execution
@@ -81,7 +81,7 @@ class CountryUseCaseImplTest {
     void findById_shouldReturnObject() {
         // Configuration
         Long id = 1L;
-        when(repository.findById(id)).thenReturn(mockFactory.getOptionalCountry());
+        when(repository.findById(id)).thenReturn(mockSingleton.getOptionalCountry());
         Country response;
 
         // Execution
@@ -112,9 +112,9 @@ class CountryUseCaseImplTest {
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        Country model = mockFactory.getCountry();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockFactory.getCountry());
+        Country model = mockSingleton.getCountry();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.save(model)).thenReturn(mockSingleton.getCountry());
         Country response;
 
         // Execution
@@ -131,10 +131,10 @@ class CountryUseCaseImplTest {
         // Configuration
         CountryUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        Country model = mockFactory.getCountry();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockFactory.getCountry());
-        when(repository.findById(any())).thenReturn(mockFactory.getOptionalCountry());
+        Country model = mockSingleton.getCountry();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getCountry());
+        when(repository.findById(any())).thenReturn(mockSingleton.getOptionalCountry());
         Country response;
 
         // Execution
@@ -152,8 +152,8 @@ class CountryUseCaseImplTest {
         // Configuration
         CountryUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.findById(any())).thenReturn(mockFactory.getOptionalCountry());
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.findById(any())).thenReturn(mockSingleton.getOptionalCountry());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, validatorsOutOfCore));

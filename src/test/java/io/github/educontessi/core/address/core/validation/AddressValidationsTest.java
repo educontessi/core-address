@@ -2,7 +2,7 @@ package io.github.educontessi.core.address.core.validation;
 
 import io.github.educontessi.core.address.core.model.Address;
 import io.github.educontessi.core.address.core.validation.businessrule.ObjectNotNullValidation;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class AddressValidationsTest {
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @Test
     void validationsOnSave_shouldReturnValidations() {
         // Configuration
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        Address model = mockFactory.getAddress();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        Address model = mockSingleton.getAddress();
         AddressValidations validation = new AddressValidations();
         List<Validator> response;
 
@@ -38,7 +38,7 @@ class AddressValidationsTest {
     @Test
     void validationsOnDelete_shouldReturnValidations() {
         // Configuration
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
         AddressValidations validation = new AddressValidations();
         List<Validator> response;
 

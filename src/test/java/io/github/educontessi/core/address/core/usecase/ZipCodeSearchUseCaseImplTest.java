@@ -1,10 +1,9 @@
 package io.github.educontessi.core.address.core.usecase;
 
-import io.github.educontessi.core.address.core.model.Street;
 import io.github.educontessi.core.address.core.model.ZipCodeSearch;
 import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchPort;
 import io.github.educontessi.core.address.core.validation.ZipCodeSearchValidations;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,7 +29,7 @@ class ZipCodeSearchUseCaseImplTest {
     @InjectMocks
     private ZipCodeSearchUseCaseImpl useCase;
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @BeforeEach
     void setup() {
@@ -41,7 +40,7 @@ class ZipCodeSearchUseCaseImplTest {
     void execute_shouldReturnObject() {
         // Configuration
         String zipcode = "88900000";
-        when(repository.search(zipcode)).thenReturn(mockFactory.getZipCodeSearch());
+        when(repository.search(zipcode)).thenReturn(mockSingleton.getZipCodeSearch());
         ZipCodeSearch response;
 
         // Execution

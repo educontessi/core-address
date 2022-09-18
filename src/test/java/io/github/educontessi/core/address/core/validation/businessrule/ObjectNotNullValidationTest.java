@@ -2,7 +2,7 @@ package io.github.educontessi.core.address.core.validation.businessrule;
 
 import io.github.educontessi.core.address.core.exception.BusinessException;
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ObjectNotNullValidationTest {
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @Test
     void validate_shouldValidateOk() {
         // Configuration
-        Country country = mockFactory.getCountry();
+        Country country = mockSingleton.getCountry();
         ObjectNotNullValidation validation = new ObjectNotNullValidation(country);
 
         // Execution and Check the results

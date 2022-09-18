@@ -6,7 +6,7 @@ import io.github.educontessi.core.address.core.model.State;
 import io.github.educontessi.core.address.core.ports.out.StateRepositoryPort;
 import io.github.educontessi.core.address.core.validation.StateValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ class StateUseCaseImplTest {
     @InjectMocks
     private StateUseCaseImpl useCase;
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @BeforeEach
     void setup() {
@@ -47,7 +47,7 @@ class StateUseCaseImplTest {
     void findAll_shouldReturnList() {
         // Configuration
         String expand = "all";
-        when(repository.findAll(expand)).thenReturn(mockFactory.getStateList());
+        when(repository.findAll(expand)).thenReturn(mockSingleton.getStateList());
         List<State> response;
 
         // Execution
@@ -62,11 +62,11 @@ class StateUseCaseImplTest {
     @Test
     void search_shouldReturnSearch() {
         // Configuration
-        StateFilter filter = mockFactory.getStateFilter();
-        Object pageable = mockFactory.getPageable();
+        StateFilter filter = mockSingleton.getStateFilter();
+        Object pageable = mockSingleton.getPageable();
         String expand = "all";
 
-        when(repository.search(filter, pageable, expand)).thenReturn(mockFactory.getPaginatedState());
+        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedState());
         Object response;
 
         // Execution
@@ -84,7 +84,7 @@ class StateUseCaseImplTest {
         // Configuration
         Long id = 1L;
         String expand = "all";
-        when(repository.findById(id, expand)).thenReturn(mockFactory.getOptionalState());
+        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalState());
         State response;
 
         // Execution
@@ -118,7 +118,7 @@ class StateUseCaseImplTest {
         // Configuration
         StateUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        when(repository.findById(id, null)).thenReturn(mockFactory.getOptionalState());
+        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalState());
         State response;
 
         // Execution
@@ -135,7 +135,7 @@ class StateUseCaseImplTest {
         // Configuration
         Long countryId = 1L;
         String expand = "all";
-        when(repository.findAllByCountryId(countryId, expand)).thenReturn(mockFactory.getStateList());
+        when(repository.findAllByCountryId(countryId, expand)).thenReturn(mockSingleton.getStateList());
         List<State> response;
 
         // Execution
@@ -151,7 +151,7 @@ class StateUseCaseImplTest {
         // Configuration
         String uf = "TS";
         String expand = "all";
-        when(repository.findByUf(uf, expand)).thenReturn(mockFactory.getOptionalState());
+        when(repository.findByUf(uf, expand)).thenReturn(mockSingleton.getOptionalState());
         State response;
 
         // Execution
@@ -183,9 +183,9 @@ class StateUseCaseImplTest {
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        State model = mockFactory.getState();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockFactory.getState());
+        State model = mockSingleton.getState();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.save(model)).thenReturn(mockSingleton.getState());
         State response;
 
         // Execution
@@ -202,10 +202,10 @@ class StateUseCaseImplTest {
         // Configuration
         StateUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        State model = mockFactory.getState();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockFactory.getState());
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalState());
+        State model = mockSingleton.getState();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getState());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalState());
         State response;
 
         // Execution
@@ -223,8 +223,8 @@ class StateUseCaseImplTest {
         // Configuration
         StateUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalState());
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalState());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, validatorsOutOfCore));

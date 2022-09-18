@@ -2,7 +2,7 @@ package io.github.educontessi.core.address.core.validation;
 
 import io.github.educontessi.core.address.core.model.Neighborhood;
 import io.github.educontessi.core.address.core.validation.businessrule.ObjectNotNullValidation;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,13 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class NeighborhoodValidationsTest {
     
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @Test
     void validationsOnSave_shouldReturnValidations() {
         // Configuration
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        Neighborhood model = mockFactory.getNeighborhood();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        Neighborhood model = mockSingleton.getNeighborhood();
         NeighborhoodValidations validation = new NeighborhoodValidations();
         List<Validator> response;
 
@@ -38,7 +38,7 @@ class NeighborhoodValidationsTest {
     @Test
     void validationsOnDelete_shouldReturnValidations() {
         // Configuration
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
         NeighborhoodValidations validation = new NeighborhoodValidations();
         List<Validator> response;
 

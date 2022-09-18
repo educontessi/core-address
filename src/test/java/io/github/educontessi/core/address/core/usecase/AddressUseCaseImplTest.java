@@ -5,7 +5,7 @@ import io.github.educontessi.core.address.core.model.Address;
 import io.github.educontessi.core.address.core.ports.out.AddressRepositoryPort;
 import io.github.educontessi.core.address.core.validation.AddressValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -35,7 +35,7 @@ class AddressUseCaseImplTest {
     @InjectMocks
     private AddressUseCaseImpl useCase;
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @BeforeEach
     void setup() {
@@ -46,7 +46,7 @@ class AddressUseCaseImplTest {
     void findAllByIntegrationId_shouldReturnList() {
         // Configuration
         String integrationId = UUID.randomUUID().toString();
-        when(repository.findAllByIntegrationId(integrationId)).thenReturn(mockFactory.getAddressList());
+        when(repository.findAllByIntegrationId(integrationId)).thenReturn(mockSingleton.getAddressList());
         List<Address> response;
 
         // Execution
@@ -63,7 +63,7 @@ class AddressUseCaseImplTest {
         // Configuration
         String integrationId = UUID.randomUUID().toString();
         Long id = 1L;
-        when(repository.findById(id, integrationId)).thenReturn(mockFactory.getOptionalAddress());
+        when(repository.findById(id, integrationId)).thenReturn(mockSingleton.getOptionalAddress());
         Address response;
 
         // Execution
@@ -96,7 +96,7 @@ class AddressUseCaseImplTest {
     void findDefaultAddress_shouldReturnObject() {
         // Configuration
         String integrationId = UUID.randomUUID().toString();
-        when(repository.findDefaultAddress(integrationId)).thenReturn(mockFactory.getOptionalAddress());
+        when(repository.findDefaultAddress(integrationId)).thenReturn(mockSingleton.getOptionalAddress());
         Address response;
 
         // Execution
@@ -127,9 +127,9 @@ class AddressUseCaseImplTest {
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        Address model = mockFactory.getAddress();
-        List<Validator > validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockFactory.getAddress());
+        Address model = mockSingleton.getAddress();
+        List<Validator > validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.save(model)).thenReturn(mockSingleton.getAddress());
         Address response;
 
         // Execution
@@ -146,10 +146,10 @@ class AddressUseCaseImplTest {
         // Configuration
         AddressUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        Address model = mockFactory.getAddress();
-        List<Validator > validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockFactory.getAddress());
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalAddress());
+        Address model = mockSingleton.getAddress();
+        List<Validator > validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getAddress());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalAddress());
         Address response;
 
         // Execution
@@ -168,8 +168,8 @@ class AddressUseCaseImplTest {
         AddressUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
         String integrationId = UUID.randomUUID().toString();
-        List<Validator > validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalAddress());
+        List<Validator > validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalAddress());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, integrationId, validatorsOutOfCore));

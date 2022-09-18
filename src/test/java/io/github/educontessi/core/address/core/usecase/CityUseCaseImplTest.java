@@ -6,7 +6,7 @@ import io.github.educontessi.core.address.core.model.City;
 import io.github.educontessi.core.address.core.ports.out.CityRepositoryPort;
 import io.github.educontessi.core.address.core.validation.CityValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -36,7 +36,7 @@ class CityUseCaseImplTest {
     @InjectMocks
     private CityUseCaseImpl useCase;
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @BeforeEach
     void setup() {
@@ -46,11 +46,11 @@ class CityUseCaseImplTest {
     @Test
     void search_shouldReturnSearch() {
         // Configuration
-        CityFilter filter = mockFactory.getCityFilter();
-        Object pageable = mockFactory.getPageable();
+        CityFilter filter = mockSingleton.getCityFilter();
+        Object pageable = mockSingleton.getPageable();
         String expand = "all";
 
-        when(repository.search(filter, pageable, expand)).thenReturn(mockFactory.getPaginatedCity());
+        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedCity());
         Object response;
 
         // Execution
@@ -68,7 +68,7 @@ class CityUseCaseImplTest {
         // Configuration
         Long id = 1L;
         String expand = "all";
-        when(repository.findById(id, expand)).thenReturn(mockFactory.getOptionalCity());
+        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalCity());
         City response;
 
         // Execution
@@ -102,7 +102,7 @@ class CityUseCaseImplTest {
         // Configuration
         CityUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        when(repository.findById(id, null)).thenReturn(mockFactory.getOptionalCity());
+        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalCity());
         City response;
 
         // Execution
@@ -119,7 +119,7 @@ class CityUseCaseImplTest {
         // Configuration
         Long stateId = 1L;
         String expand = "all";
-        when(repository.findAllByStateId(stateId, expand)).thenReturn(mockFactory.getCityList());
+        when(repository.findAllByStateId(stateId, expand)).thenReturn(mockSingleton.getCityList());
         List<City> response;
 
         // Execution
@@ -135,7 +135,7 @@ class CityUseCaseImplTest {
         // Configuration
         Integer ibge = 123456;
         String expand = "all";
-        when(repository.findByIbge(ibge, expand)).thenReturn(mockFactory.getOptionalCity());
+        when(repository.findByIbge(ibge, expand)).thenReturn(mockSingleton.getOptionalCity());
         City response;
 
         // Execution
@@ -167,9 +167,9 @@ class CityUseCaseImplTest {
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        City model = mockFactory.getCity();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockFactory.getCity());
+        City model = mockSingleton.getCity();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.save(model)).thenReturn(mockSingleton.getCity());
         City response;
 
         // Execution
@@ -186,10 +186,10 @@ class CityUseCaseImplTest {
         // Configuration
         CityUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        City model = mockFactory.getCity();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockFactory.getCity());
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalCity());
+        City model = mockSingleton.getCity();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getCity());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalCity());
         City response;
 
         // Execution
@@ -207,8 +207,8 @@ class CityUseCaseImplTest {
         // Configuration
         CityUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalCity());
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalCity());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, validatorsOutOfCore));

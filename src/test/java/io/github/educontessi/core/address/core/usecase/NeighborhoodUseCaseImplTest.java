@@ -6,7 +6,7 @@ import io.github.educontessi.core.address.core.model.Neighborhood;
 import io.github.educontessi.core.address.core.ports.out.NeighborhoodRepositoryPort;
 import io.github.educontessi.core.address.core.validation.NeighborhoodValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -38,7 +38,7 @@ class NeighborhoodUseCaseImplTest {
     @InjectMocks
     private NeighborhoodUseCaseImpl useCase;
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @BeforeEach
     void setup() {
@@ -48,11 +48,11 @@ class NeighborhoodUseCaseImplTest {
     @Test
     void search_shouldReturnSearch() {
         // Configuration
-        NeighborhoodFilter filter = mockFactory.getNeighborhoodFilter();
-        Object pageable = mockFactory.getPageable();
+        NeighborhoodFilter filter = mockSingleton.getNeighborhoodFilter();
+        Object pageable = mockSingleton.getPageable();
         String expand = "all";
 
-        when(repository.search(filter, pageable, expand)).thenReturn(mockFactory.getPaginatedNeighborhood());
+        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedNeighborhood());
         Object response;
 
         // Execution
@@ -70,7 +70,7 @@ class NeighborhoodUseCaseImplTest {
         // Configuration
         Long id = 1L;
         String expand = "all";
-        when(repository.findById(id, expand)).thenReturn(mockFactory.getOptionalNeighborhood());
+        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalNeighborhood());
         Neighborhood response;
 
         // Execution
@@ -104,7 +104,7 @@ class NeighborhoodUseCaseImplTest {
         // Configuration
         NeighborhoodUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        when(repository.findById(id, null)).thenReturn(mockFactory.getOptionalNeighborhood());
+        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalNeighborhood());
         Neighborhood response;
 
         // Execution
@@ -121,7 +121,7 @@ class NeighborhoodUseCaseImplTest {
         // Configuration
         Long stateId = 1L;
         String expand = "all";
-        when(repository.findAllByCityId(stateId, expand)).thenReturn(mockFactory.getNeighborhoodList());
+        when(repository.findAllByCityId(stateId, expand)).thenReturn(mockSingleton.getNeighborhoodList());
         List<Neighborhood> response;
 
         // Execution
@@ -136,9 +136,9 @@ class NeighborhoodUseCaseImplTest {
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        Neighborhood model = mockFactory.getNeighborhood();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockFactory.getNeighborhood());
+        Neighborhood model = mockSingleton.getNeighborhood();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.save(model)).thenReturn(mockSingleton.getNeighborhood());
         Neighborhood response;
 
         // Execution
@@ -155,10 +155,10 @@ class NeighborhoodUseCaseImplTest {
         // Configuration
         NeighborhoodUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        Neighborhood model = mockFactory.getNeighborhood();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockFactory.getNeighborhood());
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalNeighborhood());
+        Neighborhood model = mockSingleton.getNeighborhood();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getNeighborhood());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalNeighborhood());
         Neighborhood response;
 
         // Execution
@@ -176,8 +176,8 @@ class NeighborhoodUseCaseImplTest {
         // Configuration
         NeighborhoodUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalNeighborhood());
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalNeighborhood());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, validatorsOutOfCore));
@@ -193,7 +193,7 @@ class NeighborhoodUseCaseImplTest {
         // Configuration
         String name = "Test";
         Long cityId = 1L;
-        when(repository.findByNameAndCityId(name, cityId)).thenReturn(mockFactory.getOptionalNeighborhood());
+        when(repository.findByNameAndCityId(name, cityId)).thenReturn(mockSingleton.getOptionalNeighborhood());
         Neighborhood response;
 
         // Execution

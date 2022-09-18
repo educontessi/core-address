@@ -6,7 +6,7 @@ import io.github.educontessi.core.address.core.model.Street;
 import io.github.educontessi.core.address.core.ports.out.StreetRepositoryPort;
 import io.github.educontessi.core.address.core.validation.StreetValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
-import io.github.educontessi.core.address.mock.MockFactory;
+import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -37,7 +37,7 @@ class StreetUseCaseImplTest {
     @InjectMocks
     private StreetUseCaseImpl useCase;
 
-    private final MockFactory mockFactory = new MockFactory();
+    private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
     @BeforeEach
     void setup() {
@@ -47,11 +47,11 @@ class StreetUseCaseImplTest {
     @Test
     void search_shouldReturnSearch() {
         // Configuration
-        StreetFilter filter = mockFactory.getStreetFilter();
-        Object pageable = mockFactory.getPageable();
+        StreetFilter filter = mockSingleton.getStreetFilter();
+        Object pageable = mockSingleton.getPageable();
         String expand = "all";
 
-        when(repository.search(filter, pageable, expand)).thenReturn(mockFactory.getPaginatedStreet());
+        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedStreet());
         Object response;
 
         // Execution
@@ -69,7 +69,7 @@ class StreetUseCaseImplTest {
         // Configuration
         Long id = 1L;
         String expand = "all";
-        when(repository.findById(id, expand)).thenReturn(mockFactory.getOptionalStreet());
+        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalStreet());
         Street response;
 
         // Execution
@@ -103,7 +103,7 @@ class StreetUseCaseImplTest {
         // Configuration
         StreetUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        when(repository.findById(id, null)).thenReturn(mockFactory.getOptionalStreet());
+        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalStreet());
         Street response;
 
         // Execution
@@ -120,7 +120,7 @@ class StreetUseCaseImplTest {
         // Configuration
         Long stateId = 1L;
         String expand = "all";
-        when(repository.findAllByCityId(stateId, expand)).thenReturn(mockFactory.getStreetList());
+        when(repository.findAllByCityId(stateId, expand)).thenReturn(mockSingleton.getStreetList());
         List<Street> response;
 
         // Execution
@@ -135,9 +135,9 @@ class StreetUseCaseImplTest {
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        Street model = mockFactory.getStreet();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockFactory.getStreet());
+        Street model = mockSingleton.getStreet();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.save(model)).thenReturn(mockSingleton.getStreet());
         Street response;
 
         // Execution
@@ -154,10 +154,10 @@ class StreetUseCaseImplTest {
         // Configuration
         StreetUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        Street model = mockFactory.getStreet();
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockFactory.getStreet());
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalStreet());
+        Street model = mockSingleton.getStreet();
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getStreet());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalStreet());
         Street response;
 
         // Execution
@@ -175,8 +175,8 @@ class StreetUseCaseImplTest {
         // Configuration
         StreetUseCaseImpl useCaseSpy = spy(useCase);
         Long id = 1L;
-        List<Validator> validatorsOutOfCore = mockFactory.getValidatorsOutOfCore();
-        when(repository.findById(any(), any())).thenReturn(mockFactory.getOptionalStreet());
+        List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalStreet());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, validatorsOutOfCore));
@@ -192,7 +192,7 @@ class StreetUseCaseImplTest {
         // Configuration
         String name = "Test";
         Long cityId = 1L;
-        when(repository.findByNameAndCityId(name, cityId)).thenReturn(mockFactory.getOptionalStreet());
+        when(repository.findByNameAndCityId(name, cityId)).thenReturn(mockSingleton.getOptionalStreet());
         Street response;
 
         // Execution

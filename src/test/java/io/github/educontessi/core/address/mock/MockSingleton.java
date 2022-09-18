@@ -13,7 +13,19 @@ import java.util.*;
 /**
  * @author Eduardo Possamai Contessi
  */
-public class MockFactory {
+public class MockSingleton {
+
+    public static MockSingleton instance;
+
+    private MockSingleton() {
+    }
+
+    public static MockSingleton getInstance() {
+        if (instance == null) {
+            instance = new MockSingleton();
+        }
+        return instance;
+    }
 
     public Address getAddress() {
         Address address = new Address();
