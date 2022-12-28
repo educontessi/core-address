@@ -1,5 +1,6 @@
 package io.github.educontessi.core.address.mock;
 
+import io.github.educontessi.core.address.adapters.out.rest.feing.dto.ViaCepDto;
 import io.github.educontessi.core.address.core.enums.PropertyType;
 import io.github.educontessi.core.address.core.filter.*;
 import io.github.educontessi.core.address.core.model.*;
@@ -208,5 +209,20 @@ public class MockSingleton {
         zipCodeSearch.setCity(getCity());
         zipCodeSearch.setState(getState());
         return zipCodeSearch;
+    }
+
+    public ViaCepDto getViaCepDto() {
+        ViaCepDto viaCepDto = new ViaCepDto();
+        viaCepDto.setCep("88900000");
+        viaCepDto.setLogradouro("Logradouro");
+        viaCepDto.setComplemento("Complemento");
+        viaCepDto.setBairro("Bairro");
+        viaCepDto.setLocalidade("Localidade");
+        viaCepDto.setUf("SC");
+        viaCepDto.setIbge("123456");
+        viaCepDto.setGia("Gia");
+        viaCepDto.setDdd("Ddd");
+        viaCepDto.setSiafi("Siafi");
+        return viaCepDto;
     }
 }
