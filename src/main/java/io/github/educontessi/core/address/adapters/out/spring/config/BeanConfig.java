@@ -1,6 +1,6 @@
 package io.github.educontessi.core.address.adapters.out.spring.config;
 
-import io.github.educontessi.core.address.adapters.out.persistence.service.*;
+import io.github.educontessi.core.address.adapters.out.persistence.jpa.service.*;
 import io.github.educontessi.core.address.adapters.out.ports.impl.ZipCodeSearchPortImplViaCEP;
 import io.github.educontessi.core.address.core.usecase.*;
 import io.github.educontessi.core.address.core.validation.*;
