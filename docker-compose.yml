@@ -27,3 +27,9 @@ services:
       - net-core-address
 networks:
   net-core-address:
+
+
+
+# Kafka
+# .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+# .\bin\windows\kafka-server-start.bat .\config\server.properties

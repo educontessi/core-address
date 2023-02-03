@@ -11,12 +11,12 @@ import io.github.educontessi.core.address.core.validation.Validator;
 import java.util.List;
 import java.util.Optional;
 
-public class StreetUseCaseImpl implements StreetUseCasePort {
+public class StreetUseCase implements StreetUseCasePort {
 
     private final StreetRepositoryPort repository;
     private final StreetValidations validations;
 
-    public StreetUseCaseImpl(StreetRepositoryPort repository, StreetValidations validations) {
+    public StreetUseCase(StreetRepositoryPort repository, StreetValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

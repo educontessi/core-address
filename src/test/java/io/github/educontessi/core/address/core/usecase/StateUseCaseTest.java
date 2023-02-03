@@ -1,10 +1,10 @@
 package io.github.educontessi.core.address.core.usecase;
 
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
-import io.github.educontessi.core.address.core.filter.CityFilter;
-import io.github.educontessi.core.address.core.model.City;
-import io.github.educontessi.core.address.core.ports.out.CityRepositoryPort;
-import io.github.educontessi.core.address.core.validation.CityValidations;
+import io.github.educontessi.core.address.core.filter.StateFilter;
+import io.github.educontessi.core.address.core.model.State;
+import io.github.educontessi.core.address.core.ports.out.StateRepositoryPort;
+import io.github.educontessi.core.address.core.validation.StateValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,20 +21,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit Tests for the class {@link CityUseCaseImpl}
+ * Unit Tests for the class {@link StateUseCase}
  *
  * @author Eduardo Possamai Contessi
  */
-class CityUseCaseImplTest {
+class StateUseCaseTest {
 
     @Mock
-    private CityRepositoryPort repository;
+    private StateRepositoryPort repository;
 
     @Mock
-    private CityValidations validations;
+    private StateValidations validations;
 
     @InjectMocks
-    private CityUseCaseImpl useCase;
+    private StateUseCase useCase;
 
     private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
@@ -44,13 +44,29 @@ class CityUseCaseImplTest {
     }
 
     @Test
+    void findAll_shouldReturnList() {
+        // Configuration
+        String expand = "all";
+        when(repository.findAll(expand)).thenReturn(mockSingleton.getStateList());
+        List<State> response;
+
+        // Execution
+        response = useCase.findAll(expand);
+
+        // Check the results
+        assertNotNull(response);
+        assertEquals(1, response.size());
+        verify(repository, times(1)).findAll(expand);
+    }
+
+    @Test
     void search_shouldReturnSearch() {
         // Configuration
-        CityFilter filter = mockSingleton.getCityFilter();
+        StateFilter filter = mockSingleton.getStateFilter();
         Object pageable = mockSingleton.getPageable();
         String expand = "all";
 
-        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedCity());
+        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedState());
         Object response;
 
         // Execution
@@ -59,7 +75,7 @@ class CityUseCaseImplTest {
         // Check the results
         assertNotNull(response);
         assertTrue(response instanceof Page);
-        assertEquals(1, ((Page<City>) response).getTotalElements());
+        assertEquals(1, ((Page<State>) response).getTotalElements());
         verify(repository, times(1)).search(filter, pageable, expand);
     }
 
@@ -68,8 +84,8 @@ class CityUseCaseImplTest {
         // Configuration
         Long id = 1L;
         String expand = "all";
-        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalCity());
-        City response;
+        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalState());
+        State response;
 
         // Execution
         response = useCase.findById(id, expand);
@@ -100,10 +116,10 @@ class CityUseCaseImplTest {
     @Test
     void findById_shouldReturnObjectWithOutExpand() {
         // Configuration
-        CityUseCaseImpl useCaseSpy = spy(useCase);
+        StateUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
-        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalCity());
-        City response;
+        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalState());
+        State response;
 
         // Execution
         response = useCaseSpy.findById(id);
@@ -115,62 +131,62 @@ class CityUseCaseImplTest {
     }
 
     @Test
-    void findAllByStateId_shouldReturnList() {
+    void findAllByCountryId_shouldReturnList() {
         // Configuration
-        Long stateId = 1L;
+        Long countryId = 1L;
         String expand = "all";
-        when(repository.findAllByStateId(stateId, expand)).thenReturn(mockSingleton.getCityList());
-        List<City> response;
+        when(repository.findAllByCountryId(countryId, expand)).thenReturn(mockSingleton.getStateList());
+        List<State> response;
 
         // Execution
-        response = useCase.findAllByStateId(stateId, expand);
+        response = useCase.findAllByCountryId(countryId, expand);
 
         // Check the results
         assertNotNull(response);
-        verify(repository, times(1)).findAllByStateId(stateId, expand);
+        verify(repository, times(1)).findAllByCountryId(countryId, expand);
     }
 
     @Test
-    void findByIbge_shouldReturnObject() {
+    void findByUf_shouldReturnList() {
         // Configuration
-        Integer ibge = 123456;
+        String uf = "TS";
         String expand = "all";
-        when(repository.findByIbge(ibge, expand)).thenReturn(mockSingleton.getOptionalCity());
-        City response;
+        when(repository.findByUf(uf, expand)).thenReturn(mockSingleton.getOptionalState());
+        State response;
 
         // Execution
-        response = useCase.findByIbge(ibge, expand);
+        response = useCase.findByUf(uf, expand);
 
         // Check the results
         assertNotNull(response);
-        verify(repository, times(1)).findByIbge(ibge, expand);
+        verify(repository, times(1)).findByUf(uf, expand);
     }
 
     @Test
-    void findByIbge_shouldReturnEntityNotFoundException() {
+    void findByUf_shouldReturnEntityNotFoundException() {
         // Configuration
-        Integer ibge = 123456;
+        String uf = "TS";
         String expand = "all";
-        String exceptionMessage = "There is no record with IBGE " + ibge;
-        when(repository.findByIbge(ibge, expand)).thenReturn(Optional.empty());
+        String exceptionMessage = "There is no record with UF " + uf;
+        when(repository.findByUf(uf, expand)).thenReturn(Optional.empty());
 
         // Execution
         EntityNotFoundException response = assertThrows(EntityNotFoundException.class,
-                () -> useCase.findByIbge(ibge, expand));
+                () -> useCase.findByUf(uf, expand));
 
         // Check the results
         assertNotNull(response);
         assertEquals(exceptionMessage, response.getMessage());
-        verify(repository, times(1)).findByIbge(ibge, expand);
+        verify(repository, times(1)).findByUf(uf, expand);
     }
 
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        City model = mockSingleton.getCity();
+        State model = mockSingleton.getState();
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockSingleton.getCity());
-        City response;
+        when(repository.save(model)).thenReturn(mockSingleton.getState());
+        State response;
 
         // Execution
         response = useCase.save(model, validatorsOutOfCore);
@@ -184,13 +200,13 @@ class CityUseCaseImplTest {
     @Test
     void update_shouldUpdateObject() {
         // Configuration
-        CityUseCaseImpl useCaseSpy = spy(useCase);
+        StateUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
-        City model = mockSingleton.getCity();
+        State model = mockSingleton.getState();
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockSingleton.getCity());
-        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalCity());
-        City response;
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getState());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalState());
+        State response;
 
         // Execution
         response = useCaseSpy.update(id, model, validatorsOutOfCore);
@@ -205,10 +221,10 @@ class CityUseCaseImplTest {
     @Test
     void delete_shouldDeleteObject() {
         // Configuration
-        CityUseCaseImpl useCaseSpy = spy(useCase);
+        StateUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
-        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalCity());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalState());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, validatorsOutOfCore));

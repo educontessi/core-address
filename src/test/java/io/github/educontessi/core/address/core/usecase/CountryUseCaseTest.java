@@ -21,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit Tests for the class {@link CountryUseCaseImpl}
+ * Unit Tests for the class {@link CountryUseCase}
  *
  * @author Eduardo Possamai Contessi
  */
-class CountryUseCaseImplTest {
+class CountryUseCaseTest {
 
     @Mock
     private CountryRepositoryPort repository;
@@ -34,7 +34,7 @@ class CountryUseCaseImplTest {
     private CountryValidations validations;
 
     @InjectMocks
-    private CountryUseCaseImpl useCase;
+    private CountryUseCase useCase;
 
     private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
@@ -129,7 +129,7 @@ class CountryUseCaseImplTest {
     @Test
     void update_shouldUpdateObject() {
         // Configuration
-        CountryUseCaseImpl useCaseSpy = spy(useCase);
+        CountryUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         Country model = mockSingleton.getCountry();
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
@@ -150,7 +150,7 @@ class CountryUseCaseImplTest {
     @Test
     void delete_shouldDeleteObject() {
         // Configuration
-        CountryUseCaseImpl useCaseSpy = spy(useCase);
+        CountryUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
         when(repository.findById(any())).thenReturn(mockSingleton.getOptionalCountry());

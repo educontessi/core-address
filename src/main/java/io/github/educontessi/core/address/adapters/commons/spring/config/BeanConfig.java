@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.spring.config;
+package io.github.educontessi.core.address.adapters.commons.spring.config;
 
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.service.*;
 import io.github.educontessi.core.address.adapters.out.ports.impl.ZipCodeSearchPortImplViaCEP;
@@ -12,38 +12,38 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 public class BeanConfig {
 
     @Bean
-    CountryUseCaseImpl countryUseCaseImpl(CountryService service) {
-        return new CountryUseCaseImpl(service, new CountryValidations());
+    CountryUseCase countryUseCaseImpl(CountryService service) {
+        return new CountryUseCase(service, new CountryValidations());
     }
 
     @Bean
-    StateUseCaseImpl stateUseCase(StateService service) {
-        return new StateUseCaseImpl(service, new StateValidations());
+    StateUseCase stateUseCase(StateService service) {
+        return new StateUseCase(service, new StateValidations());
     }
 
     @Bean
-    CityUseCaseImpl cityUseCase(CityService service) {
-        return new CityUseCaseImpl(service, new CityValidations());
+    CityUseCase cityUseCase(CityService service) {
+        return new CityUseCase(service, new CityValidations());
     }
 
     @Bean
-    NeighborhoodUseCaseImpl neighborhoodUseCase(NeighborhoodService service) {
-        return new NeighborhoodUseCaseImpl(service, new NeighborhoodValidations());
+    NeighborhoodUseCase neighborhoodUseCase(NeighborhoodService service) {
+        return new NeighborhoodUseCase(service, new NeighborhoodValidations());
     }
 
     @Bean
-    StreetUseCaseImpl streetUseCase(StreetService service) {
-        return new StreetUseCaseImpl(service, new StreetValidations());
+    StreetUseCase streetUseCase(StreetService service) {
+        return new StreetUseCase(service, new StreetValidations());
     }
 
     @Bean
-    ZipCodeSearchUseCaseImpl zipCodeSearchUseCase(ZipCodeSearchPortImplViaCEP service) {
-        return new ZipCodeSearchUseCaseImpl(service, new ZipCodeSearchValidations());
+    ZipCodeSearchUseCase zipCodeSearchUseCase(ZipCodeSearchPortImplViaCEP service) {
+        return new ZipCodeSearchUseCase(service, new ZipCodeSearchValidations());
     }
 
     @Bean
-    AddressUseCaseImpl addressUseCase(AddressService service) {
-        return new AddressUseCaseImpl(service, new AddressValidations());
+    AddressUseCase addressUseCase(AddressService service) {
+        return new AddressUseCase(service, new AddressValidations());
     }
 
     @Bean

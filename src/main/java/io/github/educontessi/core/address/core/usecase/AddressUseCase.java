@@ -10,12 +10,12 @@ import io.github.educontessi.core.address.core.validation.Validator;
 import java.util.List;
 import java.util.Optional;
 
-public class AddressUseCaseImpl implements AddressUseCasePort {
+public class AddressUseCase implements AddressUseCasePort {
 
     private final AddressRepositoryPort repository;
     private final AddressValidations validations;
 
-    public AddressUseCaseImpl(AddressRepositoryPort repository, AddressValidations validations) {
+    public AddressUseCase(AddressRepositoryPort repository, AddressValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

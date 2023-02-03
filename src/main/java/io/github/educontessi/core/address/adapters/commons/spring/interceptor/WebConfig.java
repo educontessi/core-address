@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.spring.interceptor;
+package io.github.educontessi.core.address.adapters.commons.spring.interceptor;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

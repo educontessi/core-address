@@ -14,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit Tests for the class {@link ZipCodeSearchUseCaseImpl}
+ * Unit Tests for the class {@link ZipCodeSearchUseCase}
  *
  * @author Eduardo Possamai Contessi
  */
-class ZipCodeSearchUseCaseImplTest {
+class ZipCodeSearchUseCaseTest {
 
     @Mock
     private ZipCodeSearchPort repository;
@@ -27,7 +27,7 @@ class ZipCodeSearchUseCaseImplTest {
     private ZipCodeSearchValidations validations;
 
     @InjectMocks
-    private ZipCodeSearchUseCaseImpl useCase;
+    private ZipCodeSearchUseCase useCase;
 
     private final MockSingleton mockSingleton = MockSingleton.getInstance();
 

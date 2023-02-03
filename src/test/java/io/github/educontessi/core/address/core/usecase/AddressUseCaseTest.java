@@ -20,11 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit Tests for the class {@link AddressUseCaseImpl}
+ * Unit Tests for the class {@link AddressUseCase}
  *
  * @author Eduardo Possamai Contessi
  */
-class AddressUseCaseImplTest {
+class AddressUseCaseTest {
 
     @Mock
     private AddressRepositoryPort repository;
@@ -33,7 +33,7 @@ class AddressUseCaseImplTest {
     private AddressValidations validations;
 
     @InjectMocks
-    private AddressUseCaseImpl useCase;
+    private AddressUseCase useCase;
 
     private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
@@ -144,7 +144,7 @@ class AddressUseCaseImplTest {
     @Test
     void update_shouldUpdateObject() {
         // Configuration
-        AddressUseCaseImpl useCaseSpy = spy(useCase);
+        AddressUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         Address model = mockSingleton.getAddress();
         List<Validator > validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
@@ -165,7 +165,7 @@ class AddressUseCaseImplTest {
     @Test
     void delete_shouldDeleteObject() {
         // Configuration
-        AddressUseCaseImpl useCaseSpy = spy(useCase);
+        AddressUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         String integrationId = UUID.randomUUID().toString();
         List<Validator > validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();

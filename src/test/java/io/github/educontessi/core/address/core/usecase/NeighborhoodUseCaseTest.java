@@ -1,10 +1,10 @@
 package io.github.educontessi.core.address.core.usecase;
 
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
-import io.github.educontessi.core.address.core.filter.StateFilter;
-import io.github.educontessi.core.address.core.model.State;
-import io.github.educontessi.core.address.core.ports.out.StateRepositoryPort;
-import io.github.educontessi.core.address.core.validation.StateValidations;
+import io.github.educontessi.core.address.core.filter.NeighborhoodFilter;
+import io.github.educontessi.core.address.core.model.Neighborhood;
+import io.github.educontessi.core.address.core.ports.out.NeighborhoodRepositoryPort;
+import io.github.educontessi.core.address.core.validation.NeighborhoodValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,23 +18,25 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 /**
- * Unit Tests for the class {@link StateUseCaseImpl}
+ * Unit Tests for the class {@link NeighborhoodUseCase}
  *
  * @author Eduardo Possamai Contessi
  */
-class StateUseCaseImplTest {
+class NeighborhoodUseCaseTest {
 
     @Mock
-    private StateRepositoryPort repository;
+    private NeighborhoodRepositoryPort repository;
 
     @Mock
-    private StateValidations validations;
+    private NeighborhoodValidations validations;
 
     @InjectMocks
-    private StateUseCaseImpl useCase;
+    private NeighborhoodUseCase useCase;
 
     private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
@@ -44,29 +46,13 @@ class StateUseCaseImplTest {
     }
 
     @Test
-    void findAll_shouldReturnList() {
-        // Configuration
-        String expand = "all";
-        when(repository.findAll(expand)).thenReturn(mockSingleton.getStateList());
-        List<State> response;
-
-        // Execution
-        response = useCase.findAll(expand);
-
-        // Check the results
-        assertNotNull(response);
-        assertEquals(1, response.size());
-        verify(repository, times(1)).findAll(expand);
-    }
-
-    @Test
     void search_shouldReturnSearch() {
         // Configuration
-        StateFilter filter = mockSingleton.getStateFilter();
+        NeighborhoodFilter filter = mockSingleton.getNeighborhoodFilter();
         Object pageable = mockSingleton.getPageable();
         String expand = "all";
 
-        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedState());
+        when(repository.search(filter, pageable, expand)).thenReturn(mockSingleton.getPaginatedNeighborhood());
         Object response;
 
         // Execution
@@ -75,7 +61,7 @@ class StateUseCaseImplTest {
         // Check the results
         assertNotNull(response);
         assertTrue(response instanceof Page);
-        assertEquals(1, ((Page<State>) response).getTotalElements());
+        assertEquals(1, ((Page<Neighborhood>) response).getTotalElements());
         verify(repository, times(1)).search(filter, pageable, expand);
     }
 
@@ -84,8 +70,8 @@ class StateUseCaseImplTest {
         // Configuration
         Long id = 1L;
         String expand = "all";
-        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalState());
-        State response;
+        when(repository.findById(id, expand)).thenReturn(mockSingleton.getOptionalNeighborhood());
+        Neighborhood response;
 
         // Execution
         response = useCase.findById(id, expand);
@@ -116,10 +102,10 @@ class StateUseCaseImplTest {
     @Test
     void findById_shouldReturnObjectWithOutExpand() {
         // Configuration
-        StateUseCaseImpl useCaseSpy = spy(useCase);
+        NeighborhoodUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
-        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalState());
-        State response;
+        when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalNeighborhood());
+        Neighborhood response;
 
         // Execution
         response = useCaseSpy.findById(id);
@@ -131,62 +117,29 @@ class StateUseCaseImplTest {
     }
 
     @Test
-    void findAllByCountryId_shouldReturnList() {
+    void findAllByCityId_shouldReturnList() {
         // Configuration
-        Long countryId = 1L;
+        Long stateId = 1L;
         String expand = "all";
-        when(repository.findAllByCountryId(countryId, expand)).thenReturn(mockSingleton.getStateList());
-        List<State> response;
+        when(repository.findAllByCityId(stateId, expand)).thenReturn(mockSingleton.getNeighborhoodList());
+        List<Neighborhood> response;
 
         // Execution
-        response = useCase.findAllByCountryId(countryId, expand);
+        response = useCase.findAllByCityId(stateId, expand);
 
         // Check the results
         assertNotNull(response);
-        verify(repository, times(1)).findAllByCountryId(countryId, expand);
+        verify(repository, times(1)).findAllByCityId(stateId, expand);
     }
 
-    @Test
-    void findByUf_shouldReturnList() {
-        // Configuration
-        String uf = "TS";
-        String expand = "all";
-        when(repository.findByUf(uf, expand)).thenReturn(mockSingleton.getOptionalState());
-        State response;
-
-        // Execution
-        response = useCase.findByUf(uf, expand);
-
-        // Check the results
-        assertNotNull(response);
-        verify(repository, times(1)).findByUf(uf, expand);
-    }
-
-    @Test
-    void findByUf_shouldReturnEntityNotFoundException() {
-        // Configuration
-        String uf = "TS";
-        String expand = "all";
-        String exceptionMessage = "There is no record with UF " + uf;
-        when(repository.findByUf(uf, expand)).thenReturn(Optional.empty());
-
-        // Execution
-        EntityNotFoundException response = assertThrows(EntityNotFoundException.class,
-                () -> useCase.findByUf(uf, expand));
-
-        // Check the results
-        assertNotNull(response);
-        assertEquals(exceptionMessage, response.getMessage());
-        verify(repository, times(1)).findByUf(uf, expand);
-    }
 
     @Test
     void save_shouldSaveObject() {
         // Configuration
-        State model = mockSingleton.getState();
+        Neighborhood model = mockSingleton.getNeighborhood();
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
-        when(repository.save(model)).thenReturn(mockSingleton.getState());
-        State response;
+        when(repository.save(model)).thenReturn(mockSingleton.getNeighborhood());
+        Neighborhood response;
 
         // Execution
         response = useCase.save(model, validatorsOutOfCore);
@@ -200,13 +153,13 @@ class StateUseCaseImplTest {
     @Test
     void update_shouldUpdateObject() {
         // Configuration
-        StateUseCaseImpl useCaseSpy = spy(useCase);
+        NeighborhoodUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
-        State model = mockSingleton.getState();
+        Neighborhood model = mockSingleton.getNeighborhood();
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
-        when(repository.update(any(), any())).thenReturn(mockSingleton.getState());
-        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalState());
-        State response;
+        when(repository.update(any(), any())).thenReturn(mockSingleton.getNeighborhood());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalNeighborhood());
+        Neighborhood response;
 
         // Execution
         response = useCaseSpy.update(id, model, validatorsOutOfCore);
@@ -221,10 +174,10 @@ class StateUseCaseImplTest {
     @Test
     void delete_shouldDeleteObject() {
         // Configuration
-        StateUseCaseImpl useCaseSpy = spy(useCase);
+        NeighborhoodUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
-        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalState());
+        when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalNeighborhood());
 
         // Execution
         assertDoesNotThrow(() -> useCaseSpy.delete(id, validatorsOutOfCore));
@@ -233,6 +186,38 @@ class StateUseCaseImplTest {
         verify(repository, times(1)).delete(any());
         verify(validations, times(1)).validationsOnDelete(validatorsOutOfCore);
         verify(useCaseSpy, times(1)).findById(any(), any());
+    }
+
+    @Test
+    void findByNameAndCityId_shouldReturnObject() {
+        // Configuration
+        String name = "Test";
+        Long cityId = 1L;
+        when(repository.findByNameAndCityId(name, cityId)).thenReturn(mockSingleton.getOptionalNeighborhood());
+        Neighborhood response;
+
+        // Execution
+        response = useCase.findByNameAndCityId(name, cityId);
+
+        // Check the results
+        assertNotNull(response);
+        verify(repository, times(1)).findByNameAndCityId(name, cityId);
+    }
+
+    @Test
+    void findByNameAndCityId_shouldReturnNull() {
+        // Configuration
+        String name = "Test";
+        Long cityId = 1L;
+        when(repository.findByNameAndCityId(name, cityId)).thenReturn(Optional.empty());
+        Neighborhood response;
+
+        // Execution
+        response = useCase.findByNameAndCityId(name, cityId);
+
+        // Check the results
+        assertNull(response);
+        verify(repository, times(1)).findByNameAndCityId(name, cityId);
     }
 
 }

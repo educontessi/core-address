@@ -22,11 +22,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit Tests for the class {@link StreetUseCaseImpl}
+ * Unit Tests for the class {@link StreetUseCase}
  *
  * @author Eduardo Possamai Contessi
  */
-class StreetUseCaseImplTest {
+class StreetUseCaseTest {
 
     @Mock
     private StreetRepositoryPort repository;
@@ -35,7 +35,7 @@ class StreetUseCaseImplTest {
     private StreetValidations validations;
 
     @InjectMocks
-    private StreetUseCaseImpl useCase;
+    private StreetUseCase useCase;
 
     private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
@@ -101,7 +101,7 @@ class StreetUseCaseImplTest {
     @Test
     void findById_shouldReturnObjectWithOutExpand() {
         // Configuration
-        StreetUseCaseImpl useCaseSpy = spy(useCase);
+        StreetUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         when(repository.findById(id, null)).thenReturn(mockSingleton.getOptionalStreet());
         Street response;
@@ -152,7 +152,7 @@ class StreetUseCaseImplTest {
     @Test
     void update_shouldUpdateObject() {
         // Configuration
-        StreetUseCaseImpl useCaseSpy = spy(useCase);
+        StreetUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         Street model = mockSingleton.getStreet();
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
@@ -173,7 +173,7 @@ class StreetUseCaseImplTest {
     @Test
     void delete_shouldDeleteObject() {
         // Configuration
-        StreetUseCaseImpl useCaseSpy = spy(useCase);
+        StreetUseCase useCaseSpy = spy(useCase);
         Long id = 1L;
         List<Validator> validatorsOutOfCore = mockSingleton.getValidatorsOutOfCore();
         when(repository.findById(any(), any())).thenReturn(mockSingleton.getOptionalStreet());

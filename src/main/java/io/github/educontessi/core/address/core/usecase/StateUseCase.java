@@ -11,12 +11,12 @@ import io.github.educontessi.core.address.core.validation.Validator;
 import java.util.List;
 import java.util.Optional;
 
-public class StateUseCaseImpl implements StateUseCasePort {
+public class StateUseCase implements StateUseCasePort {
 
     private final StateRepositoryPort repository;
     private final StateValidations validations;
 
-    public StateUseCaseImpl(StateRepositoryPort repository, StateValidations validations) {
+    public StateUseCase(StateRepositoryPort repository, StateValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

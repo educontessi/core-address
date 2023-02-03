@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.spring.interceptor;
+package io.github.educontessi.core.address.adapters.commons.spring.interceptor;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;

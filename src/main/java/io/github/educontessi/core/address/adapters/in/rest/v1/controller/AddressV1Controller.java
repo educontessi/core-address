@@ -1,6 +1,5 @@
 package io.github.educontessi.core.address.adapters.in.rest.v1.controller;
 
-import io.github.educontessi.core.address.adapters.in.documentation.*;
 import io.github.educontessi.core.address.adapters.in.rest.documentation.*;
 import io.github.educontessi.core.address.adapters.in.rest.v1.datamanager.AddressV1DataManager;
 import io.github.educontessi.core.address.adapters.in.rest.v1.dto.AddressV1Dto;

@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.spring.interceptor;
+package io.github.educontessi.core.address.adapters.commons.spring.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
