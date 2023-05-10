@@ -22,7 +22,8 @@ import java.time.Duration;
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RedisConfig.class);
+    private static final Logger
+            LOGGER = LoggerFactory.getLogger(RedisConfig.class);
 
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {

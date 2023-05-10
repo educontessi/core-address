@@ -4,10 +4,10 @@ import io.github.educontessi.core.address.adapters.in.rest.exception.InvalidDtoE
 import io.github.educontessi.core.address.adapters.in.rest.v1.dto.BaseDto;
 import io.github.educontessi.core.address.core.model.BaseModel;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import java.util.Set;
 
 public abstract class DataConverter<M extends BaseModel, D extends BaseDto> {

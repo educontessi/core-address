@@ -11,6 +11,7 @@ import io.github.educontessi.core.address.core.exception.InvalidUuidException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -37,7 +38,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             + "the problem persists, contact your system administrator.";
 
     @Override
-    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         HttpStatus statusResponse = HttpStatus.UNSUPPORTED_MEDIA_TYPE;
         ErrorType errorType = ErrorType.INVALID_REQUEST;
         String userMessage = "Content-Type was not informed";
@@ -48,7 +49,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+                                                                  HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         HttpStatus statusResponse = HttpStatus.BAD_REQUEST;
         ErrorType errorType = ErrorType.INCOMPREHENSIBLE_MESSAGE;
         String userMessage = "The request body is invalid. Check syntax error.";
@@ -59,7 +60,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) { // Exception usada quando não utiliza dto
+                                                                  HttpHeaders headers, HttpStatusCode status, WebRequest request) { // Exception usada quando não utiliza dto
         HttpStatus statusResponse = HttpStatus.BAD_REQUEST;
         ErrorType errorType = ErrorType.INVALID_DATA;
         String userMessage = "One or more fields are invalid. Please fill in correctly and try again.";
@@ -130,7 +131,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         HttpStatus statusResponse = HttpStatus.UNPROCESSABLE_ENTITY;
         ErrorType errorType = ErrorType.INVALID_DATA;
         String userMessage = ex.getMessage();

@@ -1,7 +1,7 @@
 package io.github.educontessi.core.address.adapters.in.rest.v1.dto;
 
-import javax.validation.Valid;
-import javax.validation.constraints.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import java.math.BigDecimal;
 
 /**

@@ -2,7 +2,7 @@ package io.github.educontessi.core.address.adapters.out.persistence.jpa.entity;
 
 import io.github.educontessi.core.address.core.enums.PropertyType;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "address_view")

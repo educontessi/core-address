@@ -3,8 +3,8 @@ package io.github.educontessi.core.address.adapters.out.persistence.jpa.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @MappedSuperclass

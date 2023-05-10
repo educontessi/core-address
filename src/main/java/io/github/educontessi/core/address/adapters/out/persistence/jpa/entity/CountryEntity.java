@@ -1,6 +1,6 @@
 package io.github.educontessi.core.address.adapters.out.persistence.jpa.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "country_view")

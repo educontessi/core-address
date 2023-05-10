@@ -2,8 +2,8 @@ package io.github.educontessi.core.address.core.model;
 
 import io.github.educontessi.core.address.core.util.StringUtils;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 /**
  * Model {@link Country} to manipulate country table

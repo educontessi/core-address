@@ -1,5 +1,6 @@
 package io.github.educontessi.core.address.mock;
 
+import io.github.educontessi.core.address.adapters.in.rest.v1.dto.CountryV1Dto;
 import io.github.educontessi.core.address.adapters.out.rest.feing.dto.ViaCepDto;
 import io.github.educontessi.core.address.core.enums.PropertyType;
 import io.github.educontessi.core.address.core.filter.*;
@@ -224,5 +225,14 @@ public class MockSingleton {
         viaCepDto.setDdd("Ddd");
         viaCepDto.setSiafi("Siafi");
         return viaCepDto;
+    }
+
+    public CountryV1Dto getCountryV1Dto() {
+        CountryV1Dto dto = new CountryV1Dto();
+        dto.setId(1L);
+        dto.setName("Test");
+        dto.setAcronym("TS");
+        dto.setBacen("0000");
+        return dto;
     }
 }
