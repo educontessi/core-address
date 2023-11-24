@@ -34,7 +34,7 @@ public class NeighborhoodRepositoryImpl implements NeighborhoodRepositoryQuery {
         TypedQuery<NeighborhoodEntity> query = manager.createQuery(criteria);
         addPaginationRestrictions(query, pageable);
 
-        return new PageImpl<>(query.getResultList(), pageable, total(predicates));
+        return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
     private Predicate[] createRestrictions(NeighborhoodFilter filter, CriteriaBuilder builder, Root<NeighborhoodEntity> root) {
@@ -56,10 +56,11 @@ public class NeighborhoodRepositoryImpl implements NeighborhoodRepositoryQuery {
         query.setMaxResults(totalRecordsPerPage);
     }
 
-    private Long total(Predicate[] predicates) {
+    private Long total(NeighborhoodFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<NeighborhoodEntity> root = criteria.from(NeighborhoodEntity.class);
+        Predicate[] predicates = createRestrictions(filter, builder, root);
         criteria.where(predicates);
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();

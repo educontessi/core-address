@@ -34,7 +34,7 @@ public class StateRepositoryImpl implements StateRepositoryQuery {
         TypedQuery<StateEntity> query = manager.createQuery(criteria);
         addPaginationRestrictions(query, pageable);
 
-        return new PageImpl<>(query.getResultList(), pageable, total(predicates));
+        return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
     private Predicate[] createRestrictions(StateFilter filter, CriteriaBuilder builder, Root<StateEntity> root) {
@@ -62,10 +62,11 @@ public class StateRepositoryImpl implements StateRepositoryQuery {
         query.setMaxResults(totalRecordsPerPage);
     }
 
-    private Long total(Predicate[] predicates) {
+    private Long total(StateFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<StateEntity> root = criteria.from(StateEntity.class);
+        Predicate[] predicates = createRestrictions(filter, builder, root);
         criteria.where(predicates);
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();

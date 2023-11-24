@@ -34,7 +34,7 @@ public class StreetRepositoryImpl implements StreetRepositoryQuery {
         TypedQuery<StreetEntity> query = manager.createQuery(criteria);
         addPaginationRestrictions(query, pageable);
 
-        return new PageImpl<>(query.getResultList(), pageable, total(predicates));
+        return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
     private Predicate[] createRestrictions(StreetFilter filter, CriteriaBuilder builder, Root<StreetEntity> root) {
@@ -56,10 +56,11 @@ public class StreetRepositoryImpl implements StreetRepositoryQuery {
         query.setMaxResults(totalRecordsPerPage);
     }
 
-    private Long total(Predicate[] predicates) {
+    private Long total(StreetFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<StreetEntity> root = criteria.from(StreetEntity.class);
+        Predicate[] predicates = createRestrictions(filter, builder, root);
         criteria.where(predicates);
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();

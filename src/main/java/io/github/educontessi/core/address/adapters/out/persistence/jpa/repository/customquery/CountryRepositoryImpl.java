@@ -34,7 +34,7 @@ public class CountryRepositoryImpl implements CountryRepositoryQuery {
         TypedQuery<CountryEntity> query = manager.createQuery(criteria);
         addPaginationRestrictions(query, pageable);
 
-        return new PageImpl<>(query.getResultList(), pageable, total(predicates));
+        return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
     private Predicate[] createRestrictions(CountryFilter filter, CriteriaBuilder builder, Root<CountryEntity> root) {
@@ -56,10 +56,11 @@ public class CountryRepositoryImpl implements CountryRepositoryQuery {
         query.setMaxResults(totalRecordsPerPage);
     }
 
-    private Long total(Predicate[] predicates) {
+    private Long total(CountryFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<CountryEntity> root = criteria.from(CountryEntity.class);
+        Predicate[] predicates = createRestrictions(filter, builder, root);
         criteria.where(predicates);
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();

@@ -34,7 +34,7 @@ public class CityRepositoryImpl implements CityRepositoryQuery {
         TypedQuery<CityEntity> query = manager.createQuery(criteria);
         addPaginationRestrictions(query, pageable);
 
-        return new PageImpl<>(query.getResultList(), pageable, total(predicates));
+        return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
     private Predicate[] createRestrictions(CityFilter filter, CriteriaBuilder builder, Root<CityEntity> root) {
@@ -56,10 +56,11 @@ public class CityRepositoryImpl implements CityRepositoryQuery {
         query.setMaxResults(totalRecordsPerPage);
     }
 
-    private Long total(Predicate[] predicates) {
+    private Long total(CityFilter filter) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         Root<CityEntity> root = criteria.from(CityEntity.class);
+        Predicate[] predicates = createRestrictions(filter, builder, root);
         criteria.where(predicates);
         criteria.select(builder.count(root));
         return manager.createQuery(criteria).getSingleResult();
