@@ -1,7 +1,7 @@
 package io.github.educontessi.core.address.core.usecase;
 
 import io.github.educontessi.core.address.core.model.ZipCodeSearch;
-import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchPort;
+import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchAdapterPort;
 import io.github.educontessi.core.address.core.validation.ZipCodeSearchValidations;
 import io.github.educontessi.core.address.mock.MockSingleton;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 class ZipCodeSearchUseCaseTest {
 
     @Mock
-    private ZipCodeSearchPort repository;
+    private ZipCodeSearchAdapterPort repository;
 
     @Mock
     private ZipCodeSearchValidations validations;

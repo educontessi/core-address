@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.core.exception.EntityNotFoundException
 import io.github.educontessi.core.address.core.filter.NeighborhoodFilter;
 import io.github.educontessi.core.address.core.model.Neighborhood;
 import io.github.educontessi.core.address.core.ports.in.NeighborhoodUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.NeighborhoodRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.NeighborhoodAdapterPort;
 import io.github.educontessi.core.address.core.validation.NeighborhoodValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class NeighborhoodUseCase implements NeighborhoodUseCasePort {
 
-    private final NeighborhoodRepositoryPort repository;
+    private final NeighborhoodAdapterPort repository;
     private final NeighborhoodValidations validations;
 
-    public NeighborhoodUseCase(NeighborhoodRepositoryPort repository, NeighborhoodValidations validations) {
+    public NeighborhoodUseCase(NeighborhoodAdapterPort repository, NeighborhoodValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

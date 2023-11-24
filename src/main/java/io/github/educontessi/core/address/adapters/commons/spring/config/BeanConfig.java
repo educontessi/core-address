@@ -1,7 +1,6 @@
 package io.github.educontessi.core.address.adapters.commons.spring.config;
 
-import io.github.educontessi.core.address.adapters.out.persistence.jpa.service.*;
-import io.github.educontessi.core.address.adapters.out.ports.impl.ZipCodeSearchPortImplViaCEP;
+import io.github.educontessi.core.address.adapters.out.ports.impl.*;
 import io.github.educontessi.core.address.core.usecase.*;
 import io.github.educontessi.core.address.core.validation.*;
 import org.springframework.context.annotation.Bean;
@@ -12,37 +11,37 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
 public class BeanConfig {
 
     @Bean
-    CountryUseCase countryUseCaseImpl(CountryService service) {
+    CountryUseCase countryUseCaseImpl(CountryAdapterPortImpl service) {
         return new CountryUseCase(service, new CountryValidations());
     }
 
     @Bean
-    StateUseCase stateUseCase(StateService service) {
+    StateUseCase stateUseCase(StateAdapterPortImpl service) {
         return new StateUseCase(service, new StateValidations());
     }
 
     @Bean
-    CityUseCase cityUseCase(CityService service) {
+    CityUseCase cityUseCase(CityAdapterPortImpl service) {
         return new CityUseCase(service, new CityValidations());
     }
 
     @Bean
-    NeighborhoodUseCase neighborhoodUseCase(NeighborhoodService service) {
+    NeighborhoodUseCase neighborhoodUseCase(NeighborhoodAdapterPortImpl service) {
         return new NeighborhoodUseCase(service, new NeighborhoodValidations());
     }
 
     @Bean
-    StreetUseCase streetUseCase(StreetService service) {
+    StreetUseCase streetUseCase(StreetAdapterPortImpl service) {
         return new StreetUseCase(service, new StreetValidations());
     }
 
     @Bean
-    ZipCodeSearchUseCase zipCodeSearchUseCase(ZipCodeSearchPortImplViaCEP service) {
+    ZipCodeSearchUseCase zipCodeSearchUseCase(ZipCodeSearchAdapterPortImpl service) {
         return new ZipCodeSearchUseCase(service, new ZipCodeSearchValidations());
     }
 
     @Bean
-    AddressUseCase addressUseCase(AddressService service) {
+    AddressUseCase addressUseCase(AddressAdapterPortImpl service) {
         return new AddressUseCase(service, new AddressValidations());
     }
 

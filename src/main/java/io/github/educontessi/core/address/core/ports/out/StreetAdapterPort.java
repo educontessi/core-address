@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.model.Street;
 import java.util.List;
 import java.util.Optional;
 
-public interface StreetRepositoryPort {
+public interface StreetAdapterPort {
 
     Object search(StreetFilter filter, Object pageable, String expand);
 

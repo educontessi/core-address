@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.persistence.jpa.service;
+package io.github.educontessi.core.address.adapters.out.ports.impl;
 
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.dataconverter.AddressOutDataconverter;
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.entity.AddressEntity;
@@ -7,7 +7,7 @@ import io.github.educontessi.core.address.core.config.GlobalParameters;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.model.Address;
-import io.github.educontessi.core.address.core.ports.out.AddressRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.AddressAdapterPort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,12 +19,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AddressService implements AddressRepositoryPort {
+public class AddressAdapterPortImpl implements AddressAdapterPort {
 
     private final AddressRepository repository;
     private final AddressOutDataconverter mapper;
 
-    public AddressService(AddressRepository repository, AddressOutDataconverter mapper) {
+    public AddressAdapterPortImpl(AddressRepository repository, AddressOutDataconverter mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

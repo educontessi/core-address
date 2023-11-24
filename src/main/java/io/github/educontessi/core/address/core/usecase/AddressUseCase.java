@@ -3,7 +3,7 @@ package io.github.educontessi.core.address.core.usecase;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.model.Address;
 import io.github.educontessi.core.address.core.ports.in.AddressUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.AddressRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.AddressAdapterPort;
 import io.github.educontessi.core.address.core.validation.AddressValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 
@@ -12,10 +12,10 @@ import java.util.Optional;
 
 public class AddressUseCase implements AddressUseCasePort {
 
-    private final AddressRepositoryPort repository;
+    private final AddressAdapterPort repository;
     private final AddressValidations validations;
 
-    public AddressUseCase(AddressRepositoryPort repository, AddressValidations validations) {
+    public AddressUseCase(AddressAdapterPort repository, AddressValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

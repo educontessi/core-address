@@ -3,7 +3,7 @@ package io.github.educontessi.core.address.core.usecase;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.core.ports.out.CountryRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.CountryAdapterPort;
 import io.github.educontessi.core.address.core.validation.CountryValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.mock.MockSingleton;
@@ -28,7 +28,7 @@ import static org.mockito.Mockito.*;
 class CountryUseCaseTest {
 
     @Mock
-    private CountryRepositoryPort repository;
+    private CountryAdapterPort repository;
 
     @Mock
     private CountryValidations validations;

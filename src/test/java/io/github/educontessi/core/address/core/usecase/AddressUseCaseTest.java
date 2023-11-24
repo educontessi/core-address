@@ -2,7 +2,7 @@ package io.github.educontessi.core.address.core.usecase;
 
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.model.Address;
-import io.github.educontessi.core.address.core.ports.out.AddressRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.AddressAdapterPort;
 import io.github.educontessi.core.address.core.validation.AddressValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.mock.MockSingleton;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
 class AddressUseCaseTest {
 
     @Mock
-    private AddressRepositoryPort repository;
+    private AddressAdapterPort repository;
 
     @Mock
     private AddressValidations validations;

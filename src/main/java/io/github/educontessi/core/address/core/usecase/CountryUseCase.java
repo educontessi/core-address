@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.core.exception.EntityNotFoundException
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
 import io.github.educontessi.core.address.core.ports.in.CountryUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.CountryRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.CountryAdapterPort;
 import io.github.educontessi.core.address.core.validation.CountryValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class CountryUseCase implements CountryUseCasePort {
 
-    private final CountryRepositoryPort repository;
+    private final CountryAdapterPort repository;
     private final CountryValidations validations;
 
-    public CountryUseCase(CountryRepositoryPort repository, CountryValidations validations) {
+    public CountryUseCase(CountryAdapterPort repository, CountryValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.model.Country;
 import java.util.List;
 import java.util.Optional;
 
-public interface CountryRepositoryPort {
+public interface CountryAdapterPort {
 
     List<Country> findAll();
 

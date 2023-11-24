@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.core.exception.EntityNotFoundException
 import io.github.educontessi.core.address.core.filter.StreetFilter;
 import io.github.educontessi.core.address.core.model.Street;
 import io.github.educontessi.core.address.core.ports.in.StreetUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.StreetRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.StreetAdapterPort;
 import io.github.educontessi.core.address.core.validation.StreetValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class StreetUseCase implements StreetUseCasePort {
 
-    private final StreetRepositoryPort repository;
+    private final StreetAdapterPort repository;
     private final StreetValidations validations;
 
-    public StreetUseCase(StreetRepositoryPort repository, StreetValidations validations) {
+    public StreetUseCase(StreetAdapterPort repository, StreetValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

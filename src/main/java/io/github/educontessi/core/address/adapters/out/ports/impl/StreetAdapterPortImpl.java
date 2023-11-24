@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.persistence.jpa.service;
+package io.github.educontessi.core.address.adapters.out.ports.impl;
 
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.dataconverter.StreetOutDataconverter;
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.entity.StreetEntity;
@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.StreetFilter;
 import io.github.educontessi.core.address.core.model.Street;
-import io.github.educontessi.core.address.core.ports.out.StreetRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.StreetAdapterPort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StreetService implements StreetRepositoryPort {
+public class StreetAdapterPortImpl implements StreetAdapterPort {
 
     private final StreetRepository repository;
     private final StreetOutDataconverter mapper;
 
-    public StreetService(StreetRepository repository, StreetOutDataconverter mapper) {
+    public StreetAdapterPortImpl(StreetRepository repository, StreetOutDataconverter mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

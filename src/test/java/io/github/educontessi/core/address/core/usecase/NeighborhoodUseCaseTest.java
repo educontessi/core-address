@@ -3,7 +3,7 @@ package io.github.educontessi.core.address.core.usecase;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.NeighborhoodFilter;
 import io.github.educontessi.core.address.core.model.Neighborhood;
-import io.github.educontessi.core.address.core.ports.out.NeighborhoodRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.NeighborhoodAdapterPort;
 import io.github.educontessi.core.address.core.validation.NeighborhoodValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 import io.github.educontessi.core.address.mock.MockSingleton;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.times;
 class NeighborhoodUseCaseTest {
 
     @Mock
-    private NeighborhoodRepositoryPort repository;
+    private NeighborhoodAdapterPort repository;
 
     @Mock
     private NeighborhoodValidations validations;

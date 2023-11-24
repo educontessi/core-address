@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.core.exception.EntityNotFoundException
 import io.github.educontessi.core.address.core.filter.StateFilter;
 import io.github.educontessi.core.address.core.model.State;
 import io.github.educontessi.core.address.core.ports.in.StateUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.StateRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.StateAdapterPort;
 import io.github.educontessi.core.address.core.validation.StateValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class StateUseCase implements StateUseCasePort {
 
-    private final StateRepositoryPort repository;
+    private final StateAdapterPort repository;
     private final StateValidations validations;
 
-    public StateUseCase(StateRepositoryPort repository, StateValidations validations) {
+    public StateUseCase(StateAdapterPort repository, StateValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

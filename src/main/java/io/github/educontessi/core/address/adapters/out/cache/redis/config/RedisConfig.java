@@ -21,7 +21,7 @@ import java.time.Duration;
  */
 @Configuration
 @EnableCaching
-public class RedisConfig extends CachingConfigurerSupport {
+public class RedisConfig implements CacheErrorHandler {
     private static final Logger
             LOGGER = LoggerFactory.getLogger(RedisConfig.class);
 
@@ -56,28 +56,22 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     @Override
-    public CacheErrorHandler errorHandler() {
-        return new CacheErrorHandler() {
-            @Override
-            public void handleCacheGetError(RuntimeException exception, Cache cache, Object key) {
-                LOGGER.info("Failure getting from cache: {}, exception: {}", cache.getName(), exception);
-            }
-
-            @Override
-            public void handleCachePutError(RuntimeException exception, Cache cache, Object key, Object value) {
-                LOGGER.info("Failure putting into cache: {}, exception: {}", cache.getName(), exception);
-            }
-
-            @Override
-            public void handleCacheEvictError(RuntimeException exception, Cache cache, Object key) {
-                LOGGER.info("Failure evicting from cache: {}, exception: {}", cache.getName(), exception);
-            }
-
-            @Override
-            public void handleCacheClearError(RuntimeException exception, Cache cache) {
-                LOGGER.info("Failure clearing cache: {}, exception: {}", cache.getName(), exception);
-            }
-        };
+    public void handleCacheGetError(RuntimeException exception, Cache cache, Object key) {
+        LOGGER.info("Failure getting from cache: {}, exception: {}", cache.getName(), exception);
     }
 
+    @Override
+    public void handleCachePutError(RuntimeException exception, Cache cache, Object key, Object value) {
+        LOGGER.info("Failure putting into cache: {}, exception: {}", cache.getName(), exception);
+    }
+
+    @Override
+    public void handleCacheEvictError(RuntimeException exception, Cache cache, Object key) {
+        LOGGER.info("Failure evicting from cache: {}, exception: {}", cache.getName(), exception);
+    }
+
+    @Override
+    public void handleCacheClearError(RuntimeException exception, Cache cache) {
+        LOGGER.info("Failure clearing cache: {}, exception: {}", cache.getName(), exception);
+    }
 }

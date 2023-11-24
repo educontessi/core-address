@@ -4,7 +4,7 @@ import io.github.educontessi.core.address.core.exception.EntityNotFoundException
 import io.github.educontessi.core.address.core.filter.CityFilter;
 import io.github.educontessi.core.address.core.model.City;
 import io.github.educontessi.core.address.core.ports.in.CityUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.CityRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.CityAdapterPort;
 import io.github.educontessi.core.address.core.validation.CityValidations;
 import io.github.educontessi.core.address.core.validation.Validator;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class CityUseCase implements CityUseCasePort {
 
-    private final CityRepositoryPort repository;
+    private final CityAdapterPort repository;
     private final CityValidations validations;
 
-    public CityUseCase(CityRepositoryPort repository, CityValidations validations) {
+    public CityUseCase(CityAdapterPort repository, CityValidations validations) {
         this.repository = repository;
         this.validations = validations;
     }

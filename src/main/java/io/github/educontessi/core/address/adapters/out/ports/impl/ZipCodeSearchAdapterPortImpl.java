@@ -7,7 +7,7 @@ import io.github.educontessi.core.address.core.ports.in.CityUseCasePort;
 import io.github.educontessi.core.address.core.ports.in.NeighborhoodUseCasePort;
 import io.github.educontessi.core.address.core.ports.in.StateUseCasePort;
 import io.github.educontessi.core.address.core.ports.in.StreetUseCasePort;
-import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchPort;
+import io.github.educontessi.core.address.core.ports.out.ZipCodeSearchAdapterPort;
 import io.github.educontessi.core.address.core.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +22,9 @@ import static io.github.educontessi.core.address.core.config.TagLogs.*;
  * @author Eduardo Possamai Contessi
  */
 @Service
-public class ZipCodeSearchPortImplViaCEP implements ZipCodeSearchPort {
+public class ZipCodeSearchAdapterPortImpl implements ZipCodeSearchAdapterPort {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ZipCodeSearchPortImplViaCEP.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ZipCodeSearchAdapterPortImpl.class);
 
     private final StreetUseCasePort streetUseCasePort;
     private final NeighborhoodUseCasePort neighborhoodUseCasePort;
@@ -32,11 +32,11 @@ public class ZipCodeSearchPortImplViaCEP implements ZipCodeSearchPort {
     private final StateUseCasePort stateUseCasePort;
     private final ViaCEPFeign viaCEPFeign;
 
-    public ZipCodeSearchPortImplViaCEP(StreetUseCasePort streetUseCasePort,
-                                       NeighborhoodUseCasePort neighborhoodUseCasePort,
-                                       CityUseCasePort cityUseCasePort,
-                                       StateUseCasePort stateUseCasePort,
-                                       ViaCEPFeign viaCEPFeign) {
+    public ZipCodeSearchAdapterPortImpl(StreetUseCasePort streetUseCasePort,
+                                        NeighborhoodUseCasePort neighborhoodUseCasePort,
+                                        CityUseCasePort cityUseCasePort,
+                                        StateUseCasePort stateUseCasePort,
+                                        ViaCEPFeign viaCEPFeign) {
         this.streetUseCasePort = streetUseCasePort;
         this.neighborhoodUseCasePort = neighborhoodUseCasePort;
         this.cityUseCasePort = cityUseCasePort;

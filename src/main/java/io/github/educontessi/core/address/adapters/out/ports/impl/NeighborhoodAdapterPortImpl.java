@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.persistence.jpa.service;
+package io.github.educontessi.core.address.adapters.out.ports.impl;
 
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.dataconverter.NeighborhoodOutDataconverter;
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.entity.NeighborhoodEntity;
@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.NeighborhoodFilter;
 import io.github.educontessi.core.address.core.model.Neighborhood;
-import io.github.educontessi.core.address.core.ports.out.NeighborhoodRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.NeighborhoodAdapterPort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class NeighborhoodService implements NeighborhoodRepositoryPort {
+public class NeighborhoodAdapterPortImpl implements NeighborhoodAdapterPort {
 
     private final NeighborhoodRepository repository;
     private final NeighborhoodOutDataconverter mapper;
 
-    public NeighborhoodService(NeighborhoodRepository repository, NeighborhoodOutDataconverter mapper) {
+    public NeighborhoodAdapterPortImpl(NeighborhoodRepository repository, NeighborhoodOutDataconverter mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

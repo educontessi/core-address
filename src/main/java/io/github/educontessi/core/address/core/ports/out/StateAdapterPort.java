@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.model.State;
 import java.util.List;
 import java.util.Optional;
 
-public interface StateRepositoryPort {
+public interface StateAdapterPort {
 
     List<State> findAll(String expand);
 

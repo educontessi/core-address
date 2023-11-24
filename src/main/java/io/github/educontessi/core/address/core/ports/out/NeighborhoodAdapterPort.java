@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.model.Neighborhood;
 import java.util.List;
 import java.util.Optional;
 
-public interface NeighborhoodRepositoryPort {
+public interface NeighborhoodAdapterPort {
 
     Object search(NeighborhoodFilter filter, Object pageable, String expand);
 

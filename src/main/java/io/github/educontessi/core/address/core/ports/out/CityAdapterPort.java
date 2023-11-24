@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.model.City;
 import java.util.List;
 import java.util.Optional;
 
-public interface CityRepositoryPort {
+public interface CityAdapterPort {
 
     Object search(CityFilter filter, Object pageable, String expand);
 

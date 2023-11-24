@@ -1,14 +1,14 @@
-package io.github.educontessi.core.address.adapters.out.persistence.jpa.service;
+package io.github.educontessi.core.address.adapters.out.ports.impl;
 
-import io.github.educontessi.core.address.adapters.out.persistence.jpa.dataconverter.CityOutDataconverter;
-import io.github.educontessi.core.address.adapters.out.persistence.jpa.entity.CityEntity;
-import io.github.educontessi.core.address.adapters.out.persistence.jpa.repository.CityRepository;
+import io.github.educontessi.core.address.adapters.out.persistence.jpa.dataconverter.StateOutDataconverter;
+import io.github.educontessi.core.address.adapters.out.persistence.jpa.entity.StateEntity;
+import io.github.educontessi.core.address.adapters.out.persistence.jpa.repository.StateRepository;
 import io.github.educontessi.core.address.core.config.GlobalParameters;
 import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
-import io.github.educontessi.core.address.core.filter.CityFilter;
-import io.github.educontessi.core.address.core.model.City;
-import io.github.educontessi.core.address.core.ports.out.CityRepositoryPort;
+import io.github.educontessi.core.address.core.filter.StateFilter;
+import io.github.educontessi.core.address.core.model.State;
+import io.github.educontessi.core.address.core.ports.out.StateAdapterPort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,63 +23,69 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CityService implements CityRepositoryPort {
+public class StateAdapterPortImpl implements StateAdapterPort {
 
-    private final CityRepository repository;
-    private final CityOutDataconverter mapper;
+    private final StateRepository repository;
+    private final StateOutDataconverter mapper;
 
-    public CityService(CityRepository repository, CityOutDataconverter mapper) {
+    public StateAdapterPortImpl(StateRepository repository, StateOutDataconverter mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
 
     @Override
-    public Page<City> search(CityFilter filter, Object pageable, String expand) {
-        Page<CityEntity> list = repository.search(filter, (Pageable) pageable);
+    public List<State> findAll(String expand) {
+        List<StateEntity> list = repository.findAll();
+        return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
+    }
+
+    @Override
+    public Page<State> search(StateFilter filter, Object pageable, String expand) {
+        Page<StateEntity> list = repository.search(filter, (Pageable) pageable);
         return new PageImpl<>(
                 list.getContent().stream().map(e -> mapper.entityToModel(e, expand)).toList(),
                 list.getPageable(), list.getTotalElements());
     }
 
     @Override
-    @Cacheable(value = "core-address-city")
-    public Optional<City> findById(Long id, String expand) {
-        Optional<CityEntity> optionalSaved = repository.findById(id);
+    @Cacheable(value = "core-address-state")
+    public Optional<State> findById(Long id, String expand) {
+        Optional<StateEntity> optionalSaved = repository.findById(id);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
     }
 
     @Override
-    public List<City> findAllByStateId(Long stateId, String expand) {
-        List<CityEntity> list = repository.findAllByStateId(stateId);
+    public List<State> findAllByCountryId(Long countryId, String expand) {
+        List<StateEntity> list = repository.findAllByCountryId(countryId);
         return list.stream().map(e -> mapper.entityToModel(e, expand)).toList();
     }
 
     @Override
-    @Cacheable(value = "core-address-city")
-    public Optional<City> findByIbge(Integer ibge, String expand) {
-        Optional<CityEntity> optionalSaved = repository.findByIbge(ibge);
+    @Cacheable(value = "core-address-state")
+    public Optional<State> findByUf(String uf, String expand) {
+        Optional<StateEntity> optionalSaved = repository.findByUf(uf);
         return optionalSaved.map(e -> mapper.entityToModel(e, expand));
     }
 
     @Override
-    @CacheEvict(value = "core-address-city", key = "#p0.id", condition = "#p0.id != null")
-    public City save(City model) {
-        CityEntity entity = new CityEntity();
+    @CacheEvict(value = "core-address-state", key = "#p0.id", condition = "#p0.id != null")
+    public State save(State model) {
+        StateEntity entity = new StateEntity();
         mapper.modelToEntity(entity, model);
         repository.save(entity);
         return mapper.entityToModel(entity);
     }
 
     @Override
-    public City update(City model, City saved) {
+    public State update(State model, State saved) {
         BeanUtils.copyProperties(model, saved, model.getIgnoreProperties());
         return save(saved);
     }
 
     @Override
-    @CacheEvict(value = "core-address-city", key = "#p0.id")
-    public void delete(City saved) {
-        CityEntity entity = new CityEntity();
+    @CacheEvict(value = "core-address-state", key = "#p0.id")
+    public void delete(State saved) {
+        StateEntity entity = new StateEntity();
         mapper.modelToEntity(entity, saved);
         if (GlobalParameters.EXCLUDE_DEFINITIVE) {
             definitiveDelete(entity);
@@ -88,7 +94,7 @@ public class CityService implements CityRepositoryPort {
         }
     }
 
-    protected void definitiveDelete(CityEntity saved) {
+    protected void definitiveDelete(StateEntity saved) {
         try {
             repository.delete(saved);
             repository.flush();
@@ -100,7 +106,7 @@ public class CityService implements CityRepositoryPort {
         }
     }
 
-    protected void paranoidDelete(CityEntity saved) {
+    protected void paranoidDelete(StateEntity saved) {
         saved.setDeleted(true);
         repository.saveAndFlush(saved);
     }

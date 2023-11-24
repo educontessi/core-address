@@ -1,4 +1,4 @@
-package io.github.educontessi.core.address.adapters.out.persistence.jpa.service;
+package io.github.educontessi.core.address.adapters.out.ports.impl;
 
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.dataconverter.CountryOutDataconverter;
 import io.github.educontessi.core.address.adapters.out.persistence.jpa.entity.CountryEntity;
@@ -8,7 +8,7 @@ import io.github.educontessi.core.address.core.exception.EntityInUseException;
 import io.github.educontessi.core.address.core.exception.EntityNotFoundException;
 import io.github.educontessi.core.address.core.filter.CountryFilter;
 import io.github.educontessi.core.address.core.model.Country;
-import io.github.educontessi.core.address.core.ports.out.CountryRepositoryPort;
+import io.github.educontessi.core.address.core.ports.out.CountryAdapterPort;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CountryService implements CountryRepositoryPort {
+public class CountryAdapterPortImpl implements CountryAdapterPort {
 
     private final CountryRepository repository;
     private final CountryOutDataconverter mapper;
 
-    public CountryService(CountryRepository repository, CountryOutDataconverter mapper) {
+    public CountryAdapterPortImpl(CountryRepository repository, CountryOutDataconverter mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -58,6 +58,7 @@ public class CountryService implements CountryRepositoryPort {
     @Override
     @CacheEvict(value = "core-address-country", key = "#p0.id", condition = "#p0.id != null")
     public Country save(Country model) {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+ model.getId());
         CountryEntity entity = new CountryEntity();
         mapper.modelToEntity(entity, model);
         repository.save(entity);

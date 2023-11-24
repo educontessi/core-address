@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit Tests for the class {@link ZipCodeSearchPortImplViaCEP}
+ * Unit Tests for the class {@link ZipCodeSearchAdapterPortImpl}
  *
  * @author Eduardo Possamai Contessi
  */
-class ZipCodeSearchPortImplViaCEPTest {
+class ZipCodeSearchAdapterPortImplTest {
 
     @Mock
     private StreetUseCasePort streetUseCasePort;
@@ -40,7 +40,7 @@ class ZipCodeSearchPortImplViaCEPTest {
     private ViaCEPFeign viaCEPFeign;
 
     @InjectMocks
-    private ZipCodeSearchPortImplViaCEP zipCodeSearchPortImplViaCEP;
+    private ZipCodeSearchAdapterPortImpl zipCodeSearchAdapterPortImpl;
 
     private final MockSingleton mockSingleton = MockSingleton.getInstance();
 
@@ -52,7 +52,7 @@ class ZipCodeSearchPortImplViaCEPTest {
     @Test
     void search_shouldReturnObject() {
         // Configuration
-        ZipCodeSearchPortImplViaCEP zipCodeSearchPortImplViaCEPSpy = spy(zipCodeSearchPortImplViaCEP);
+        ZipCodeSearchAdapterPortImpl zipCodeSearchAdapterPortImplSpy = spy(zipCodeSearchAdapterPortImpl);
         ViaCepDto viaCepDto = mockSingleton.getViaCepDto();
         String zipCode = "88900000";
         when(viaCEPFeign.searchZipCode(any())).thenReturn(viaCepDto);
@@ -64,7 +64,7 @@ class ZipCodeSearchPortImplViaCEPTest {
         ZipCodeSearch response;
 
         // Execution
-        response = zipCodeSearchPortImplViaCEPSpy.search(zipCode);
+        response = zipCodeSearchAdapterPortImplSpy.search(zipCode);
 
         // Check the results
         assertNotNull(response);
@@ -72,10 +72,10 @@ class ZipCodeSearchPortImplViaCEPTest {
         assertNotNull(response.getCity());
         assertNotNull(response.getNeighborhood());
         assertNotNull(response.getStreet());
-        verify(zipCodeSearchPortImplViaCEPSpy, times(1)).getState(any());
-        verify(zipCodeSearchPortImplViaCEPSpy, times(1)).getCity(any(), any());
-        verify(zipCodeSearchPortImplViaCEPSpy, times(1)).getNeighborhood(any(), any());
-        verify(zipCodeSearchPortImplViaCEPSpy, times(1)).getStreet(any(), any());
+        verify(zipCodeSearchAdapterPortImplSpy, times(1)).getState(any());
+        verify(zipCodeSearchAdapterPortImplSpy, times(1)).getCity(any(), any());
+        verify(zipCodeSearchAdapterPortImplSpy, times(1)).getNeighborhood(any(), any());
+        verify(zipCodeSearchAdapterPortImplSpy, times(1)).getStreet(any(), any());
     }
 
 }

@@ -7,7 +7,7 @@ import io.github.educontessi.core.address.core.model.Address;
 import java.util.List;
 import java.util.Optional;
 
-public interface AddressRepositoryPort {
+public interface AddressAdapterPort {
 
     List<Address> findAllByIntegrationId(String integrationId);
 
