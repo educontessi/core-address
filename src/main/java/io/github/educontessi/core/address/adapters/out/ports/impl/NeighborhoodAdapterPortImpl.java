@@ -82,7 +82,7 @@ public class NeighborhoodAdapterPortImpl implements NeighborhoodAdapterPort {
     }
 
     @Override
-    @Cacheable(value = "core-address-neighborhood")
+    @Cacheable(value = "core-address-neighborhood", unless="#result == null")
     public Optional<Neighborhood> findByNameAndCityId(String name, Long cityId) {
         Optional<NeighborhoodEntity> optionalSaved = repository.findByNameAndCityId(name, cityId);
         return optionalSaved.map(e -> mapper.entityToModel(e, null));

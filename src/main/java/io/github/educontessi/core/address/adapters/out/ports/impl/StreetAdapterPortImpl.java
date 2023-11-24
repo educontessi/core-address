@@ -82,7 +82,7 @@ public class StreetAdapterPortImpl implements StreetAdapterPort {
     }
 
     @Override
-    @Cacheable(value = "core-address-street")
+    @Cacheable(value = "core-address-street", unless="#result == null")
     public Optional<Street> findByNameAndCityId(String name, Long cityId) {
         Optional<StreetEntity> optionalSaved = repository.findByNameAndCityId(name, cityId);
         return optionalSaved.map(e -> mapper.entityToModel(e, null));

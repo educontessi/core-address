@@ -4,7 +4,7 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import org.springdoc.core.GroupedOpenApi;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-    // http://localhost:8081/api/core-address/swagger-ui.html
+    // http://localhost:8090/api/core-address/swagger-ui.html
     @Bean
     public OpenAPI openAPI(@Value("${application-description}") String appDesciption,
                            @Value("${application-version}") String appVersion) {
@@ -38,7 +38,7 @@ public class SwaggerConfig {
 
     @Bean
     public GroupedOpenApi groupedOpenApiV1() {
-        var packagesToscan = "io.github.educontessi.core.address.adapters.in.web.v1.web.controller";
+        var packagesToscan = "io.github.educontessi.core.address.adapters.in.rest.v1.controller";
         return GroupedOpenApi.builder()
                 .group("core-address-v1")
                 .packagesToScan(packagesToscan)
